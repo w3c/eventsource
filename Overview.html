@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- when publishing, change bits marked ZZZ --><html lang=en-US-x-Hixie><meta charset=ascii><title>Server-Sent Events</title><style type=text/css>
+<!DOCTYPE html><!-- when publishing, change bits marked ZZZ --><html lang=en-US-x-Hixie><title>Server-Sent Events</title><style type=text/css>
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -246,7 +246,7 @@
   NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
   interpreted as described in RFC2119. For readability, these words do
-  not appear in all uppercase letters in this specification. <a href=#refsRFC2119>[RFC2119]</a><p>Requirements phrased in the imperative as part of algorithms
+  not appear in all uppercase letters in this specification. <a href=#references>[RFC2119]</a><p>Requirements phrased in the imperative as part of algorithms
   (such as "strip any leading space characters" or "return false and
   abort these steps") are to be interpreted with the meaning of the
   key word ("must", "should", "may", etc) used in introducing the
@@ -266,7 +266,7 @@
    <dd>
 
     <p>Many fundamental concepts from HTML5 are used by this
-    specification. <a href=#refsHTML5>[HTML5]</a></p>
+    specification. <a href=#references>[HTML5]</a></p>
 
    </dd>
 
@@ -275,7 +275,7 @@
    <dd>
 
     <p>The IDL blocks in this specification use the semantics of the
-    WebIDL specification. <a href=#refsWebIDL>[WebIDL]</a></p>
+    WebIDL specification. <a href=#references>[WebIDL]</a></p>
 
    </dd>
 
@@ -286,7 +286,7 @@
   scripts in Web applications, and does not necessarily imply the
   existence of an actual <code>Document</code> object or of any other
   <code>Node</code> objects as defined in the DOM Core
-  specifications. <a href=#refsDOM3CORE>[DOM3CORE]</a><p>A DOM attribute is said to be <em>getting</em> when its value is
+  specifications. <a href=#references>[DOM3CORE]</a><p>A DOM attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
   <em>setting</em> when a new value is assigned to it.<h2 id=the-eventsource-interface><span class=secno>4 </span>The <code><a href=#eventsource>EventSource</a></code> interface</h2><pre class=idl>[<a href=#dom-eventsource title=dom-EventSource>Constructor</a>(in DOMString url)]
 interface <dfn id=eventsource>EventSource</dfn> {
@@ -304,7 +304,7 @@ interface <dfn id=eventsource>EventSource</dfn> {
            attribute <span>Function</span> <a href=#handler-eventsource-onerror title=handler-EventSource-onerror>onerror</a>;
   void <a href=#dom-eventsource-disconnect title=dom-EventSource-disconnect>disconnect</a>();
 };</pre><p><code><a href=#eventsource>EventSource</a></code> objects must also implement the
-  <code>EventTarget</code> interface. <a href=#refsDOM3EVENTS>[DOM3EVENTS]</a><p>The <dfn id=dom-eventsource title=dom-EventSource><code>EventSource(<var title="">url</var>)</code></dfn> constructor takes one argument,
+  <code>EventTarget</code> interface. <a href=#references>[DOM3EVENTS]</a><p>The <dfn id=dom-eventsource title=dom-EventSource><code>EventSource(<var title="">url</var>)</code></dfn> constructor takes one argument,
   <var title="">url</var>, which specifies the <span>URL</span> to
   which to connect. When the <code>EventSource()</code> constructor is
   invoked, the UA must run these steps:<ol><li><p><span title="resolve a url">Resolve</span> the
@@ -437,7 +437,7 @@ interface <dfn id=eventsource>EventSource</dfn> {
   task">queued</span> by <code><a href=#eventsource>EventSource</a></code> objects is the
   <dfn id=remote-event-task-source>remote event task source</dfn>.<h2 id=parsing-an-event-stream><span class=secno>6 </span>Parsing an event stream</h2><p>This event stream format's MIME type is
   <code>text/event-stream</code>.<p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
-  character set for which is Unicode. <a href=#refsABNF>[ABNF]</a></p><!-- XXX
+  character set for which is Unicode. <a href=#references>[ABNF]</a></p><!-- XXX
   ftp://ftp.rfc-editor.org/in-notes/std/std68.txt --><pre>stream        = [ bom ] *event
 event         = *( comment / field ) end-of-line
 comment       = colon *any-char end-of-line
