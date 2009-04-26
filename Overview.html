@@ -147,7 +147,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 24 April 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 26 April 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -213,7 +213,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 24 April 2009 Editor's Draft.
+  This specification is the 26 April 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -418,11 +418,11 @@ interface <dfn id="eventsource">EventSource</dfn> {
   Gateway Timeout, and 505 HTTP Version Not Supported responses --><p>For non-HTTP protocols, UAs should act in equivalent ways.<hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
   user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>queue a
-  task</span> to <span>fire a simple event</span> named <code title="event-open">open</code> at the
+  task</span> to <span>fire a simple event</span> called <code title="event-open">open</code> at the
   <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reset-the-connection">reset the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>,
-  <span>queue a task</span> to <span>fire a simple event</span> named
+  <span>queue a task</span> to <span>fire a simple event</span> called
   <code title="event-error">error</code> at the
   <code><a href="#eventsource">EventSource</a></code> object, and then <span>fetch</span> the
   event source resource again after a delay equal to the reconnection
@@ -430,7 +430,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   connection get opened anew!</strong><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>queue a
-  task</span> to <span>fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
+  task</span> to <span>fire a simple event</span> called <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
   object. <strong>Once the user agent has <a href="#fail-the-connection" title="fail the
   connection">failed the connection</a>, it does <em>not</em>
   attempt to reconnect!</strong><hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
