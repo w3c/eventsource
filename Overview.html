@@ -318,8 +318,17 @@ interface <dfn id="eventsource">EventSource</dfn> {
    <li><p>Return a new <code><a href="#eventsource">EventSource</a></code> object, and continue
    these steps in the background (without blocking scripts).</li>
 
-   <li><p><span>Fetch</span> the resource identified by the resulting
-   <span>absolute URL</span>, as described below.</li>
+   <li>
+
+    <p><span>Fetch</span> the resource identified by the resulting
+    <span>absolute URL</span>, and process it as described below.</p>
+
+    <p class="note">The definition of the <span title="fetch">fetching</span> algorithm is such that if the
+    browser is already fetching the resource identified by the given
+    <span>absolute URL</span>, that connection can be reused, instead
+    of a new connection being established.</p>
+
+   </li>
 
   </ol><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-URL"><code>URL</code></dfn>
   attribute must return the <span>absolute URL</span> that resulted
@@ -694,7 +703,8 @@ data:&nbsp;test</pre>
   domain. Authors can avoid this using the relatively complex
   mechanism of using unique domain names per connection, or by
   allowing the user to enable or disable the <code><a href="#eventsource">EventSource</a></code>
-  functionality on a per-page basis.<hr><p>Other formats of event framing may also be supported in addition
+  functionality on a per-page basis, or by sharing a single
+  <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>.<hr><p>Other formats of event framing may also be supported in addition
   to <code>text/event-stream</code>, but this specification does not
   define how they are to be parsed or processed.<p class="note">Such formats could include systems like SMS-push;
   for example servers could use <code title="">Accept</code> headers
