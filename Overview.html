@@ -147,7 +147,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 26 April 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 27 April 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -213,7 +213,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 26 April 2009 Editor's Draft.
+  This specification is the 27 April 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -546,7 +546,7 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    <dt>If the field name is "retry"</dt>
 
    <dd><p>If the field value consists of only characters in the range
-   U+0030 DIGIT ZERO ('0') U+0039 DIGIT NINE ('9'), then interpret the
+   U+0030 DIGIT ZERO ('0') .. U+0039 DIGIT NINE ('9'), then interpret the
    field value as an integer in base ten, and set the event stream's
    <a href="#concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection
    time</a> to that integer. Otherwise, ignore the field.</dd>
