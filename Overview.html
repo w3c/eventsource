@@ -151,7 +151,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 11 June 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 16 June 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -217,7 +217,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 11 June 2009 Editor's Draft.
+  This specification is the 16 June 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -450,8 +450,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   task">queued</span> by <code><a href="#eventsource">EventSource</a></code> objects is the
   <dfn id="remote-event-task-source">remote event task source</dfn>.<h2 id="parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</h2><p>This event stream format's MIME type is
   <code>text/event-stream</code>.<p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
-  character set for which is Unicode. <a href="#references">[ABNF]</a></p><!-- XXX
-  ftp://ftp.rfc-editor.org/in-notes/std/std68.txt --><pre>stream        = [ bom ] *event
+  character set for which is Unicode. <a href="#references">[ABNF]</a><pre>stream        = [ bom ] *event
 event         = *( comment / field ) end-of-line
 comment       = colon *any-char end-of-line
 field         = 1*name-char [ colon [ space ] *any-char ] end-of-line
