@@ -173,7 +173,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 29 June 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 7 July 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -239,7 +239,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 29 June 2009 Editor's Draft.
+  This specification is the 7 July 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -328,7 +328,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
            attribute <span>Function</span> <a href="#handler-eventsource-onopen" title="handler-EventSource-onopen">onopen</a>;
            attribute <span>Function</span> <a href="#handler-eventsource-onmessage" title="handler-EventSource-onmessage">onmessage</a>;
            attribute <span>Function</span> <a href="#handler-eventsource-onerror" title="handler-EventSource-onerror">onerror</a>;
-  void <a href="#dom-eventsource-disconnect" title="dom-EventSource-disconnect">disconnect</a>();
+  void <a href="#dom-eventsource-close" title="dom-EventSource-close">close</a>();
 };</pre><p><code><a href="#eventsource">EventSource</a></code> objects must also implement the
   <code>EventTarget</code> interface. <a href="#references">[DOM3EVENTS]</a><p>The <dfn id="dom-eventsource" title="dom-EventSource"><code>EventSource(<var title="">url</var>)</code></dfn> constructor takes one argument,
   <var title="">url</var>, which specifies the <span>URL</span> to
@@ -376,13 +376,13 @@ interface <dfn id="eventsource">EventSource</dfn> {
    <dt><dfn id="dom-eventsource-closed" title="dom-EventSource-CLOSED"><code>CLOSED</code></dfn> (numeric value 2)</dt>
 
    <dd>The connection is not open, and the user agent is not trying to
-   reconnect. Either there was a fatal error or the <code title="dom-EventSource-disconnect"><a href="#dom-eventsource-disconnect">disconnect()</a></code> method was
+   reconnect. Either there was a fatal error or the <code title="dom-EventSource-close"><a href="#dom-eventsource-close">close()</a></code> method was
    invoked.</dd>
 
   </dl><p>When the object is created its <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> must be set to
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> (0). The
   rules given below for handling the connection define when the value
-  changes.<p>The <dfn id="dom-eventsource-disconnect" title="dom-EventSource-disconnect"><code>disconnect()</code></dfn>
+  changes.<p>The <dfn id="dom-eventsource-close" title="dom-EventSource-close"><code>close()</code></dfn>
   method must close the connection, if any, and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>. If the
   connection is already closed, the method must do nothing.<p>The following are the <span>event handler attributes</span> (and their corresponding <span title="event handler event type">event handler event types</span>)
