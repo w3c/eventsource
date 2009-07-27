@@ -174,7 +174,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 16 July 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 27 July 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -240,7 +240,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 16 July 2009 Editor's Draft.
+  This specification is the 27 July 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -736,8 +736,10 @@ data:&nbsp;test</pre>
   define how they are to be parsed or processed.<p class="note">Such formats could include systems like SMS-push;
   for example servers could use <code title="">Accept</code> headers
   and HTTP redirects to an SMS-push mechanism as a kind of protocol
-  negotiation to reduce network load in GSM environments.<h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2><p>An <code><a href="#eventsource">EventSource</a></code> object with an open connection must not
-  be garbage collected if there are any event listeners registered for
-  <code title="event-message">message</code> events.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
+  negotiation to reduce network load in GSM environments.<h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2><p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is not <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, and the object has one
+  or more event listeners registered for <code title="event-message">message</code> events, there must be a strong
+  reference from the <code>Window</code> or <code>WorkerUtils</code>
+  object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
+  invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
   its connection is still open, the connection must be closed.<h2 class="no-num" id="references">References</h2><p class="big-issue">This section will be written in a future
   draft.<!--XXX-->
