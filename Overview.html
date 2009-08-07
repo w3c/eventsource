@@ -174,7 +174,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 28 July 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 7 August 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -240,7 +240,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 28 July 2009 Editor's Draft.
+  This specification is the 7 August 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -263,6 +263,9 @@
  <li><a href="#event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</a></li>
  <li><a href="#notes"><span class="secno">8 </span>Notes</a></li>
  <li><a href="#garbage-collection"><span class="secno">9 </span>Garbage collection</a></li>
+ <li><a href="#iana-considerations"><span class="secno">10 </span>IANA considerations</a>
+  <ol>
+   <li><a href="#text-event-stream"><span class="secno">10.1 </span><code>text/event-stream</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></ol>
 <!--end-toc--><hr><h2 id="server-sent-events-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable servers to push data to Web pages over HTTP or using
   dedicated server-push protocols, this specification introduces the
@@ -404,7 +407,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   </ul><p>These values are not currently exposed on the interface.<h2 id="processing-model"><span class="secno">5 </span>Processing model</h2><p>The resource indicated in the argument to the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor is <span title="fetch">fetched</span> when the constructor is run.<p>For HTTP connections, the <code title="">Accept</code> header may
   be included; if included, it must contain only formats of event
   framing that are supported by the user agent (one of which must be
-  <code>text/event-stream</code>, as described below).<p>If the event source's last event ID string is not the empty
+  <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).<p>If the event source's last event ID string is not the empty
   string, then a <code title="">Last-Event-ID</code> HTTP header must
   be included with the request, whose value is the value of the event
   source's last event ID string.<p>User agents should use the <code>Cache-Control: no-cache</code>
@@ -415,7 +418,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   expected to fail as if the site was down.<hr><p>As data is received, the <span title="concept-task">tasks</span>
   queued by the <span>networking task source</span> to handle the data
   must act as follows.<p>HTTP 200 OK responses with a <span>Content-Type</span> header
-  specifying the type <code>text/event-stream</code> must be processed
+  specifying the type <code><a href="#text-event-stream">text/event-stream</a></code> must be processed
   line by line <a href="#event-stream-interpretation">as described
   below</a>.<p>When a successful response with a supported MIME type is
   received, such that the user agent begins parsing the contents of
@@ -425,7 +428,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   itself closes), the user agent must <a href="#reset-the-connection">reset the
   connection</a>. This doesn't apply for the error cases that are
   listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
-  than <code>text/event-stream</code> (or some other supported type)
+  than <code><a href="#text-event-stream">text/event-stream</a></code> (or some other supported type)
   must cause the user agent to <a href="#fail-the-connection">fail the connection</a>.<p>HTTP 204 No Content, and 205 Reset Content responses are
   equivalent to 200 OK responses with the right MIME type but no
   content, and thus must <a href="#reset-the-connection">reset the connection</a>.<p>Other HTTP response codes in the 2xx range <!--201 Created, 202
@@ -474,7 +477,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   attempt to reconnect!</strong><hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
   task">queued</span> by <code><a href="#eventsource">EventSource</a></code> objects is the
   <dfn id="remote-event-task-source">remote event task source</dfn>.<h2 id="parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</h2><p>This event stream format's MIME type is
-  <code>text/event-stream</code>.<p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
+  <code><a href="#text-event-stream">text/event-stream</a></code>.<p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
   character set for which is Unicode. <a href="#references">[ABNF]</a><pre>stream        = [ bom ] *event
 event         = *( comment / field ) end-of-line
 comment       = colon *any-char end-of-line
@@ -732,7 +735,7 @@ data:&nbsp;test</pre>
   allowing the user to enable or disable the <code><a href="#eventsource">EventSource</a></code>
   functionality on a per-page basis, or by sharing a single
   <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>.<hr><p>Other formats of event framing may also be supported in addition
-  to <code>text/event-stream</code>, but this specification does not
+  to <code><a href="#text-event-stream">text/event-stream</a></code>, but this specification does not
   define how they are to be parsed or processed.<p class="note">Such formats could include systems like SMS-push;
   for example servers could use <code title="">Accept</code> headers
   and HTTP redirects to an SMS-push mechanism as a kind of protocol
@@ -741,5 +744,73 @@ data:&nbsp;test</pre>
   reference from the <code>Window</code> or <code>WorkerUtils</code>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
   invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
-  its connection is still open, the connection must be closed.<h2 class="no-num" id="references">References</h2><p class="big-issue">This section will be written in a future
+  its connection is still open, the connection must be closed.<h2 id="iana-considerations"><span class="secno">10 </span>IANA considerations</h2><p>This registration is for community review and will be submitted
+  to the IESG for review, approval, and registration with IANA.<h3 id="text-event-stream"><span class="secno">10.1 </span><dfn><code>text/event-stream</code></dfn></h3><!--
+   To: ietf-types@iana.org
+   Subject: Registration of media type text/event-stream
+  --><dl><dt>Type name:</dt>
+   <dd>text</dd>
+   <dt>Subtype name:</dt>
+   <dd>event-stream</dd>
+   <dt>Required parameters:</dt>
+   <dd>No parameters</dd>
+   <dt>Optional parameters:</dt>
+   <dd>No parameters</dd>
+   <dt>Encoding considerations:</dt>
+   <dd>Always UTF-8.</dd>
+   <dt>Security considerations:</dt>
+   <dd>
+
+    <p>An event stream from an origin distinct from the origin of the
+    content consuming the event stream can result in information
+    leakage. To avoid this, user agents are required to apply CORS
+    semantics or block all cross-origin loads. <a href="#references">[CORS]</a></p>
+
+    <p>Event streams can overwhelm a user agent; a user agent is
+    expected to apply suitable restrictions to avoid depleting local
+    resources because of an overabundance of information from an event
+    stream.</p>
+
+    <p>Servers can be overwhelmed if a situation develops in which the
+    server is causing clients to reconnect rapidly. Servers should use
+    a 5xx status code to indicate capacity problems, as this will
+    prevent conforming clients from reconnecting automatically.</p>
+
+   </dd>
+   <dt>Interoperability considerations:</dt>
+   <dd>
+    Rules for processing both conforming and non-conforming content
+    are defined in this specification.
+   </dd>
+   <dt>Published specification:</dt>
+   <dd>
+    This document is the relevant specification.
+   </dd>
+   <dt>Applications that use this media type:</dt>
+   <dd>
+    Web browsers and tools using Web services.
+   </dd>
+   <dt>Additional information:</dt>
+   <dd>
+    <dl><dt>Magic number(s):</dt>
+     <dd>No sequence of bytes can uniquely identify an event stream.</dd>
+     <dt>File extension(s):</dt>
+     <dd>No specific file extensions are recommended for this type.</dd>
+     <dt>Macintosh file type code(s):</dt>
+     <dd>No specific Macintosh file type codes are recommended for this type.</dd>
+    </dl></dd>
+   <dt>Person &amp; email address to contact for further information:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>Intended usage:</dt>
+   <dd>Common</dd>
+   <dt>Restrictions on usage:</dt>
+   <dd>This format is only expected to be used by dynamic open-ended
+   streams served using HTTP or a similar protocol. Finite resources
+   are not expected to be labeled with this type.</dd>
+   <dt>Author:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>Change controller:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+  </dl><p>Fragment identifiers have no meaning with
+  <code><a href="#text-event-stream">text/event-stream</a></code> resources.<h2 class="no-num" id="references">References</h2><p class="big-issue">This section will be written in a future
   draft.<!--XXX-->
