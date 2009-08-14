@@ -1,6 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- when publishing, change bits marked ZZZ --><html lang="en-US-x-Hixie">
-  <title>Server-Sent Events</title>
-  <style type="text/css">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- when publishing, change bits marked ZZZ --><html lang="en-US-x-Hixie"><title>Server-Sent Events</title><style type="text/css">
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -171,23 +169,17 @@
    ul.domTree .t7 code, .domTree .t8 code { color: green; }
    ul.domTree .t10 code { color: teal; }
 
-  </style>
-  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"> <!-- ZZZ ED vs WD -->
- </head>
- <body>
-  <div class="head">
+  </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><!-- ZZZ ED vs WD --><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 11 August 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 14 August 2009</h2>
    <!--:ZZZ-->
-   <dl>
-<!-- ZZZ: update the month/day (twice), (un)comment out
+   <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
     <dd><a href="http://www.w3.org/TR/2009/WD-eventsource-20090423/">http://www.w3.org/TR/2009/WD-eventsource-20090423/</a></dd>
- :ZZZ -->
-    <dt>Latest Published Version:</dt>
+ :ZZZ --><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
     <dd><a href="http://dev.w3.org/html5/eventsource/">http://dev.w3.org/html5/eventsource/</a></dd>
@@ -197,41 +189,24 @@
 <!-- :ZZZ -->
     <dt>Editors:</dt>
     <dd><a href="mailto:ian@hixie.ch">Ian Hickson</a>, Google, Inc.</dd>
-   </dl>
-   <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-   © 2009 <a href="http://www.w3.org/"><abbr title="World Wide
-   Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts
+   </dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+   &copy; 2009 <a href="http://www.w3.org/"><abbr title="World Wide
+   Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts
    Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research
    Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C
    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
    and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document
    use</a> rules apply.</p>
-  </div>
-
-  <hr class="top">
-
-  <h2 class="no-num no-toc" id="abstract">Abstract</h2>
-
-  <p>This specification defines an API for opening an HTTP connection
+  </div><hr class="top"><h2 class="no-num no-toc" id="abstract">Abstract</h2><p>This specification defines an API for opening an HTTP connection
   for receiving push notifications from a server in the form of DOM
   events. The API is designed such that it can be extended to work
-  with other push notification schemes such as Push SMS.</p>
-
-
-  <h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2>
-
-  <!-- intro boilerplate (required) -->
-  <p><em>This section describes the status of this document at the
+  with other push notification schemes such as Push SMS.<h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2><!-- intro boilerplate (required) --><p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
   document. A list of current W3C publications and the most recently
   formally published revision of this technical report can be found in
   the <a href="http://www.w3.org/TR/">W3C technical reports index</a>
-  at http://www.w3.org/TR/.</em></p>
-
-
-  <!-- where to send feedback (required) -->
-  <p>If you wish to make comments regarding this document, please send
+  at http://www.w3.org/TR/.</em></p><!-- where to send feedback (required) --><p>If you wish to make comments regarding this document, please send
   them to <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a>
   (<a href="mailto:public-webapps-request@w3.org?subject=subscribe">subscribe</a>,
   <a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>)
@@ -241,73 +216,40 @@
   <a href="http://lists.whatwg.org/pipermail/whatwg-whatwg.org/">archives</a>).
   <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING SENTENCE TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
 
-  All feedback is welcome.</p>
-
-
-  <!-- stability (required) -->
-  <p>Implementors should be aware that this specification is not
+  All feedback is welcome.</p><!-- stability (required) --><p>Implementors should be aware that this specification is not
   stable. <strong>Implementors who are not taking part in the
   discussions are likely to find the specification changing out from
   under them in incompatible ways.</strong> Vendors interested in
   implementing this specification before it eventually reaches the
   Candidate Recommendation stage should join the aforementioned
-  mailing lists and take part in the discussions.</p>
-
-
-  <!-- version history or list of changes (required) -->
-
-  <p>The latest stable version of the editor's draft of this
+  mailing lists and take part in the discussions.</p><!-- version history or list of changes (required) --><p>The latest stable version of the editor's draft of this
   specification is always available on <a href="http://dev.w3.org/html5/eventsource/Overview.html">the W3C CVS
   server</a>. Change tracking for this document is available at the
-  following location:</p>
-
-  <ul>
-   <li>CVS log: <a href="http://dev.w3.org/cvsweb/html5/eventsource/Overview.html">http://dev.w3.org/cvsweb/html5/eventsource/Overview.html</a></li>
-  </ul>
-
-  <!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-  <!-- relationship to other work (required) -->
-  <p>This specification is automatically generated from the
+  following location:<ul><li>CVS log: <a href="http://dev.w3.org/cvsweb/html5/eventsource/Overview.html">http://dev.w3.org/cvsweb/html5/eventsource/Overview.html</a></li>
+  </ul><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- relationship to other work (required) --><p>This specification is automatically generated from the
   corresponding section in the HTML5 specification's source document,
   as hosted in the <a href="http://svn.whatwg.org/webapps/">WHATWG
   Subversion repository</a>. Detailed change history for all of HTML5,
   including the parts that form this specification, can be found at
-  the following locations:</p>
-  <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-
-  <!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-  <ul>
-   <li>Twitter messages (non-editorial changes only): <a href="http://twitter.com/WHATWG">http://twitter.com/WHATWG</a></li>
+  the following locations:</p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><ul><li>Twitter messages (non-editorial changes only): <a href="http://twitter.com/WHATWG">http://twitter.com/WHATWG</a></li>
    <li>Interactive Web interface: <a href="http://html5.org/tools/web-apps-tracker">http://html5.org/tools/web-apps-tracker</a></li>
    <li>Commit-Watchers mailing list: <a href="http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org">http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org</a></li>
    <li>Subversion interface: <a href="http://svn.whatwg.org/webapps/">http://svn.whatwg.org/webapps/</a></li>
-  </ul>
-  <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-
-
-  <!-- status of document, group responsible (required) -->
-  <p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Apps
+  </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Apps
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 11 August 2009 Editor's Draft.
+  This specification is the 14 August 2009 Editor's Draft.
   <!--:ZZZ-->
-  </p>
-
-
-  <!-- required patent boilerplate -->
-  <p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+  </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
   of the group; that page also includes instructions for disclosing a
   patent. An individual who has actual knowledge of a patent which the
   individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-  6 of the W3C Patent Policy</a>.</p>
-
-  <h2 class="no-num no-toc" id="contents">Table of contents</h2>
-  
+  6 of the W3C Patent Policy</a>.<h2 class="no-num no-toc" id="contents">Table of contents</h2>
 <!--begin-toc-->
 <ol class="toc">
  <li><a href="#server-sent-events-intro"><span class="secno">1 </span>Introduction</a></li>
@@ -325,66 +267,31 @@
   <ol>
    <li><a href="#text-event-stream"><span class="secno">10.1 </span><code>text/event-stream</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></ol>
-<!--end-toc-->
-  <hr>
-  <h2 id="server-sent-events-intro"><span class="secno">1 </span>Introduction</h2>
-
-  <p><i>This section is non-normative.</i></p>
-
-  <p>To enable servers to push data to Web pages over HTTP or using
+<!--end-toc--><hr><h2 id="server-sent-events-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable servers to push data to Web pages over HTTP or using
   dedicated server-push protocols, this specification introduces the
-  <code><a href="#eventsource">EventSource</a></code> interface.</p>
-
-  <p class="XXX">An introduction to the client-side and
-  server-side of using the direct connection APIs.</p>
-
-
-
-  <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2>
-
-  <p>All diagrams, examples, and notes in this specification are
+  <code><a href="#eventsource">EventSource</a></code> interface.<p class="XXX">An introduction to the client-side and
+  server-side of using the direct connection APIs.<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
-  Everything else in this specification is normative.</p>
-
-  <p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
+  Everything else in this specification is normative.<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
   NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
   interpreted as described in RFC2119. For readability, these words do
-  not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a></p>
-
-  <p>Requirements phrased in the imperative as part of algorithms
+  not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a><p>Requirements phrased in the imperative as part of algorithms
   (such as "strip any leading space characters" or "return false and
   abort these steps") are to be interpreted with the meaning of the
   key word ("must", "should", "may", etc) used in introducing the
-  algorithm.</p>
-
-  <p>Some conformance requirements are phrased as requirements on
+  algorithm.<p>Some conformance requirements are phrased as requirements on
   attributes, methods or objects. Such requirements are to be
-  interpreted as requirements on user agents.</p>
-
-  <p>Conformance requirements phrased as algorithms or specific steps
+  interpreted as requirements on user agents.<p>Conformance requirements phrased as algorithms or specific steps
   may be implemented in any manner, so long as the end result is
   equivalent. (In particular, the algorithms defined in this
   specification are intended to be easy to follow, and not intended to
-  be performant.)</p>
-
-  <p>The only conformance class defined by this specification is user
-  agents.</p>
-
-  <p>User agents may impose implementation-specific limits on
+  be performant.)<p>The only conformance class defined by this specification is user
+  agents.<p>User agents may impose implementation-specific limits on
   otherwise unconstrained inputs, e.g. to prevent denial of service
   attacks, to guard against running out of memory, or to work around
-  platform-specific limitations.</p>
-
-
-  <h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3>
-
-  <p>This specification relies on several other underlying
-  specifications.</p>
-
-  <dl>
-
-   <dt>HTML5</dt>
+  platform-specific limitations.<h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3><p>This specification relies on several other underlying
+  specifications.<dl><dt>HTML5</dt>
 
    <dd>
 
@@ -402,29 +309,16 @@
 
    </dd>
 
-  </dl>
-
-
-  <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
-
-  <p>The construction "a <code title="">Foo</code> object", where
+  </dl><h2 id="terminology"><span class="secno">3 </span>Terminology</h2><p>The construction "a <code title="">Foo</code> object", where
   <code title="">Foo</code> is actually an interface, is sometimes
   used instead of the more accurate "an object implementing the
-  interface <code title="">Foo</code>".</p>
-
-  <p>The term DOM is used to refer to the API set made available to
+  interface <code title="">Foo</code>".<p>The term DOM is used to refer to the API set made available to
   scripts in Web applications, and does not necessarily imply the
   existence of an actual <code>Document</code> object or of any other
   <code>Node</code> objects as defined in the DOM Core
-  specifications. <a href="#refsDOMCORE">[DOMCORE]</a></p>
-
-  <p>A DOM attribute is said to be <em>getting</em> when its value is
+  specifications. <a href="#refsDOMCORE">[DOMCORE]</a><p>A DOM attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
-  <em>setting</em> when a new value is assigned to it.</p>
-
-  <h2 id="the-eventsource-interface"><span class="secno">4 </span>The <code><a href="#eventsource">EventSource</a></code> interface</h2>
-
-  <pre class="idl">[<a href="#dom-eventsource" title="dom-EventSource">Constructor</a>(in DOMString url)]
+  <em>setting</em> when a new value is assigned to it.<h2 id="the-eventsource-interface"><span class="secno">4 </span>The <code><a href="#eventsource">EventSource</a></code> interface</h2><pre class="idl">[<a href="#dom-eventsource" title="dom-EventSource">Constructor</a>(in DOMString url)]
 interface <dfn id="eventsource">EventSource</dfn> {
   readonly attribute DOMString <a href="#dom-eventsource-url" title="dom-EventSource-URL">URL</a>;
 
@@ -439,19 +333,11 @@ interface <dfn id="eventsource">EventSource</dfn> {
            attribute <span>Function</span> <a href="#handler-eventsource-onmessage" title="handler-EventSource-onmessage">onmessage</a>;
            attribute <span>Function</span> <a href="#handler-eventsource-onerror" title="handler-EventSource-onerror">onerror</a>;
   void <a href="#dom-eventsource-close" title="dom-EventSource-close">close</a>();
-};</pre>
-
-  <p><code><a href="#eventsource">EventSource</a></code> objects must also implement the
-  <code>EventTarget</code> interface. <a href="#refsDOMEVENTS">[DOMEVENTS]</a></p>
-
-  <p>The <dfn id="dom-eventsource" title="dom-EventSource"><code>EventSource(<var title="">url</var>)</code></dfn> constructor takes one argument,
+};</pre><p><code><a href="#eventsource">EventSource</a></code> objects must also implement the
+  <code>EventTarget</code> interface. <a href="#refsDOMEVENTS">[DOMEVENTS]</a><p>The <dfn id="dom-eventsource" title="dom-EventSource"><code>EventSource(<var title="">url</var>)</code></dfn> constructor takes one argument,
   <var title="">url</var>, which specifies the <span>URL</span> to
   which to connect. When the <code>EventSource()</code> constructor is
-  invoked, the UA must run these steps:</p>
-
-  <ol>
-
-   <li><p><span title="resolve a url">Resolve</span> the
+  invoked, the UA must run these steps:<ol><li><p><span title="resolve a url">Resolve</span> the
    <span>URL</span> specified in <var title="">url</var>, relative to
    the <span>first script</span>'s <span title="script's base
    URL">base URL</span>.</li>
@@ -474,26 +360,14 @@ interface <dfn id="eventsource">EventSource</dfn> {
 
    </li>
 
-  </ol>
-
-  <p>This constructor must be visible when the <span>script's global
+  </ol><p>This constructor must be visible when the <span>script's global
   scope</span> is either a <code>Window</code> object or an object
-  implementing the <code>WorkerUtils</code> interface.</p>
-
-  <hr>
-
-  <p>The <dfn id="dom-eventsource-url" title="dom-EventSource-URL"><code>URL</code></dfn>
+  implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-URL"><code>URL</code></dfn>
   attribute must return the <span>absolute URL</span> that resulted
   from <span title="resolve a url">resolving</span> the value that was
-  passed to the constructor.</p>
-
-  <p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
+  passed to the constructor.<p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
   attribute represents the state of the connection. It can have the
-  following values:</p>
-
-  <dl>
-
-   <dt><dfn id="dom-eventsource-connecting" title="dom-EventSource-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
+  following values:<dl><dt><dfn id="dom-eventsource-connecting" title="dom-EventSource-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
    <dd>The connection has not yet been established, or it was closed
    and the user agent is reconnecting.</dd>
@@ -509,39 +383,20 @@ interface <dfn id="eventsource">EventSource</dfn> {
    reconnect. Either there was a fatal error or the <code title="dom-EventSource-close"><a href="#dom-eventsource-close">close()</a></code> method was
    invoked.</dd>
 
-  </dl>
-
-  <p>When the object is created its <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> must be set to
+  </dl><p>When the object is created its <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> must be set to
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> (0). The
   rules given below for handling the connection define when the value
-  changes.</p>
-
-  <p>The <dfn id="dom-eventsource-close" title="dom-EventSource-close"><code>close()</code></dfn>
+  changes.<p>The <dfn id="dom-eventsource-close" title="dom-EventSource-close"><code>close()</code></dfn>
   method must close the connection, if any, and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>. If the
-  connection is already closed, the method must do nothing.</p>
-
-  <p>The following are the <span>event handler attributes</span> (and their corresponding <span title="event handler event type">event handler event types</span>)
+  connection is already closed, the method must do nothing.<p>The following are the <span>event handler attributes</span> (and their corresponding <span title="event handler event type">event handler event types</span>)
   that must be supported, as DOM attributes, by all objects
-  implementing the <code><a href="#eventsource">EventSource</a></code> interface:</p>
-
-  <table>
-   <thead>
-    <tr><th><span title="event handler attributes">event handler attribute</span> <th><span>Event handler event type</span>
-   <tbody>
-    <tr><td><dfn id="handler-eventsource-onopen" title="handler-EventSource-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
+  implementing the <code><a href="#eventsource">EventSource</a></code> interface:<table><thead><tr><th><span title="event handler attributes">event handler attribute</span> <th><span>Event handler event type</span>
+   <tbody><tr><td><dfn id="handler-eventsource-onopen" title="handler-EventSource-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
     <tr><td><dfn id="handler-eventsource-onmessage" title="handler-EventSource-onmessage"><code>onmessage</code></dfn> <td> <code title="event-message">message</code>
     <tr><td><dfn id="handler-eventsource-onerror" title="handler-EventSource-onerror"><code>onerror</code></dfn> <td> <code title="event-error">error</code>
-  </table>
-
-  <hr>
-
-  <p>In addition to the above, each <code><a href="#eventsource">EventSource</a></code> object
-  has the following associated with it:</p>
-
-  <ul>
-
-   <li>A <dfn id="concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection
+  </table><hr><p>In addition to the above, each <code><a href="#eventsource">EventSource</a></code> object
+  has the following associated with it:<ul><li>A <dfn id="concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection
    time</dfn>, in milliseconds. This must initially be a
    user-agent-defined value, probably in the region of a few
    seconds.</li>
@@ -549,90 +404,51 @@ interface <dfn id="eventsource">EventSource</dfn> {
    <li>A <dfn id="concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event
    ID string</dfn>. This must initially be the empty string.</li>
 
-  </ul>
-
-  <p>These values are not currently exposed on the interface.</p>
-
-
-  <h2 id="processing-model"><span class="secno">5 </span>Processing model</h2>
-
-  <p>The resource indicated in the argument to the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor is <span title="fetch">fetched</span> when the constructor is run.</p>
-
-  <p>For HTTP connections, the <code title="">Accept</code> header may
+  </ul><p>These values are not currently exposed on the interface.<h2 id="processing-model"><span class="secno">5 </span>Processing model</h2><p>The resource indicated in the argument to the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor is <span title="fetch">fetched</span> when the constructor is run.<p>For HTTP connections, the <code title="">Accept</code> header may
   be included; if included, it must contain only formats of event
   framing that are supported by the user agent (one of which must be
-  <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).</p>
-
-  <p>If the event source's last event ID string is not the empty
+  <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).<p>If the event source's last event ID string is not the empty
   string, then a <code title="">Last-Event-ID</code> HTTP header must
   be included with the request, whose value is the value of the event
-  source's last event ID string.</p>
-
-  <p>User agents should use the <code>Cache-Control: no-cache</code>
+  source's last event ID string.<p>User agents should use the <code>Cache-Control: no-cache</code>
   header in requests to bypass any caches for requests of event
   sources. User agents should ignore HTTP cache headers in the
-  response, never caching event sources.</p>
-
-  <p class="XXX">Cross-origin loads are expected to follow the
+  response, never caching event sources.<p class="XXX">Cross-origin loads are expected to follow the
   Access-Control semantics of CORS; without this header, they are
-  expected to fail as if the site was down.</p>
-
-  <hr>
-
-  <p>As data is received, the <span title="concept-task">tasks</span>
+  expected to fail as if the site was down.<hr><p>As data is received, the <span title="concept-task">tasks</span>
   queued by the <span>networking task source</span> to handle the data
-  must act as follows.</p>
-
-  <p>HTTP 200 OK responses with a <span>Content-Type</span> header
+  must act as follows.<p>HTTP 200 OK responses with a <span>Content-Type</span> header
   specifying the type <code><a href="#text-event-stream">text/event-stream</a></code> must be processed
   line by line <a href="#event-stream-interpretation">as described
-  below</a>.</p>
-
-  <p>When a successful response with a supported <span>MIME type</span> is
+  below</a>.<p>When a successful response with a supported <span>MIME type</span> is
   received, such that the user agent begins parsing the contents of
   the stream, the user agent must <a href="#announce-the-connection">announce the
-  connection</a>.</p>
-
-  <p>If such a resource (with the correct <span>MIME type</span>) completes loading
+  connection</a>.<p>If such a resource (with the correct <span>MIME type</span>) completes loading
   (i.e. the entire HTTP response body is received or the connection
   itself closes), the user agent must <a href="#reset-the-connection">reset the
   connection</a>. This doesn't apply for the error cases that are
-  listed below.</p>
-
-  <p>HTTP 200 OK responses that have a <span>Content-Type</span> other
+  listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
   than <code><a href="#text-event-stream">text/event-stream</a></code> (or some other supported type)
-  must cause the user agent to <a href="#fail-the-connection">fail the connection</a>.</p>
-
-  <p>HTTP 204 No Content, and 205 Reset Content responses are
+  must cause the user agent to <a href="#fail-the-connection">fail the connection</a>.<p>HTTP 204 No Content, and 205 Reset Content responses are
   equivalent to 200 OK responses with the right <span>MIME type</span> but no
-  content, and thus must <a href="#reset-the-connection">reset the connection</a>.</p>
-
-  <p>Other HTTP response codes in the 2xx range <!--201 Created, 202
+  content, and thus must <a href="#reset-the-connection">reset the connection</a>.<p>Other HTTP response codes in the 2xx range <!--201 Created, 202
   Accepted, 203 Non-Authoritative Information, and 206 Partial
   Content-->must similarly <a href="#reset-the-connection">reset the connection</a>. They
   are, however, likely to indicate an error has occurred somewhere and
-  may cause the user agent to emit a warning.</p>
-
-  <p>HTTP 301 Moved Permanently responses must cause the user agent to
+  may cause the user agent to emit a warning.<p>HTTP 301 Moved Permanently responses must cause the user agent to
   reconnect using the new server specified URL instead of the
   previously specified URL for all subsequent requests for this event
   source. (It doesn't affect other <code><a href="#eventsource">EventSource</a></code> objects
   with the same URL unless they also receive 301 responses, and it
-  doesn't affect future sessions, e.g. if the page is reloaded.)</p>
-
-  <p>HTTP 302 Found, 303 See Other, and 307 Temporary Redirect
+  doesn't affect future sessions, e.g. if the page is reloaded.)<p>HTTP 302 Found, 303 See Other, and 307 Temporary Redirect
   responses must cause the user agent to connect to the new
   server-specified URL, but if the user agent needs to again request
   the resource at a later point, it must return to the previously
-  specified URL for this event source.</p>
-
-  <p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
+  specified URL for this event source.<p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
-  other subresource.</p>
-
-  <p>Any other HTTP response code not listed here or network error
+  other subresource.<p>Any other HTTP response code not listed here or network error
   (e.g. DNS errors) must cause the user agent to <a href="#fail-the-connection">fail the
-  connection</a>.</p> <!-- including: HTTP 300 Multiple Choices,
+  connection</a>.</p><!-- including: HTTP 300 Multiple Choices,
   HTTP 304 Not Modified, HTTP 400 Bad Request, 403 Forbidden, 404 Not
   Found, 405 Method Not Allowed, 406 Not Acceptable, 408 Request
   Timeout, 409 Conflict, 410 Gone, 411 Length Required, 412
@@ -640,19 +456,11 @@ interface <dfn id="eventsource">EventSource</dfn> {
   Too Long, 415 Unsupported Media Type, 416 Requested Range Not
   Satisfiable, 417 Expectation Failed, 500 Internal Server Error, 501
   Not Implemented, 502 Bad Gateway, 503 Service Unavailable, 504
-  Gateway Timeout, and 505 HTTP Version Not Supported responses -->
-
-  <p>For non-HTTP protocols, UAs should act in equivalent ways.</p>
-
-  <hr>
-
-  <p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
+  Gateway Timeout, and 505 HTTP Version Not Supported responses --><p>For non-HTTP protocols, UAs should act in equivalent ways.<hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
   user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> called <code title="event-open">open</code> at the
-  <code><a href="#eventsource">EventSource</a></code> object.</p>
-
-  <p>When a user agent is to <dfn id="reset-the-connection">reset the connection</dfn>, the user
+  <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reset-the-connection">reset the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>,
   <span>queue a task</span> to <span>fire a simple event</span> called
@@ -660,32 +468,17 @@ interface <dfn id="eventsource">EventSource</dfn> {
   <code><a href="#eventsource">EventSource</a></code> object, and then <span>fetch</span> the
   event source resource again after a delay equal to the reconnection
   time of the event source. <strong>Only if the user agent <a href="#reset-the-connection" title="reset the connection">resets the connection</a> does the
-  connection get opened anew!</strong></p>
-
-  <p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
+  connection get opened anew!</strong><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> called <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
   object. <strong>Once the user agent has <a href="#fail-the-connection" title="fail the
   connection">failed the connection</a>, it does <em>not</em>
-  attempt to reconnect!</strong></p>
-
-  <hr>
-
-  <p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
+  attempt to reconnect!</strong><hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
   task">queued</span> by <code><a href="#eventsource">EventSource</a></code> objects is the
-  <dfn id="remote-event-task-source">remote event task source</dfn>.</p>
-
-
-  <h2 id="parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</h2>
-
-  <p>This event stream format's <span>MIME type</span> is
-  <code><a href="#text-event-stream">text/event-stream</a></code>.</p>
-
-  <p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
-  character set for which is Unicode. <a href="#refsABNF">[ABNF]</a></p>
-
-  <pre>stream        = [ bom ] *event
+  <dfn id="remote-event-task-source">remote event task source</dfn>.<h2 id="parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</h2><p>This event stream format's <span>MIME type</span> is
+  <code><a href="#text-event-stream">text/event-stream</a></code>.<p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
+  character set for which is Unicode. <a href="#refsABNF">[ABNF]</a><pre>stream        = [ bom ] *event
 event         = *( comment / field ) end-of-line
 comment       = colon *any-char end-of-line
 field         = 1*name-char [ colon [ space ] *any-char ] end-of-line
@@ -701,47 +494,24 @@ bom           = %xFEFF ; U+FEFF BYTE ORDER MARK
 name-char     = %x0000-0009 / %x000B-000C / %x000E-0039 / %x003B-10FFFF
                 ; a Unicode character other than U+000A LINE FEED, U+000D CARRIAGE RETURN, or U+003A COLON
 any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
-                ; a Unicode character other than U+000D CARRIAGE RETURN or U+003A COLON</pre>
-
-  <p>Event streams in this format must always be encoded as
-  UTF-8.</p>
-
-  <p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A
+                ; a Unicode character other than U+000D CARRIAGE RETURN or U+003A COLON</pre><p>Event streams in this format must always be encoded as
+  UTF-8.<p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A
   LINE FEED (CRLF) character pair, a single U+000A LINE FEED (LF)
-  character, or a single U+000D CARRIAGE RETURN (CR) character.</p>
-
-  <p>Since connections established to remote servers for such
+  character, or a single U+000D CARRIAGE RETURN (CR) character.<p>Since connections established to remote servers for such
   resources are expected to be long-lived, UAs should ensure that
   appropriate buffering is used. In particular, while line buffering
   with lines are defined to end with a single U+000A LINE FEED
   character is safe, block buffering or line buffering with different
-  expected line endings can cause delays in event dispatch.</p>
-
-
-  <h2 id="event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</h2>
-
-  <p>Bytes or sequences of bytes that are not valid UTF-8 sequences
-  must be interpreted as the U+FFFD REPLACEMENT CHARACTER.</p>
-
-  <p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
-  any are present.</p>
-
-  <p>The stream must then be parsed by reading everything line by
+  expected line endings can cause delays in event dispatch.<h2 id="event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</h2><p>Bytes or sequences of bytes that are not valid UTF-8 sequences
+  must be interpreted as the U+FFFD REPLACEMENT CHARACTER.<p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
+  any are present.<p>The stream must then be parsed by reading everything line by
   line, with a U+000D CARRIAGE RETURN U+000A LINE FEED (CRLF)
   character pair, a single U+000A LINE FEED (LF) character, a single
   U+000D CARRIAGE RETURN (CR) character, and the end of the file being
-  the four ways in which a line can end.</p>
-
-  <p>When a stream is parsed, a <var title="">data</var> buffer and an
+  the four ways in which a line can end.<p>When a stream is parsed, a <var title="">data</var> buffer and an
   <var title="">event name</var> buffer must be associated with
-  it. They must be initialized to the empty string</p>
-
-  <p>Lines must be processed, in the order they are received, as
-  follows:</p>
-
-  <dl class="switch">
-
-   <dt>If the line is empty (a blank line)</dt>
+  it. They must be initialized to the empty string<p>Lines must be processed, in the order they are received, as
+  follows:<dl class="switch"><dt>If the line is empty (a blank line)</dt>
 
    <dd><p><a href="#dispatchMessage">Dispatch the event</a>, as
    defined below.</dd>
@@ -782,20 +552,11 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    </dd>
 
-  </dl>
-
-  <p>Once the end of the file is reached, the user agent must <a href="#dispatchMessage">dispatch the event</a> one final time, as
-  defined below.</p>
-
-
-  <p id="processField">The steps to <dfn title="">process the
+  </dl><p>Once the end of the file is reached, the user agent must <a href="#dispatchMessage">dispatch the event</a> one final time, as
+  defined below.<p id="processField">The steps to <dfn title="">process the
   field</dfn> given a field name and a field value depend on the field
   name, as given in the following list. Field names must be compared
-  literally, with no case folding performed.</p>
-
-  <dl class="switch">
-
-   <dt>If the field name is "event"</dt>
+  literally, with no case folding performed.<dl class="switch"><dt>If the field name is "event"</dt>
 
    <dd><p>Set the <var title="">event name</var> buffer to field
    value.</dd>
@@ -837,15 +598,10 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <dd><p>The field is ignored.</dd>
 
-  </dl>
-
-
-  <p id="dispatchMessage">When the user agent is required to <dfn title="">dispatch the event</dfn>, then the user agent must act as
+  </dl><p id="dispatchMessage">When the user agent is required to <dfn title="">dispatch the event</dfn>, then the user agent must act as
   follows:
 
-  <ol>
-
-   <li><p>If the <var title="">data</var> buffer is an empty string,
+  <ol><li><p>If the <var title="">data</var> buffer is an empty string,
    set the <var title="">data</var> buffer and the <var title="">event
    name</var> buffer to the empty string and abort these
    steps.</li>
@@ -876,15 +632,10 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    <li><p><span>Queue a task</span> to dispatch the newly created
    event at the <code><a href="#eventsource">EventSource</a></code> object.</li>
 
-  </ol>
-
-  <p class="note">If an event doesn't have an "id" field, but an
+  </ol><p class="note">If an event doesn't have an "id" field, but an
   earlier event did set the event source's <span>last event ID
   string</span>, then the event's <code title="dom-MessageEvent-lastEventId">lastEventId</code> field will
-  be set to the value of whatever the last seen "id" field was.</p>
-
-
-  <div class="example">
+  be set to the value of whatever the last seen "id" field was.<div class="example">
 
    <p>The following event stream, once followed by a blank line:</p>
    <pre>data: YHOO
@@ -910,9 +661,7 @@ stocks.onmessage = function (event) {
 
    <p>...or some such.</p>
 
-  </div>
-
-  <div class="example">
+  </div><div class="example">
 
    <p>The following stream contains four blocks. The first block has
    just a comment, and will fire nothing. The second block has two
@@ -938,9 +687,7 @@ data: second event
 id
 
 data: third event</pre>
-  </div>
-
-  <div class="example">
+  </div><div class="example">
 
    <p>The following stream fires just one event:</p>
 
@@ -955,91 +702,53 @@ data:</pre>
    any actual data (the <var title="">data</var> buffer remains at the
    empty string, and so nothing gets dispatched). The middle block
    fires an event with the data set to a single newline character.</p>
-  </div>
-
-  <div class="example">
+  </div><div class="example">
 
    <p>The following stream fires two identical events:</p>
 
    <pre>data:test
 
-data: test</pre>
+data:&nbsp;test</pre>
 
    <p>This is because the space after the colon is ignored if
    present.</p>
 
-  </div>
-
-
-  <h2 id="notes"><span class="secno">8 </span>Notes</h2>
-
-  <p>Legacy proxy servers are known to, in certain cases, drop HTTP
+  </div><h2 id="notes"><span class="secno">8 </span>Notes</h2><p>Legacy proxy servers are known to, in certain cases, drop HTTP
   connections after a short timeout. To protect against such proxy
   servers, authors can include a comment line (one starting with a ':'
-  character) every 15 seconds or so.</p>
-
-  <p>Authors wishing to relate event source connections to each other
+  character) every 15 seconds or so.<p>Authors wishing to relate event source connections to each other
   or to specific documents previously served might find that relying
   on IP addresses doesn't work, as individual clients can have
   multiple IP addresses (due to having multiple proxy servers) and
   individual IP addresses can have multiple clients (due to sharing a
   proxy server). It is better to include a unique identifier in the
   document when it is served and then pass that identifier as part of
-  the URL when the connection is established.</p>
-
-  <p>Authors are also cautioned that HTTP chunking can have unexpected
+  the URL when the connection is established.<p>Authors are also cautioned that HTTP chunking can have unexpected
   negative effects on the reliability of this protocol. Where
   possible, chunking should be disabled for serving event streams
   unless the rate of messages is high enough for this not to
-  matter.</p> <!-- v2 can we get a better solution? -->
-
-  <p>Implementations that support HTTP's per-server connection
+  matter.</p><!-- v2 can we get a better solution? --><p>Implementations that support HTTP's per-server connection
   limitation might run into trouble when opening multiple pages from a
   site if each page has an <code><a href="#eventsource">EventSource</a></code> to the same
   domain. Authors can avoid this using the relatively complex
   mechanism of using unique domain names per connection, or by
   allowing the user to enable or disable the <code><a href="#eventsource">EventSource</a></code>
   functionality on a per-page basis, or by sharing a single
-  <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>.</p>
-
-  <hr>
-
-  <p>Other formats of event framing may also be supported in addition
+  <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>.<hr><p>Other formats of event framing may also be supported in addition
   to <code><a href="#text-event-stream">text/event-stream</a></code>, but this specification does not
-  define how they are to be parsed or processed.</p>
-
-  <p class="note">Such formats could include systems like SMS-push;
+  define how they are to be parsed or processed.<p class="note">Such formats could include systems like SMS-push;
   for example servers could use <code title="">Accept</code> headers
   and HTTP redirects to an SMS-push mechanism as a kind of protocol
-  negotiation to reduce network load in GSM environments.</p>
-
-
-  <h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2>
-
-  <p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is not <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, and the object has one
+  negotiation to reduce network load in GSM environments.<h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2><p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is not <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, and the object has one
   or more event listeners registered for <code title="event-message">message</code> events, there must be a strong
   reference from the <code>Window</code> or <code>WorkerUtils</code>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
-  invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.</p>
-
-  <p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
-  its connection is still open, the connection must be closed.</p>
-
-
-  <h2 id="iana-considerations"><span class="secno">10 </span>IANA considerations</h2>
-
-  <p>This registration is for community review and will be submitted
-  to the IESG for review, approval, and registration with IANA.</p>
-
-  <h3 id="text-event-stream"><span class="secno">10.1 </span><dfn><code>text/event-stream</code></dfn></h3>
-
-  <!--
+  invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
+  its connection is still open, the connection must be closed.<h2 id="iana-considerations"><span class="secno">10 </span>IANA considerations</h2><p>This registration is for community review and will be submitted
+  to the IESG for review, approval, and registration with IANA.<h3 id="text-event-stream"><span class="secno">10.1 </span><dfn><code>text/event-stream</code></dfn></h3><!--
    To: ietf-types@iana.org
    Subject: Registration of media type text/event-stream
-  -->
-
-  <dl>
-   <dt>Type name:</dt>
+  --><dl><dt>Type name:</dt>
    <dd>text</dd>
    <dt>Subtype name:</dt>
    <dd>event-stream</dd>
@@ -1083,15 +792,13 @@ data: test</pre>
    </dd>
    <dt>Additional information:</dt>
    <dd>
-    <dl>
-     <dt>Magic number(s):</dt>
+    <dl><dt>Magic number(s):</dt>
      <dd>No sequence of bytes can uniquely identify an event stream.</dd>
      <dt>File extension(s):</dt>
      <dd>No specific file extensions are recommended for this type.</dd>
      <dt>Macintosh file type code(s):</dt>
      <dd>No specific Macintosh file type codes are recommended for this type.</dd>
-    </dl>
-   </dd>
+    </dl></dd>
    <dt>Person &amp; email address to contact for further information:</dt>
    <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
    <dt>Intended usage:</dt>
@@ -1104,19 +811,8 @@ data: test</pre>
    <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
    <dt>Change controller:</dt>
    <dd>W3C</dd>
-  </dl>
-
-  <p>Fragment identifiers have no meaning with
-  <code><a href="#text-event-stream">text/event-stream</a></code> resources.</p>
-
-
-  <h2 class="no-num" id="references">References</h2>
-
-  <p>All references are normative unless marked "Non-normative".</p>
-
-  <dl>
-
-   <dt id="refsABNF">[ABNF]</dt>
+  </dl><p>Fragment identifiers have no meaning with
+  <code><a href="#text-event-stream">text/event-stream</a></code> resources.<h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".<dl><dt id="refsABNF">[ABNF]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/std/std68.txt">Augmented
    BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker,
    P. Overell. IETF, January 2008.</dd>
@@ -1175,7 +871,3 @@ data: test</pre>
    IDL</a></cite>, C. McCormack. W3C, July 2009.</dd>
 
   </dl>
-
-
- 
-
