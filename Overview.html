@@ -423,8 +423,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   network error if the <span>origin</span> of the <span>URL</span> of
   the resource to be <span title="fetch">fetched</span> is not the
   <span>same origin</span> as that of the <span>first script</span>
-  when the <a href="#dom-eventsource" title="dom-EventSource">EventSource()
-  constructor is invoked.</a></p><!-- v2: add CORS support --><hr><p>As data is received, the <span title="concept-task">tasks</span>
+  when the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code>
+  constructor is invoked.</p><!-- v2: add CORS support --><hr><p>As data is received, the <span title="concept-task">tasks</span>
   queued by the <span>networking task source</span> to handle the data
   must act as follows.<p>HTTP 200 OK responses with a <span>Content-Type</span> header
   specifying the type <code><a href="#text-event-stream">text/event-stream</a></code> must be processed
