@@ -169,7 +169,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-17-september-2009">Editor's Draft 17 September 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-18-september-2009">Editor's Draft 18 September 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -235,7 +235,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 17 September 2009 Editor's Draft.
+  This specification is the 18 September 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -264,8 +264,18 @@
  <li><a class="no-num" href="#references">References</a></ol>
 <!--end-toc--><hr><h2 id="server-sent-events-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable servers to push data to Web pages over HTTP or using
   dedicated server-push protocols, this specification introduces the
-  <code><a href="#eventsource">EventSource</a></code> interface.<p class="XXX">An introduction to the client-side and
-  server-side of using the direct connection APIs.<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
+  <code><a href="#eventsource">EventSource</a></code> interface.<p>Using this API consists of creating an <code><a href="#eventsource">EventSource</a></code>
+  object and registering an event listener.<pre>var source = new EventSource('updates.cgi');
+source.onmessage = function (event) {
+  alert(event.data);
+};</pre><p>On the server-side, the script ("<code title="">updates.cgi</code>" in this case) sends messages in the
+  following form, with the <code><a href="#text-event-stream">text/event-stream</a></code> MIME
+  type:<pre>data: This is the first message.
+
+data: This is the second message, it
+data: has two lines.
+
+data: This is the third message.</pre><h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
   Everything else in this specification is normative.<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
   NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
@@ -351,7 +361,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
     <p class="note">The definition of the <span title="fetch">fetching</span> algorithm is such that if the
     browser is already fetching the resource identified by the given
     <span>absolute URL</span>, that connection can be reused, instead
-    of a new connection being established.</p>
+    of a new connection being established. All messages received up to
+    this point are dispatched immediately, in this case.</p>
 
    </li>
 
@@ -408,9 +419,12 @@ interface <dfn id="eventsource">EventSource</dfn> {
   source's last event ID string.<p>User agents should use the <code>Cache-Control: no-cache</code>
   header in requests to bypass any caches for requests of event
   sources. User agents should ignore HTTP cache headers in the
-  response, never caching event sources.<p class="XXX">Cross-origin loads are expected to follow the
-  Access-Control semantics of CORS; without this header, they are
-  expected to fail as if the site was down.<hr><p>As data is received, the <span title="concept-task">tasks</span>
+  response, never caching event sources.<p>User agents must act as if the connection had failed due to a
+  network error if the <span>origin</span> of the <span>URL</span> of
+  the resource to be <span title="fetch">fetched</span> is not the
+  <span>same origin</span> as that of the <span>first script</span>
+  when the <a href="#dom-eventsource" title="dom-EventSource">EventSource()
+  constructor is invoked.</a></p><!-- v2: add CORS support --><hr><p>As data is received, the <span title="concept-task">tasks</span>
   queued by the <span>networking task source</span> to handle the data
   must act as follows.<p>HTTP 200 OK responses with a <span>Content-Type</span> header
   specifying the type <code><a href="#text-event-stream">text/event-stream</a></code> must be processed
@@ -758,8 +772,9 @@ data:&nbsp;test</pre>
 
     <p>An event stream from an origin distinct from the origin of the
     content consuming the event stream can result in information
-    leakage. To avoid this, user agents are required to apply CORS
-    semantics or block all cross-origin loads. <a href="#refsCORS">[CORS]</a></p>
+    leakage. To avoid this, user agents are required to <!--v2: apply
+    CORS semantics or--> block all cross-origin loads. <!--v2: <a
+    href="#refsCORS">[CORS]</a>--></p>
 
     <p>Event streams can overwhelm a user agent; a user agent is
     expected to apply suitable restrictions to avoid depleting local
