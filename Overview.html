@@ -169,7 +169,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-21-september-2009">Editor's Draft 21 September 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-28-september-2009">Editor's Draft 28 September 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -235,7 +235,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 21 September 2009 Editor's Draft.
+  This specification is the 28 September 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -356,7 +356,9 @@ interface <dfn id="eventsource">EventSource</dfn> {
    <li>
 
     <p><span>Fetch</span> the resource identified by the resulting
-    <span>absolute URL</span>, and process it as described below.</p>
+    <span>absolute URL</span>, from the <span>first script</span>'s
+    <span>origin</span>, and process it as described below.</p> <!--
+    not http-origin privacy sensitive -->
 
     <p class="note">The definition of the <span title="fetch">fetching</span> algorithm is such that if the
     browser is already fetching the resource identified by the given
@@ -453,7 +455,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   responses must cause the user agent to connect to the new
   server-specified URL, but if the user agent needs to again request
   the resource at a later point, it must return to the previously
-  specified URL for this event source.<p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
+  specified URL for this event source.<p class="note">The Origin specification also introduces some
+  relevant requirements when dealing with redirects. <a href="#refsORIGIN">[ORIGIN]</a><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
   other subresource.<p>Any other HTTP response code not listed here or network error
   (e.g. DNS errors) must cause the user agent to <a href="#fail-the-connection">fail the
@@ -476,8 +479,11 @@ interface <dfn id="eventsource">EventSource</dfn> {
   <code title="event-error">error</code> at the
   <code><a href="#eventsource">EventSource</a></code> object, and then <span>fetch</span> the
   event source resource again after a delay equal to the reconnection
-  time of the event source. <strong>Only if the user agent <a href="#reset-the-connection" title="reset the connection">resets the connection</a> does the
-  connection get opened anew!</strong><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
+  time of the event source, from the same <span>origin</span> as the
+  original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code>
+  constructor. <strong>Only if the user agent <a href="#reset-the-connection" title="reset the
+  connection">resets the connection</a> does the connection get
+  opened anew!</strong><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> called <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
@@ -855,6 +861,11 @@ data:&nbsp;test</pre>
    -->
    <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML5</a></cite>,
    I. Hickson. WHATWG, August 2009.</dd>
+
+   <dt id="refsORIGIN">[ORIGIN]</dt>
+   <dd><cite><a href="http://tools.ietf.org/html/draft-abarth-origin">The HTTP
+   Origin Header</a></cite>, A. Barth, C. Jackson, I. Hickson. IETF,
+   September 2009.</dd>
 
    <dt id="refsRFC2119">[RFC2119]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in
