@@ -510,7 +510,7 @@ bom           = %xFEFF ; U+FEFF BYTE ORDER MARK
 name-char     = %x0000-0009 / %x000B-000C / %x000E-0039 / %x003B-10FFFF
                 ; a Unicode character other than U+000A LINE FEED, U+000D CARRIAGE RETURN, or U+003A COLON
 any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
-                ; a Unicode character other than U+000D CARRIAGE RETURN or U+003A COLON</pre><p>Event streams in this format must always be encoded as
+                ; a Unicode character other than U+000A LINE FEED or U+000D CARRIAGE RETURN</pre><p>Event streams in this format must always be encoded as
   UTF-8.<p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A
   LINE FEED (CRLF) character pair, a single U+000A LINE FEED (LF)
   character, or a single U+000D CARRIAGE RETURN (CR) character.<p>Since connections established to remote servers for such
@@ -522,9 +522,11 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
   must be interpreted as the U+FFFD REPLACEMENT CHARACTER.<p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
   any are present.<p>The stream must then be parsed by reading everything line by
   line, with a U+000D CARRIAGE RETURN U+000A LINE FEED (CRLF)
-  character pair, a single U+000A LINE FEED (LF) character, a single
-  U+000D CARRIAGE RETURN (CR) character, and the end of the file being
-  the four ways in which a line can end.<p>When a stream is parsed, a <var title="">data</var> buffer and an
+  character pair, a single U+000A LINE FEED (LF) character not
+  preceded by a U+000D CARRIAGE RETURN (CR) character, a single U+000D
+  CARRIAGE RETURN (CR) character not followd by a U+000D CARRIAGE
+  RETURN (LF) character, and the end of the file being the four ways
+  in which a line can end.<p>When a stream is parsed, a <var title="">data</var> buffer and an
   <var title="">event name</var> buffer must be associated with
   it. They must be initialized to the empty string<p>Lines must be processed, in the order they are received, as
   follows:<dl class="switch"><dt>If the line is empty (a blank line)</dt>
@@ -580,8 +582,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <dt>If the field name is "data"</dt>
 
-   <dd><p>If the <var title="">data</var> buffer is not the empty
-   string, then append a single U+000A LINE FEED character to the <var title="">data</var> buffer. Append the field value to the <var title="">data</var> buffer.</dd>
+   <dd><p>Append the field value to the <var title="">data</var>
+   buffer, then append a single U+000A LINE FEED character to the <var title="">data</var> buffer.</dd>
 
 
    <dt>If the field name is "id"</dt>
@@ -622,11 +624,15 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    name</var> buffer to the empty string and abort these
    steps.</li>
 
+   <li>If the <var title="">data</var> buffer's last character is a
+   U+000A LINE FEED character, then remove the last character from the
+   <var title="">data</var> buffer.
+
    <li><p>If the <var title="">event name</var> buffer is not the
-   empty string but is also not a valid <a href="http://www.w3.org/TR/REC-xml-names/#NT-NCName">NCName</a>,
-   set the <var title="">data</var> buffer and the <var title="">event
-   name</var> buffer to the empty string and abort these
-   steps.</li>
+   empty string but is also not a valid event type name, as defined by
+   the DOM Events specification, set the <var title="">data</var>
+   buffer and the <var title="">event name</var> buffer to the empty
+   string and abort these steps. <a href="#refsDOMEVENTS">[DOMEVENTS]</a></li>
 
    <li><p>Otherwise, create an event that uses the
    <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
@@ -851,6 +857,18 @@ data:&nbsp;test</pre>
    <dd><cite><a href="http://simon.html5.org/specs/web-dom-core">Web
    DOM Core</a></cite>, S. Pieters. W3C, June 2009.</dd>
    -->
+
+   <dt id="refsDOMEVENTS">[DOMEVENTS]</dt>
+   <!--
+   <dd><cite><a
+   href="http://www.w3.org/TR/DOM-Level-3-Events/">Document Object
+   Model (DOM) Level 3 Events Specification</a></cite>,
+   B. H&ouml;hrmann, P. Le Hegaret, T. Pixley. W3C, December
+   2007.</dd>
+   -->
+   <dd><cite><a href="http://dev.w3.org/2006/webapi/DOM-Level-3-Events/html/DOM3-Events.html">Document
+   Object Model (DOM) Level 3 Events Specification</a></cite>,
+   D. Schepers. W3C, July 2009.</dd>
 
    <dt id="refsHTML5">[HTML5]</dt>
    <!--
