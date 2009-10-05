@@ -373,7 +373,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-URL"><code>URL</code></dfn>
   attribute must return the <span>absolute URL</span> that resulted
   from <span title="resolve a url">resolving</span> the value that was
-  passed to the constructor.<p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
+  passed to the constructor.</p><!-- not the result of redirects,
+  since that would introduce race conditions --><p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
   attribute represents the state of the connection. It can have the
   following values:<dl><dt><dfn id="dom-eventsource-connecting" title="dom-EventSource-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
@@ -395,7 +396,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> (0). The
   rules given below for handling the connection define when the value
   changes.<p>The <dfn id="dom-eventsource-close" title="dom-EventSource-close"><code>close()</code></dfn>
-  method must close the connection, if any, and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  method must close the connection, if any; must abort any
+  reconnection attempt, if any; and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>. If the
   connection is already closed, the method must do nothing.<p>The following are the <span>event handlers</span> (and their
   corresponding <span title="event handler event type">event handler
@@ -435,9 +437,10 @@ interface <dfn id="eventsource">EventSource</dfn> {
   below</a>.<p>When a successful response with a supported <span>MIME type</span> is
   received, such that the user agent begins parsing the contents of
   the stream, the user agent must <a href="#announce-the-connection">announce the
-  connection</a>.<p>If such a resource (with the correct <span>MIME type</span>) completes loading
-  (i.e. the entire HTTP response body is received or the connection
-  itself closes), the user agent must <a href="#reset-the-connection">reset the
+  connection</a>.<p>If such a resource (with the correct <span>MIME type</span>)
+  completes loading (i.e. either the entire HTTP response body is
+  received, or the connection is closed somehow, whether by the server
+  or by a network error), the user agent must <a href="#reset-the-connection">reset the
   connection</a>. This doesn't apply for the error cases that are
   listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
   than <code><a href="#text-event-stream">text/event-stream</a></code> (or some other supported type)
@@ -459,17 +462,19 @@ interface <dfn id="eventsource">EventSource</dfn> {
   specified URL for this event source.<p class="note">The Origin specification also introduces some
   relevant requirements when dealing with redirects. <a href="#refsORIGIN">[ORIGIN]</a><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
-  other subresource.<p>Any other HTTP response code not listed here or network error
-  (e.g. DNS errors) must cause the user agent to <a href="#fail-the-connection">fail the
-  connection</a>.</p><!-- including: HTTP 300 Multiple Choices,
-  HTTP 304 Not Modified, HTTP 400 Bad Request, 403 Forbidden, 404 Not
-  Found, 405 Method Not Allowed, 406 Not Acceptable, 408 Request
-  Timeout, 409 Conflict, 410 Gone, 411 Length Required, 412
-  Precondition Failed, 413 Request Entity Too Large, 414 Request-URI
-  Too Long, 415 Unsupported Media Type, 416 Requested Range Not
-  Satisfiable, 417 Expectation Failed, 500 Internal Server Error, 501
-  Not Implemented, 502 Bad Gateway, 503 Service Unavailable, 504
-  Gateway Timeout, and 505 HTTP Version Not Supported responses --><p>For non-HTTP protocols, UAs should act in equivalent ways.<hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
+  other subresource.<p>Any other HTTP response code not listed here, and any network
+  error that prevents the HTTP connection from being established in
+  the first place (e.g. DNS errors), must cause the user agent to
+  <a href="#fail-the-connection">fail the connection</a>.</p><!-- including: HTTP 300
+  Multiple Choices, HTTP 304 Not Modified, HTTP 400 Bad Request, 403
+  Forbidden, 404 Not Found, 405 Method Not Allowed, 406 Not
+  Acceptable, 408 Request Timeout, 409 Conflict, 410 Gone, 411 Length
+  Required, 412 Precondition Failed, 413 Request Entity Too Large, 414
+  Request-URI Too Long, 415 Unsupported Media Type, 416 Requested
+  Range Not Satisfiable, 417 Expectation Failed, 500 Internal Server
+  Error, 501 Not Implemented, 502 Bad Gateway, 503 Service
+  Unavailable, 504 Gateway Timeout, and 505 HTTP Version Not Supported
+  responses --><p>For non-HTTP protocols, UAs should act in equivalent ways.<hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
   user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> named <code title="event-open">open</code> at the
@@ -625,9 +630,9 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    name</var> buffer to the empty string and abort these
    steps.</li>
 
-   <li>If the <var title="">data</var> buffer's last character is a
+   <li><p>If the <var title="">data</var> buffer's last character is a
    U+000A LINE FEED (LF) character, then remove the last character
-   from the <var title="">data</var> buffer.
+   from the <var title="">data</var> buffer.</li>
 
    <li><p>If the <var title="">event name</var> buffer is not the
    empty string but is also not a valid event type name, as defined by
