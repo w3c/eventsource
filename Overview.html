@@ -502,21 +502,21 @@ end-of-line   = ( cr lf / cr / lf / eof )
 eof           = &lt; matches repeatedly at the end of the stream &gt;
 
 ; characters
-lf            = %x000A ; U+000A LINE FEED
-cr            = %x000D ; U+000D CARRIAGE RETURN
+lf            = %x000A ; U+000A LINE FEED (LF)
+cr            = %x000D ; U+000D CARRIAGE RETURN (CR)
 space         = %x0020 ; U+0020 SPACE
-colon         = %x003A ; U+003A COLON
+colon         = %x003A ; U+003A COLON (:)
 bom           = %xFEFF ; U+FEFF BYTE ORDER MARK
 name-char     = %x0000-0009 / %x000B-000C / %x000E-0039 / %x003B-10FFFF
-                ; a Unicode character other than U+000A LINE FEED, U+000D CARRIAGE RETURN, or U+003A COLON
+                ; a Unicode character other than U+000A LINE FEED (LF), U+000D CARRIAGE RETURN (CR), or U+003A COLON (:)
 any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
-                ; a Unicode character other than U+000A LINE FEED or U+000D CARRIAGE RETURN</pre><p>Event streams in this format must always be encoded as
+                ; a Unicode character other than U+000A LINE FEED (LF) or U+000D CARRIAGE RETURN (CR)</pre><p>Event streams in this format must always be encoded as
   UTF-8.<p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A
   LINE FEED (CRLF) character pair, a single U+000A LINE FEED (LF)
   character, or a single U+000D CARRIAGE RETURN (CR) character.<p>Since connections established to remote servers for such
   resources are expected to be long-lived, UAs should ensure that
   appropriate buffering is used. In particular, while line buffering
-  with lines are defined to end with a single U+000A LINE FEED
+  with lines are defined to end with a single U+000A LINE FEED (LF)
   character is safe, block buffering or line buffering with different
   expected line endings can cause delays in event dispatch.<h2 id="event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</h2><p>Bytes or sequences of bytes that are not valid UTF-8 sequences
   must be interpreted as the U+FFFD REPLACEMENT CHARACTER.<p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
@@ -583,7 +583,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    <dt>If the field name is "data"</dt>
 
    <dd><p>Append the field value to the <var title="">data</var>
-   buffer, then append a single U+000A LINE FEED character to the <var title="">data</var> buffer.</dd>
+   buffer, then append a single U+000A LINE FEED (LF) character to the
+   <var title="">data</var> buffer.</dd>
 
 
    <dt>If the field name is "id"</dt>
@@ -625,8 +626,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    steps.</li>
 
    <li>If the <var title="">data</var> buffer's last character is a
-   U+000A LINE FEED character, then remove the last character from the
-   <var title="">data</var> buffer.
+   U+000A LINE FEED (LF) character, then remove the last character
+   from the <var title="">data</var> buffer.
 
    <li><p>If the <var title="">event name</var> buffer is not the
    empty string but is also not a valid event type name, as defined by
