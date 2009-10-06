@@ -169,7 +169,7 @@
    <h1>Server-Sent Events</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-5-october-2009">Editor's Draft 5 October 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-6-october-2009">Editor's Draft 6 October 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -235,7 +235,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!-- This specification is the 23 April 2009 Working Draft. -->
-  This specification is the 5 October 2009 Editor's Draft.
+  This specification is the 6 October 2009 Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -260,7 +260,8 @@
  <li><a href="#garbage-collection"><span class="secno">9 </span>Garbage collection</a></li>
  <li><a href="#iana-considerations"><span class="secno">10 </span>IANA considerations</a>
   <ol>
-   <li><a href="#text-event-stream"><span class="secno">10.1 </span><code>text/event-stream</code></a></ol></li>
+   <li><a href="#text-event-stream"><span class="secno">10.1 </span><code>text/event-stream</code></a></li>
+   <li><a href="#last-event-id"><span class="secno">10.2 </span><code>Last-Event-ID</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></ol>
 <!--end-toc--><hr><h2 id="server-sent-events-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable servers to push data to Web pages over HTTP or using
   dedicated server-push protocols, this specification introduces the
@@ -419,9 +420,9 @@ interface <dfn id="eventsource">EventSource</dfn> {
   be included; if included, it must contain only formats of event
   framing that are supported by the user agent (one of which must be
   <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).<p>If the event source's last event ID string is not the empty
-  string, then a <code title="">Last-Event-ID</code> HTTP header must
-  be included with the request, whose value is the value of the event
-  source's last event ID string.<p>User agents should use the <code>Cache-Control: no-cache</code>
+  string, then a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code>
+  HTTP header must be included with the request, whose value is the
+  value of the event source's last event ID string.<p>User agents should use the <code>Cache-Control: no-cache</code>
   header in requests to bypass any caches for requests of event
   sources. User agents should ignore HTTP cache headers in the
   response, never caching event sources.<p>User agents must act as if the connection had failed due to a
@@ -696,15 +697,15 @@ stocks.onmessage = function (event) {
    fields with names "data" and "id" respectively; an event will be
    fired for this block, with the data "first event", and will then
    set the last event ID to "1" so that if the connection died between
-   this block and the next, the server would be sent a <code title="">Last-Event-ID</code> header with the value "1". The third
-   block fires an event with data "second event", and also has an "id"
-   field, this time with no value, which resets the last event ID to
-   the empty string (meaning no <code title="">Last-Event-ID</code>
-   header will now be sent in the event of a reconnection being
-   attempted). Finally, the last block just fires an event with the
-   data "third event". Note that the last block doesn't have to end
-   with a blank line, the end of the stream is enough to trigger the
-   dispatch of the last event.</p>
+   this block and the next, the server would be sent a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> header with the
+   value "1". The third block fires an event with data "second event",
+   and also has an "id" field, this time with no value, which resets
+   the last event ID to the empty string (meaning no <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> header will now be
+   sent in the event of a reconnection being attempted). Finally, the
+   last block just fires an event with the data "third event". Note
+   that the last block doesn't have to end with a blank line, the end
+   of the stream is enough to trigger the dispatch of the last
+   event.</p>
 
    <pre>: test stream
 
@@ -772,8 +773,8 @@ data:&nbsp;test</pre>
   reference from the <code>Window</code> or <code>WorkerUtils</code>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
   invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
-  its connection is still open, the connection must be closed.<h2 id="iana-considerations"><span class="secno">10 </span>IANA considerations</h2><p>This registration is for community review and will be submitted
-  to the IESG for review, approval, and registration with IANA.<h3 id="text-event-stream"><span class="secno">10.1 </span><dfn><code>text/event-stream</code></dfn></h3><!--
+  its connection is still open, the connection must be closed.<h2 id="iana-considerations"><span class="secno">10 </span>IANA considerations</h2><h3 id="text-event-stream"><span class="secno">10.1 </span><dfn><code>text/event-stream</code></dfn></h3><p>This registration is for community review and will be submitted
+  to the IESG for review, approval, and registration with IANA.</p><!--
    To: ietf-types@iana.org
    Subject: Registration of media type text/event-stream
   --><dl><dt>Type name:</dt>
@@ -841,7 +842,22 @@ data:&nbsp;test</pre>
    <dt>Change controller:</dt>
    <dd>W3C</dd>
   </dl><p>Fragment identifiers have no meaning with
-  <code><a href="#text-event-stream">text/event-stream</a></code> resources.</p><!--START vCard--><!--START vEvent--><h2 class="no-num" id="references">References</h2><!--REFS--><!--END vCard--><!--END vEvent--><p>All references are normative unless marked "Non-normative".</p><!--START vCard--><!--START vEvent--><dl><dt id="refsABNF">[ABNF]</dt>
+  <code><a href="#text-event-stream">text/event-stream</a></code> resources.<h3 id="last-event-id"><span class="secno">10.2 </span><dfn title="http-last-event-id"><code>Last-Event-ID</code></dfn></h3><p>This section describes a header field for registration in the
+  Permanent Message Header Field Registry.  <a href="#refsRFC3864">[RFC3864]</a><dl><dt>Header field name</dt>
+   <dd>Last-Event-ID</dd>
+   <dt>Applicable protocol</dt>
+   <dd>http</dd>
+   <dt>Status</dt>
+   <dd>standard</dd>
+   <dt>Author/Change controller</dt>
+   <dd>W3C</dd>
+   <dt>Specification document(s)</dt>
+   <dd>
+    This document is the relevant specification.
+   </dd>
+   <dt>Related information</dt>
+   <dd>None.</dd>   
+  </dl><!--START vCard--><!--START vEvent--><h2 class="no-num" id="references">References</h2><!--REFS--><!--END vCard--><!--END vEvent--><p>All references are normative unless marked "Non-normative".</p><!--START vCard--><!--START vEvent--><dl><dt id="refsABNF">[ABNF]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/std/std68.txt">Augmented
    BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker,
    P. Overell. IETF, January 2008.</dd>
@@ -896,6 +912,11 @@ data:&nbsp;test</pre>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in
    RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF, March
    1997.</dd>
+
+   <dt id="refsRFC3864">[RFC3864]</dt>
+   <dd><cite><a href="http://www.ietf.org/rfc/rfc3864.txt">Registration Procedures
+   for Message Header Fields</a></cite>, G. Klyne, M. Nottingham,
+   J. Mogul. IETF, September 2004.</dd>
 
    <dt id="refsWEBIDL">[WEBIDL]</dt>
    <!--
