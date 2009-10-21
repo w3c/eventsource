@@ -665,8 +665,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    to the <span title="Unicode serialization of an origin">Unicode
    serialization</span> of the <span>origin</span> of the event
    stream's URL, and the <code title="dom-MessageEvent-lastEventId">lastEventId</code> attribute
-   must be set to the <span>last event ID string</span> of the event
-   source.</li>
+   must be set to the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
+   string</a> of the event source.</li>
 
    <li><p>If the <var title="">event name</var> buffer has a value
    other than the empty string, change the type of the newly created
@@ -679,8 +679,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    event at the <code><a href="#eventsource">EventSource</a></code> object.</li>
 
   </ol><p class="note">If an event doesn't have an "id" field, but an
-  earlier event did set the event source's <span>last event ID
-  string</span>, then the event's <code title="dom-MessageEvent-lastEventId">lastEventId</code> field will
+  earlier event did set the event source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
+  string</a>, then the event's <code title="dom-MessageEvent-lastEventId">lastEventId</code> field will
   be set to the value of whatever the last seen "id" field was.<div class="example">
 
    <p>The following event stream, once followed by a blank line:</p>
