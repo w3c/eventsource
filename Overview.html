@@ -169,7 +169,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-13-november-2009">Editor's Draft 13 November 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-25-november-2009">Editor's Draft 25 November 2009</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -231,7 +231,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 13 November 2009 Editor's Draft.
+  This specification is the 25 November 2009 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -436,15 +436,15 @@ interface <dfn id="eventsource">EventSource</dfn> {
   connection</a>.<p>If such a resource (with the correct <span>MIME type</span>)
   completes loading (i.e. either the entire HTTP response body is
   received, or the connection is closed somehow, whether by the server
-  or by a network error), the user agent must <a href="#reset-the-connection">reset the
+  or by a network error), the user agent must <a href="#reestablish-the-connection">reestablish the
   connection</a>. This doesn't apply for the error cases that are
   listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
   than <code><a href="#text-event-stream">text/event-stream</a></code> (or some other supported type)
   must cause the user agent to <a href="#fail-the-connection">fail the connection</a>.<p>HTTP 204 No Content, and 205 Reset Content responses are
   equivalent to 200 OK responses with the right <span>MIME type</span> but no
-  content, and thus must <a href="#reset-the-connection">reset the connection</a>.<p>Other HTTP response codes in the 2xx range <!--201 Created, 202
+  content, and thus must <a href="#reestablish-the-connection">reestablish the connection</a>.<p>Other HTTP response codes in the 2xx range <!--201 Created, 202
   Accepted, 203 Non-Authoritative Information, and 206 Partial
-  Content-->must similarly <a href="#reset-the-connection">reset the connection</a>. They
+  Content-->must similarly <a href="#reestablish-the-connection">reestablish the connection</a>. They
   are, however, likely to indicate an error has occurred somewhere and
   may cause the user agent to emit a warning.<p>HTTP 301 Moved Permanently responses must cause the user agent to
   reconnect using the new server specified URL instead of the
@@ -474,7 +474,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> named <code title="event-open">open</code> at the
-  <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reset-the-connection">reset the connection</dfn>, the user
+  <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>,
   <span>queue a task</span> to <span>fire a simple event</span> named
@@ -483,8 +483,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   event source resource again after a delay equal to the reconnection
   time of the event source, from the same <span>origin</span> as the
   original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code>
-  constructor. <strong>Only if the user agent <a href="#reset-the-connection" title="reset the
-  connection">resets the connection</a> does the connection get
+  constructor. <strong>Only if the user agent <a href="#reestablish-the-connection" title="reestablish the
+  connection">reestablishes the connection</a> does the connection get
   opened anew!</strong><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>queue a
