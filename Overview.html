@@ -252,11 +252,12 @@
  <li><a href="#parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</a></li>
  <li><a href="#event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</a></li>
  <li><a href="#notes"><span class="secno">8 </span>Notes</a></li>
- <li><a href="#garbage-collection"><span class="secno">9 </span>Garbage collection</a></li>
- <li><a href="#iana-considerations"><span class="secno">10 </span>IANA considerations</a>
+ <li><a href="#connectionless-push-and-other-features"><span class="secno">9 </span>Connectionless push and other features</a></li>
+ <li><a href="#garbage-collection"><span class="secno">10 </span>Garbage collection</a></li>
+ <li><a href="#iana-considerations"><span class="secno">11 </span>IANA considerations</a>
   <ol>
-   <li><a href="#text-event-stream"><span class="secno">10.1 </span><code>text/event-stream</code></a></li>
-   <li><a href="#last-event-id"><span class="secno">10.2 </span><code>Last-Event-ID</code></a></ol></li>
+   <li><a href="#text-event-stream"><span class="secno">11.1 </span><code>text/event-stream</code></a></li>
+   <li><a href="#last-event-id"><span class="secno">11.2 </span><code>Last-Event-ID</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></ol>
 <!--end-toc--><hr><h2 id="server-sent-events-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable servers to push data to Web pages over HTTP or using
   dedicated server-push protocols, this specification introduces the
@@ -775,17 +776,57 @@ data:&nbsp;test</pre>
   mechanism of using unique domain names per connection, or by
   allowing the user to enable or disable the <code><a href="#eventsource">EventSource</a></code>
   functionality on a per-page basis, or by sharing a single
-  <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>. <a href="#refsWEBWORKERS">[WEBWORKERS]</a><hr><p>Other formats of event framing may also be supported in addition
-  to <code><a href="#text-event-stream">text/event-stream</a></code>, but this specification does not
-  define how they are to be parsed or processed.<p class="note">Such formats could include systems like SMS-push;
-  for example servers could use <code title="">Accept</code> headers
-  and HTTP redirects to an SMS-push mechanism as a kind of protocol
-  negotiation to reduce network load in GSM environments.<h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2><p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is not <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, and the object has one
+  <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>. <a href="#refsWEBWORKERS">[WEBWORKERS]</a><h2 id="connectionless-push-and-other-features"><span class="secno">9 </span>Connectionless push and other features</h2><p>User agents running in controlled environments, e.g. browsers on
+  mobile handsets tied to specific carriers, may offload the
+  management of the connection to a proxy on the network. In such a
+  situation, the user agent for the purposes of conformance is
+  considered to include both the handset software and the network
+  proxy.<div class="example">
+
+   <p>For example, a browser on a mobile device, after having
+   established a connection, might detect that it is on a supporting
+   network and request that a proxy server on the network take over
+   the management of the connection. The timeline for such a situation
+   might be as follows:</p>
+
+   <ol><li>Browser connects to a remote HTTP server and requests the
+    resource specified by the author in the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor.</li>
+
+    <li>The server sends occasional messages.</li>
+
+    <li>In between two messages, the browser detects that it is idle
+    except for the network activity involved in keeping the TCP
+    connection alive, and decides to switch to sleep mode to save power.</li>
+
+    <li>The browser disconnects from the server.</li>
+
+    <li>The browser contacts a service on the network, and requests
+    that that service, a "push proxy", maintain the connection instead.</li>
+
+    <li>The "push proxy" service contacts the remote HTTP server and
+    requests the resource specified by the author in the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor (possibly
+    including a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code>
+    HTTP header, etc).</li>
+
+    <li>The browser allows the mobile device to go to sleep.</li>
+ 
+    <li>The server sends another message.</li>
+
+    <li>The "push proxy" service uses a technology such as OMA push to
+    convey the event to the mobile device, which wakes only only
+    enough to process the event and then returns to sleep.</li>
+
+   </ol></div><p>This can result in considerable power savings.<p>As well as implementing the existing API and
+  <code><a href="#text-event-stream">text/event-stream</a></code> wire format as defined by this
+  specification and in more distributed ways as described above,
+  formats of event framing defined by <span>other applicable
+  specifications</span> may be supported. This specification does not
+  define how they are to be parsed or processed.<h2 id="garbage-collection"><span class="secno">10 </span>Garbage collection</h2><p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is not <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, and the object has one
   or more event listeners registered for <code title="event-message">message</code> events, there must be a strong
   reference from the <code>Window</code> or <code>WorkerUtils</code>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
   invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
-  its connection is still open, the connection must be closed.<h2 id="iana-considerations"><span class="secno">10 </span>IANA considerations</h2><h3 id="text-event-stream"><span class="secno">10.1 </span><dfn><code>text/event-stream</code></dfn></h3><p>This registration is for community review and will be submitted
+  its connection is still open, the connection must be closed.<h2 id="iana-considerations"><span class="secno">11 </span>IANA considerations</h2><h3 id="text-event-stream"><span class="secno">11.1 </span><dfn><code>text/event-stream</code></dfn></h3><p>This registration is for community review and will be submitted
   to the IESG for review, approval, and registration with IANA.</p><!--
    To: ietf-types@iana.org
    Subject: Registration of media type text/event-stream
@@ -854,7 +895,7 @@ data:&nbsp;test</pre>
    <dt>Change controller:</dt>
    <dd>W3C</dd>
   </dl><p>Fragment identifiers have no meaning with
-  <code><a href="#text-event-stream">text/event-stream</a></code> resources.<h3 id="last-event-id"><span class="secno">10.2 </span><dfn title="http-last-event-id"><code>Last-Event-ID</code></dfn></h3><p>This section describes a header field for registration in the
+  <code><a href="#text-event-stream">text/event-stream</a></code> resources.<h3 id="last-event-id"><span class="secno">11.2 </span><dfn title="http-last-event-id"><code>Last-Event-ID</code></dfn></h3><p>This section describes a header field for registration in the
   Permanent Message Header Field Registry.  <a href="#refsRFC3864">[RFC3864]</a><dl><dt>Header field name</dt>
    <dd>Last-Event-ID</dd>
    <dt>Applicable protocol</dt>
