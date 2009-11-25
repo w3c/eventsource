@@ -433,12 +433,13 @@ interface <dfn id="eventsource">EventSource</dfn> {
   below</a>.<p>When a successful response with a supported <span>MIME type</span> is
   received, such that the user agent begins parsing the contents of
   the stream, the user agent must <a href="#announce-the-connection">announce the
-  connection</a>.<p>If such a resource (with the correct <span>MIME type</span>)
-  completes loading (i.e. either the entire HTTP response body is
-  received, or the connection is closed somehow, whether by the server
-  or by a network error), the user agent must <a href="#reestablish-the-connection">reestablish the
-  connection</a>. This doesn't apply for the error cases that are
-  listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
+  connection</a>.<p>The <span title="concept-task">task</span> that the
+  <span>networking task source</span> places on the <span>task
+  queue</span> once the <span title="fetch">fetching algorithm</span>
+  for such a resource (with the correct <span>MIME type</span>) has
+  completed must <a href="#reestablish-the-connection">reestablish the connection</a>. This applies
+  whether the connection is closed gracefully or unexpectedly. It
+  doesn't apply for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
   than <code><a href="#text-event-stream">text/event-stream</a></code> (or some other supported type)
   must cause the user agent to <a href="#fail-the-connection">fail the connection</a>.<p>HTTP 204 No Content, and 205 Reset Content responses are
   equivalent to 200 OK responses with the right <span>MIME type</span> but no
