@@ -260,7 +260,7 @@
  <li><a href="#parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</a></li>
  <li><a href="#event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</a></li>
  <li><a href="#notes"><span class="secno">8 </span>Notes</a></li>
- <li><a href="#connectionless-push-and-other-features"><span class="secno">9 </span>Connectionless push and other features</a></li>
+ <li><a href="#eventsource-push"><span class="secno">9 </span>Connectionless push and other features</a></li>
  <li><a href="#garbage-collection"><span class="secno">10 </span>Garbage collection</a></li>
  <li><a href="#iana-considerations"><span class="secno">11 </span>IANA considerations</a>
   <ol>
@@ -280,7 +280,13 @@ source.onmessage = function (event) {
 data: This is the second message, it
 data: has two lines.
 
-data: This is the third message.</pre><h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
+data: This is the third message.</pre><p>Using this API rather than emulating it using
+  <code>XMLHttpRequest</code> or an <code>iframe</code> allows the
+  user agent to make better use of network resources in cases where
+  the user agent implementor and the network operator are able to
+  coordinate in advance. Amongst other benefits, this can result in
+  significant savings in battery life on portable devices. This is
+  discussed further in the section below on <a href="#eventsource-push">connectionless push</a>.<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
   Everything else in this specification is normative.<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
   NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
@@ -784,7 +790,7 @@ data:&nbsp;test</pre>
   mechanism of using unique domain names per connection, or by
   allowing the user to enable or disable the <code><a href="#eventsource">EventSource</a></code>
   functionality on a per-page basis, or by sharing a single
-  <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>. <a href="#refsWEBWORKERS">[WEBWORKERS]</a><h2 id="connectionless-push-and-other-features"><span class="secno">9 </span>Connectionless push and other features</h2><p>User agents running in controlled environments, e.g. browsers on
+  <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>. <a href="#refsWEBWORKERS">[WEBWORKERS]</a><h2 id="eventsource-push"><span class="secno">9 </span>Connectionless push and other features</h2><p>User agents running in controlled environments, e.g. browsers on
   mobile handsets tied to specific carriers, may offload the
   management of the connection to a proxy on the network. In such a
   situation, the user agent for the purposes of conformance is
