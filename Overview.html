@@ -174,7 +174,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-9-december-2009">Editor's Draft 9 December 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-10-december-2009">Editor's Draft 10 December 2009</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -244,7 +244,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 9 December 2009 Editor's Draft.
+  This specification is the 10 December 2009 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -572,7 +572,7 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
     <p>Collect the characters on the line after the first U+003A COLON
     character (:), and let <var title="">value</var> be that
-    string. If <var title="">value</var> starts with a single U+0020
+    string. If <var title="">value</var> starts with a U+0020
     SPACE character, remove it from <var title="">value</var>.</p>
 
     <p><a href="#processField">Process the field</a> using the steps
@@ -734,20 +734,20 @@ stocks.onmessage = function (event) {
    and also has an "id" field, this time with no value, which resets
    the last event ID to the empty string (meaning no <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> header will now be
    sent in the event of a reconnection being attempted). Finally, the
-   last block just fires an event with the data "third event". Note
-   that the last block doesn't have to end with a blank line, the end
-   of the stream is enough to trigger the dispatch of the last
-   event.</p>
+   last block just fires an event with the data "&nbsp;third&nbsp;event"
+   (with a single leading space character). Note that the last block
+   doesn't have to end with a blank line, the end of the stream is
+   enough to trigger the dispatch of the last event.</p>
 
    <pre>: test stream
 
 data: first event
 id: 1
 
-data: second event
+data:second event
 id
 
-data: third event</pre>
+data:&nbsp;&nbsp;third event</pre>
   </div><div class="example">
 
    <p>The following stream fires just one event:</p>
