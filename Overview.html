@@ -174,7 +174,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-8-january-2010">Editor's Draft 8 January 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-10-january-2010">Editor's Draft 10 January 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -237,7 +237,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 8 January 2010 Editor's Draft.
+  This specification is the 10 January 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -458,8 +458,9 @@ interface <dfn id="eventsource">EventSource</dfn> {
   doesn't apply for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
   than <code><a href="#text-event-stream">text/event-stream</a></code> (or some other supported type)
   must cause the user agent to <a href="#fail-the-connection">fail the connection</a>.<p>HTTP 204 No Content, and 205 Reset Content responses are
-  equivalent to 200 OK responses with the right <span>MIME type</span> but no
-  content, and thus must <a href="#reestablish-the-connection">reestablish the connection</a>.<p>Other HTTP response codes in the 2xx range <!--201 Created, 202
+  equivalent to 200 OK responses with the right <span>MIME type</span>
+  but no content, and thus must <a href="#reestablish-the-connection">reestablish the
+  connection</a>.<p>Other HTTP response codes in the 2xx range <!--201 Created, 202
   Accepted, 203 Non-Authoritative Information, and 206 Partial
   Content-->must similarly <a href="#reestablish-the-connection">reestablish the connection</a>. They
   are, however, likely to indicate an error has occurred somewhere and
