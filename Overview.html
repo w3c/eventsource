@@ -193,7 +193,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-1-february-2010">Editor's Draft 1 February 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-4-february-2010">Editor's Draft 4 February 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -256,7 +256,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 1 February 2010 Editor's Draft.
+  This specification is the 4 February 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -327,12 +327,12 @@ data: This is the third message.</pre><p>Using this API rather than emulating it
   otherwise unconstrained inputs, e.g. to prevent denial of service
   attacks, to guard against running out of memory, or to work around
   platform-specific limitations.<h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3><p>This specification relies on several other underlying
-  specifications.<dl><dt>HTML5</dt>
+  specifications.<dl><dt>HTML</dt>
 
    <dd>
 
-    <p>Many fundamental concepts from HTML5 are used by this
-    specification. <a href="#refsHTML5">[HTML5]</a></p>
+    <p>Many fundamental concepts from HTML are used by this
+    specification. <a href="#refsHTML">[HTML]</a></p>
 
    </dd>
 
@@ -950,27 +950,28 @@ data:&nbsp;test</pre>
    </dd>
    <dt>Related information</dt>
    <dd>None.</dd>   
-  </dl><h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- XXX really should remove dates and version numbers from these references once and for all --><dl><dt id="refsABNF">[ABNF]</dt>
+  </dl><h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web,
+  because the newer ones keep changing. --><dl><dt id="refsABNF">[ABNF]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/std/std68.txt">Augmented
    BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker,
-   P. Overell. IETF, January 2008.</dd>
+   P. Overell. IETF.</dd>
 
    <dt id="refsCORS">[CORS]</dt>
    <!--
    <dd><cite><a href="http://www.w3.org/TR/cors/">Cross-Origin
-   Resource Sharing</a></cite>, A. van Kesteren. W3C, March 2009.</dd>
+   Resource Sharing</a></cite>, A. van Kesteren. W3C.</dd>
    -->
    <dd><cite><a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin
-   Resource Sharing</a></cite>, A. van Kesteren.  W3C, June 2009.</dd>
+   Resource Sharing</a></cite>, A. van Kesteren.  W3C.</dd>
 
    <dt id="refsDOMCORE">[DOMCORE]</dt>
    <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/">Document
    Object Model (DOM) Level 3 Core Specification</a></cite>, A. Le
    Hors, P. Le Hegaret, L. Wood, G. Nicol, J. Robie, M. Champion,
-   S. Byrnes. W3C, April 2004.</dd>
+   S. Byrnes. W3C.</dd>
    <!--
    <dd><cite><a href="http://simon.html5.org/specs/web-dom-core">Web
-   DOM Core</a></cite>, S. Pieters. W3C, June 2009.</dd>
+   DOM Core</a></cite>, S. Pieters. W3C.</dd>
    -->
 
    <dt id="refsDOMEVENTS">[DOMEVENTS]</dt>
@@ -978,47 +979,44 @@ data:&nbsp;test</pre>
    <dd><cite><a
    href="http://www.w3.org/TR/DOM-Level-3-Events/">Document Object
    Model (DOM) Level 3 Events Specification</a></cite>,
-   B. H&ouml;hrmann, P. Le Hegaret, T. Pixley. W3C, December
-   2007.</dd>
+   B. H&ouml;hrmann, P. Le Hegaret, T. Pixley. W3C.</dd>
    -->
    <dd><cite><a href="http://dev.w3.org/2006/webapi/DOM-Level-3-Events/html/DOM3-Events.html">Document
    Object Model (DOM) Level 3 Events Specification</a></cite>,
-   D. Schepers. W3C, July 2009.</dd>
+   D. Schepers. W3C.</dd>
 
-   <dt id="refsHTML5">[HTML5]</dt>
-   <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML5</a></cite>,
-   I. Hickson. WHATWG, August 2009.</dd>
+   <dt id="refsHTML">[HTML]</dt>
+   <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML</a></cite>,
+   I. Hickson. WHATWG.</dd>
 
    <dt id="refsORIGIN">[ORIGIN]</dt>
    <dd><cite><a href="http://tools.ietf.org/html/draft-abarth-origin">The HTTP
-   Origin Header</a></cite>, A. Barth, C. Jackson, I. Hickson. IETF,
-   September 2009.</dd>
+   Origin Header</a></cite>, A. Barth, C. Jackson, I. Hickson. IETF.</dd>
 
    <dt id="refsRFC2119">[RFC2119]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in
-   RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF, March
-   1997.</dd>
+   RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
 
    <dt id="refsRFC3864">[RFC3864]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc3864.txt">Registration Procedures
    for Message Header Fields</a></cite>, G. Klyne, M. Nottingham,
-   J. Mogul. IETF, September 2004.</dd>
+   J. Mogul. IETF.</dd>
 
    <dt id="refsWEBIDL">[WEBIDL]</dt>
    <!--
    <dd><cite><a href="http://www.w3.org/TR/WebIDL/">Web
-   IDL</a></cite>, C. McCormack. W3C, December 2008.</dd>
+   IDL</a></cite>, C. McCormack. W3C.</dd>
    -->
    <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web
-   IDL</a></cite>, C. McCormack. W3C, July 2009.</dd>
+   IDL</a></cite>, C. McCormack. W3C.</dd>
 
    <dt id="refsWEBWORKERS">[WEBWORKERS]</dt>
    <!--
    <dd><cite><a
    href="http://www.w3.org/TR/webworkers/">Workers</a></cite>,
-   I. Hickson. W3C, April 2009.</dd>
+   I. Hickson. W3C.</dd>
    -->
    <dd><cite><a href="http://dev.w3.org/html5/workers/">Web
-   Workers</a></cite>, I. Hickson. W3C, September 2009.</dd>
+   Workers</a></cite>, I. Hickson. W3C.</dd>
 
   </dl>
