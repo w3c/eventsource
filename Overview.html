@@ -193,7 +193,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2010">Editor's Draft 11 February 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-12-february-2010">Editor's Draft 12 February 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -256,7 +256,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 11 February 2010 Editor's Draft.
+  This specification is the 12 February 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -326,7 +326,15 @@ data: This is the third message.</pre><p>Using this API rather than emulating it
   agents.<p>User agents may impose implementation-specific limits on
   otherwise unconstrained inputs, e.g. to prevent denial of service
   attacks, to guard against running out of memory, or to work around
-  platform-specific limitations.<h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3><p>This specification relies on several other underlying
+  platform-specific limitations.<p>When support for a feature is disabled (e.g. as an emergency
+  measure to mitigate a security problem, or to aid in development, or
+  for performance reasons), user agents must act as if they had no
+  support for the feature whatsoever, and as if the feature was not
+  mentioned in this specification. For example, if a particular
+  feature is accessed via an attribute in a Web IDL interface, the
+  attribute itself would be omitted from the objects that implement
+  that interface &mdash; leaving the attribute on the object but
+  making it return null or throw an exception is insufficient.<h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3><p>This specification relies on several other underlying
   specifications.<dl><dt>HTML</dt>
 
    <dd>
