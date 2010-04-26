@@ -183,7 +183,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-14-april-2010">Editor's Draft 14 April 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-26-april-2010">Editor's Draft 26 April 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -246,7 +246,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 14 April 2010 Editor's Draft.
+  This specification is the 26 April 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -354,7 +354,7 @@ data: This is the third message.</pre><p>Using this API rather than emulating it
   being retrieved (e.g. by author script), and is said to be
   <em>setting</em> when a new value is assigned to it.<h2 id="the-eventsource-interface"><span class="secno">4 </span>The <code><a href="#eventsource">EventSource</a></code> interface</h2><pre class="idl">[<a href="#dom-eventsource" title="dom-EventSource">Constructor</a>(in DOMString url)]
 interface <dfn id="eventsource">EventSource</dfn> {
-  readonly attribute DOMString <a href="#dom-eventsource-url" title="dom-EventSource-URL">URL</a>;
+  readonly attribute DOMString <a href="#dom-eventsource-url" title="dom-EventSource-url">url</a>;
 
   // ready state
   const unsigned short <a href="#dom-eventsource-connecting" title="dom-EventSource-CONNECTING">CONNECTING</a> = 0;
@@ -399,7 +399,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
 
   </ol><p>This constructor must be visible when the <span>script's global
   object</span> is either a <code>Window</code> object or an object
-  implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-URL"><code>URL</code></dfn>
+  implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-url"><code>url</code></dfn>
   attribute must return the <span>absolute URL</span> that resulted
   from <span title="resolve a url">resolving</span> the value that was
   passed to the constructor.</p><!-- not the result of redirects,
