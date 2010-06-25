@@ -182,7 +182,7 @@
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
-   <h2 class="no-num no-toc" id="editor-s-draft-15-june-2010">Editor's Draft 15 June 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-25-june-2010">Editor's Draft 25 June 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -252,7 +252,7 @@
   </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Apps
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 15 June 2010 Editor's Draft.
+  This specification is the 25 June 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -385,12 +385,18 @@ interface <dfn id="eventsource">EventSource</dfn> {
    <li><p>Return a new <code><a href="#eventsource">EventSource</a></code> object, and continue
    these steps in the background (without blocking scripts).</li>
 
+   <li><p>If the <span>origin</span> of the resulting <span>absolute
+   URL</span> is not the <span>same origin</span> as that of the
+   <span>entry script</span>, then act as if the resource could not be
+   obtained due to a network error and abort these steps.</li>
+
    <li>
 
     <p><span>Fetch</span> the resource identified by the resulting
     <span>absolute URL</span>, from the <span>entry script</span>'s
-    <span>origin</span>, and process it as described below.</p> <!--
-    not http-origin privacy sensitive -->
+    <span>origin</span>, with the <i>force same-origin flag</i> set,
+    and process it as described below.</p> <!-- not http-origin
+    privacy sensitive (looking forward to CORS) -->
 
     <p class="note">The definition of the <span title="fetch">fetching</span> algorithm is such that if the
     browser is already fetching the resource identified by the given
@@ -456,12 +462,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   value of the event source's last event ID string.<p>User agents should use the <code>Cache-Control: no-cache</code>
   header in requests to bypass any caches for requests of event
   sources. User agents should ignore HTTP cache headers in the
-  response, never caching event sources.<p>User agents must act as if the connection had failed due to a
-  network error if the <span>origin</span> of the <span>URL</span> of
-  the resource to be <span title="fetch">fetched</span> is not the
-  <span>same origin</span> as that of the <span>entry script</span>
-  when the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code>
-  constructor is invoked.</p><!-- v2: add CORS support --><hr><p>As data is received, the <span title="concept-task">tasks</span>
+  response, never caching event sources.<hr><p>As data is received, the <span title="concept-task">tasks</span>
   queued by the <span>networking task source</span> to handle the data
   must act as follows.<p>HTTP 200 OK responses with a <span>Content-Type</span> header
   specifying the type <code><a href="#text-event-stream">text/event-stream</a></code> must be processed
