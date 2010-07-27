@@ -182,7 +182,7 @@
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
-   <h2 class="no-num no-toc" id="editor-s-draft-23-july-2010">Editor's Draft 23 July 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-27-july-2010">Editor's Draft 27 July 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -249,10 +249,10 @@
    <li>Interactive Web interface: <a href="http://html5.org/tools/web-apps-tracker">http://html5.org/tools/web-apps-tracker</a></li>
    <li>Commit-Watchers mailing list: <a href="http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org">http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org</a></li>
    <li>Subversion interface: <a href="http://svn.whatwg.org/webapps/">http://svn.whatwg.org/webapps/</a></li>
-  </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Apps
+  </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 23 July 2010 Editor's Draft.
+  This specification is the 27 July 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -493,8 +493,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   doesn't affect future sessions, e.g. if the page is reloaded.)<p>HTTP 302 Found, 303 See Other, and 307 Temporary Redirect
   responses must cause the user agent to connect to the new
   server-specified URL, but if the user agent needs to again request
-  the resource at a later point, it must return to the previously
-  specified URL for this event source.<p class="note">The Origin specification also introduces some
+  the resource at a later point for the same event source, it must
+  return to the previously specified URL for this event source.<p class="note">The Origin specification also introduces some
   relevant requirements when dealing with redirects. <a href="#refsORIGIN">[ORIGIN]</a><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
   other subresource.<p>Any other HTTP response code not listed here, and any network
