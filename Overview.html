@@ -183,7 +183,7 @@
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
-   <h2 class="no-num no-toc" id="editor-s-draft-9-august-2010">Editor's Draft 9 August 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-10-august-2010">Editor's Draft 10 August 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -253,7 +253,7 @@
   </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 9 August 2010 Editor's Draft.
+  This specification is the 10 August 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -552,15 +552,16 @@ name-char     = %x0000-0009 / %x000B-000C / %x000E-0039 / %x003B-10FFFF
                 ; a Unicode character other than U+000A LINE FEED (LF), U+000D CARRIAGE RETURN (CR), or U+003A COLON (:)
 any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
                 ; a Unicode character other than U+000A LINE FEED (LF) or U+000D CARRIAGE RETURN (CR)</pre><p>Event streams in this format must always be encoded as
-  UTF-8.<p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A
+  UTF-8. <a href="#refsRFC3629">[RFC3629]</a><p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A
   LINE FEED (CRLF) character pair, a single U+000A LINE FEED (LF)
   character, or a single U+000D CARRIAGE RETURN (CR) character.<p>Since connections established to remote servers for such
   resources are expected to be long-lived, UAs should ensure that
   appropriate buffering is used. In particular, while line buffering
   with lines are defined to end with a single U+000A LINE FEED (LF)
   character is safe, block buffering or line buffering with different
-  expected line endings can cause delays in event dispatch.<h2 id="event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</h2><p>Bytes or sequences of bytes that are not valid UTF-8 sequences
-  must be interpreted as the U+FFFD REPLACEMENT CHARACTER.<p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
+  expected line endings can cause delays in event dispatch.<h2 id="event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</h2><p>Streams must be decoded as UTF-8 text. Bytes or sequences of
+  bytes that are not valid UTF-8 sequences must be interpreted as the
+  U+FFFD REPLACEMENT CHARACTER. <a href="#refsRFC3629">[RFC3629]</a><p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
   any are present.<p>The stream must then be parsed by reading everything line by
   line, with a U+000D CARRIAGE RETURN U+000A LINE FEED (CRLF)
   character pair, a single U+000A LINE FEED (LF) character not
@@ -998,6 +999,10 @@ data:&nbsp;test</pre>
    <dt id="refsRFC2119">[RFC2119]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in
    RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
+
+   <dt id="refsRFC3629">[RFC3629]</dt>
+   <dd><cite><a href="http://www.ietf.org/rfc/rfc3629.txt">UTF-8, a
+   transformation format of ISO 10646</a></cite>, F. Yergeau. IETF.</dd>
 
    <dt id="refsRFC3864">[RFC3864]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc3864.txt">Registration Procedures
