@@ -185,7 +185,7 @@
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
-   <h2 class="no-num no-toc" id="editor-s-draft-10-august-2010">Editor's Draft 10 August 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-30-august-2010">Editor's Draft 30 August 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -255,7 +255,7 @@
   </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 10 August 2010 Editor's Draft.
+  This specification is the 30 August 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -488,19 +488,14 @@ interface <dfn id="eventsource">EventSource</dfn> {
   Accepted, 203 Non-Authoritative Information, and 206 Partial
   Content-->must similarly <a href="#reestablish-the-connection">reestablish the connection</a>. They
   are, however, likely to indicate an error has occurred somewhere and
-  may cause the user agent to emit a warning.<p>HTTP 301 Moved Permanently responses must cause the user agent to
-  reconnect using the new server specified URL instead of the
-  previously specified URL for all subsequent requests for this event
-  source. (It doesn't affect other <code><a href="#eventsource">EventSource</a></code> objects
-  with the same URL unless they also receive 301 responses, and it
-  doesn't affect future sessions, e.g. if the page is reloaded.)<p>HTTP 302 Found, 303 See Other, and 307 Temporary Redirect
-  responses must cause the user agent to connect to the new
-  server-specified URL, but if the user agent needs to again request
-  the resource at a later point for the same event source, it must
-  return to the previously specified URL for this event source.<p class="note">The Origin specification also introduces some
-  relevant requirements when dealing with redirects. <a href="#refsORIGIN">[ORIGIN]</a><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
+  may cause the user agent to emit a warning.<p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
-  other subresource.<p>Any other HTTP response code not listed here, and any network
+  other subresource.<p>HTTP 301 Moved Permanently, HTTP 302 Found, 303 See Other, and
+  307 Temporary Redirect responses are handled by the <span title="fetch">fetching</span> algorithm. In the case of 301
+  redirects, the user agent must also remember the new URL so that
+  subsequent requests for this resource for this
+  <code><a href="#eventsource">EventSource</a></code> object start with the URL given for the
+  last 301 seen for requests for this object.<p>Any other HTTP response code not listed here, and any network
   error that prevents the HTTP connection from being established in
   the first place (e.g. DNS errors), must cause the user agent to
   <a href="#fail-the-connection">fail the connection</a>.</p><!-- including: HTTP 300
@@ -993,10 +988,6 @@ data:&nbsp;test</pre>
    <dt id="refsHTML">[HTML]</dt>
    <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML</a></cite>,
    I. Hickson. WHATWG.</dd>
-
-   <dt id="refsORIGIN">[ORIGIN]</dt>
-   <dd><cite><a href="http://tools.ietf.org/html/draft-abarth-origin">The HTTP
-   Origin Header</a></cite>, A. Barth, C. Jackson, I. Hickson. IETF.</dd>
 
    <dt id="refsRFC2119">[RFC2119]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in
