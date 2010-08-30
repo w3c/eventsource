@@ -391,7 +391,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
    <li><p>If the <span>origin</span> of the resulting <span>absolute
    URL</span> is not the <span>same origin</span> as that of the
    <span>entry script</span>, then act as if the resource could not be
-   obtained due to a network error and abort these steps.</li>
+   obtained due to a network error: <a href="#fail-the-connection">fail the connection</a>
+   and abort these steps.</li>
 
    <li>
 
