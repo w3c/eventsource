@@ -185,7 +185,7 @@
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>Server-Sent Events</h1>
-   <h2 class="no-num no-toc" id="editor-s-draft-30-august-2010">Editor's Draft 30 August 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-7-september-2010">Editor's Draft 7 September 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -255,7 +255,7 @@
   </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 30 August 2010 Editor's Draft.
+  This specification is the 7 September 2010 Editor's Draft.
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -463,7 +463,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).<p>If the event source's last event ID string is not the empty
   string, then a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code>
   HTTP header must be included with the request, whose value is the
-  value of the event source's last event ID string.<p>User agents should use the <code>Cache-Control: no-cache</code>
+  value of the event source's last event ID string, encoded as
+  UTF-8.<p>User agents should use the <code>Cache-Control: no-cache</code>
   header in requests to bypass any caches for requests of event
   sources. User agents should ignore HTTP cache headers in the
   response, never caching event sources.<hr><p>As data is received, the <span title="concept-task">tasks</span>
