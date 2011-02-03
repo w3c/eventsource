@@ -531,11 +531,11 @@ interface <dfn id="eventsource">EventSource</dfn> {
   </ul><p>These values are not currently exposed on the interface.<h2 id="processing-model"><span class="secno">5 </span>Processing model</h2><p>The resource indicated in the argument to the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor is <span title="fetch">fetched</span> when the constructor is run.<p>For HTTP connections, the <code title="">Accept</code> header may
   be included; if included, it must contain only formats of event
   framing that are supported by the user agent (one of which must be
-  <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).<p>If the event source's last event ID string is not the empty
-  string, then a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code>
-  HTTP header must be included with the request, whose value is the
-  value of the event source's last event ID string, encoded as
-  UTF-8.<p>User agents should use the <code>Cache-Control: no-cache</code>
+  <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).<p>If the event source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
+  string</a> is not the empty string, then a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> HTTP header must be
+  included with the request, whose value is the value of the event
+  source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event
+  ID string</a>, encoded as UTF-8.<p>User agents should use the <code>Cache-Control: no-cache</code>
   header in requests to bypass any caches for requests of event
   sources. User agents should ignore HTTP cache headers in the
   response, never caching event sources.<hr><p>As data is received, the <span title="concept-task">tasks</span>
