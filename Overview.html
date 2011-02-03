@@ -760,11 +760,14 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    U+000A LINE FEED (LF) character, then remove the last character
    from the <var title="">data</var> buffer.</li>
 
+<!--(there's no longer such a think as an invalid event type name it would seem)
    <li><p>If the <var title="">event name</var> buffer is not the
    empty string but is also not a valid event type name, as defined by
    the DOM Events specification, set the <var title="">data</var>
    buffer and the <var title="">event name</var> buffer to the empty
-   string and abort these steps. <a href="#refsDOMEVENTS">[DOMEVENTS]</a></li>
+   string and abort these steps. <a
+   href="#refsDOMEVENTS">[DOMEVENTS]</a></p></li>
+-->
 
    <li><p>Otherwise, create an event that uses the
    <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
