@@ -1,7 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"><!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  --><html lang="en-US-x-Hixie"><title>Server-Sent Events</title><style type="text/css">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"><html lang="en-US-x-Hixie"><title>Server-Sent Events</title><style type="text/css">
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -229,13 +226,12 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
 
    <h1>Server-Sent Events</h1>
-   <!--<h2 class="no-num no-toc">(subtitle)</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-12-april-2011">Editor's Draft 12 April 2011</h2>
+   
+   <h2 class="no-num no-toc" id="editor-s-draft-13-april-2011">Editor's Draft 13 April 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
     <dd><a class="latest-link" href="http://dev.w3.org/html5/eventsource/">http://dev.w3.org/html5/eventsource/</a></dd>
-<!-- ZZZ: add the new version after it has shipped -->
     <dt>Previous Versions:</dt>
     <dd><a href="http://www.w3.org/TR/2011/WD-eventsource-20110310/">http://www.w3.org/TR/2011/WD-eventsource-20110310/</a></dd>
     <dd><a href="http://www.w3.org/TR/2011/WD-eventsource-20110208/">http://www.w3.org/TR/2011/WD-eventsource-20110208/</a></dd>
@@ -266,12 +262,12 @@
   </div><hr class="top"><h2 class="no-num no-toc" id="abstract">Abstract</h2><p>This specification defines an API for opening an HTTP connection
   for receiving push notifications from a server in the form of DOM
   events. The API is designed such that it can be extended to work
-  with other push notification schemes such as Push SMS.<h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2><!-- intro boilerplate (required) --><p><em>This section describes the status of this document at the
+  with other push notification schemes such as Push SMS.<h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2><p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
   document. A list of current W3C publications and the most recently
   formally published revision of this technical report can be found in
   the <a href="http://www.w3.org/TR/">W3C technical reports index</a>
-  at http://www.w3.org/TR/.</em></p><!-- where to send feedback (required) --><p>If you wish to make comments regarding this document in a manner
+  at http://www.w3.org/TR/.</em></p><p>If you wish to make comments regarding this document in a manner
   that is tracked by the W3C, please submit them via using <a href="http://www.w3.org/Bugs/Public/enter_bug.cgi?product=HTML%20WG">our
   public bug database</a>. If you do not have an account then you can
   enter feedback using this form:<form action="http://www.whatwg.org/specs/web-apps/current-work/file-spam.cgi" method="post">
@@ -309,14 +305,14 @@
   <a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>),
   or <a href="mailto:whatwg@whatwg.org">whatwg@whatwg.org</a> (<a href="http://lists.whatwg.org/listinfo.cgi/whatwg-whatwg.org">subscribe</a>,
   <a href="http://lists.whatwg.org/pipermail/whatwg-whatwg.org/">archives</a>).
-  All feedback is welcome.</p><!-- stability (required) --><p>Implementors should be aware that this specification is not
+  All feedback is welcome.</p><p>Implementors should be aware that this specification is not
   stable. <strong>Implementors who are not taking part in the
   discussions are likely to find the specification changing out from
   under them in incompatible ways.</strong> Vendors interested in
   implementing this specification before it eventually reaches the
   Candidate Recommendation stage should join the aforementioned
   mailing lists and take part in the discussions.<div id="multipage-common">
-  </div><!-- version history or list of changes (required) --><p>The latest
+  </div><p>The latest
   stable version of the editor's draft of this specification is always
   available on <a href="http://dev.w3.org/html5/eventsource/">the W3C CVS server</a>
   and in the <a href="http://svn.whatwg.org/webapps/">WHATWG
@@ -335,8 +331,8 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 12 April 2011 Editor's Draft.
-  </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+  This specification is the 13 April 2011 Editor's Draft.
+  </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
   of the group; that page also includes instructions for disclosing a
@@ -344,7 +340,6 @@
   individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
   6 of the W3C Patent Policy</a>.<h2 class="no-num no-toc" id="contents">Table of Contents</h2>
-<!--begin-toc-->
 <ol class="toc">
  <li><a href="#server-sent-events-intro"><span class="secno">1 </span>Introduction</a></li>
  <li><a href="#conformance-requirements"><span class="secno">2 </span>Conformance requirements</a>
@@ -364,7 +359,7 @@
    <li><a href="#last-event-id"><span class="secno">11.2 </span><code>Last-Event-ID</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></ol>
-<!--end-toc--><hr><h2 id="server-sent-events-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable servers to push data to Web pages over HTTP or using
+<hr><h2 id="server-sent-events-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable servers to push data to Web pages over HTTP or using
   dedicated server-push protocols, this specification introduces the
   <code><a href="#eventsource">EventSource</a></code> interface.<p>Using this API consists of creating an <code><a href="#eventsource">EventSource</a></code>
   object and registering an event listener.<pre>var source = new EventSource('updates.cgi');
@@ -385,8 +380,7 @@ data: This is the third message.</pre><p>Using this API rather than emulating it
   significant savings in battery life on portable devices. This is
   discussed further in the section below on <a href="#eventsource-push">connectionless push</a>.<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
-  Everything else in this specification is normative.<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
-  NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+  Everything else in this specification is normative.<p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
   interpreted as described in RFC2119. For readability, these words do
   not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a><p>Requirements phrased in the imperative as part of algorithms
@@ -480,9 +474,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
     <p><span>Fetch</span> the resource identified by the resulting
     <span>absolute URL</span>, from the <span>entry script</span>'s
     <span>origin</span>, with the <i>force same-origin flag</i> set,
-    and process it as described below.</p> <!-- not http-origin
-    privacy sensitive (looking forward to CORS) -->
-
+    and process it as described below.</p> 
     <p class="note">The definition of the <span title="fetch">fetching</span> algorithm is such that if the
     browser is already fetching the resource identified by the given
     <span>absolute URL</span>, that connection can be reused, instead
@@ -496,8 +488,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-url"><code>url</code></dfn>
   attribute must return the <span>absolute URL</span> that resulted
   from <span title="resolve a url">resolving</span> the value that was
-  passed to the constructor.</p><!-- not the result of redirects,
-  since that would introduce race conditions --><p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
+  passed to the constructor.</p><p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
   attribute represents the state of the connection. It can have the
   following values:<dl><dt><dfn id="dom-eventsource-connecting" title="dom-EventSource-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
@@ -565,9 +556,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   doesn't apply for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
   than <code><a href="#text-event-stream">text/event-stream</a></code> (or some other supported type),
   or that have no <span>Content-Type</span> at all, must cause the
-  user agent to <a href="#fail-the-connection">fail the connection</a>.</p><!-- about:blank
-  is defined as having no MIME type; javascript: as having the type
-  text/html --><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
+  user agent to <a href="#fail-the-connection">fail the connection</a>.</p><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
   other subresource.<p>HTTP 301 Moved Permanently, HTTP 302 Found, 303 See Other, and
   307 Temporary Redirect responses are handled by the <span title="fetch">fetching</span> algorithm. In the case of 301
@@ -577,19 +566,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
   last 301 seen for requests for this object.<p>Any other HTTP response code not listed here, and any network
   error that prevents the HTTP connection from being established in
   the first place (e.g. DNS errors), must cause the user agent to
-  <a href="#fail-the-connection">fail the connection</a>.</p><!-- including: HTTP 201
-  Created, HTTP 202 Accepted, HTTP 203 Non-Authoritative Information,
-  HTTP 204 No Content, HTTP 205 Reset Content, HTTP 206 Partial
-  Content, HTTP 300 Multiple Choices, HTTP 304 Not Modified, HTTP 400
-  Bad Request, 403 Forbidden, 404 Not Found, 405 Method Not Allowed,
-  406 Not Acceptable, 408 Request Timeout, 409 Conflict, 410 Gone, 411
-  Length Required, 412 Precondition Failed, 413 Request Entity Too
-  Large, 414 Request-URI Too Long, 415 Unsupported Media Type, 416
-  Requested Range Not Satisfiable, 417 Expectation Failed, 500
-  Internal Server Error, 501 Not Implemented, 502 Bad Gateway, 503
-  Service Unavailable, 504 Gateway Timeout, and 505 HTTP Version Not
-  Supported responses --><!-- mailto: is defined as equivalent to
-  HTTP 204 --><p>For non-HTTP protocols, UAs should act in equivalent ways.<hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
+  <a href="#fail-the-connection">fail the connection</a>.</p><p>For non-HTTP protocols, UAs should act in equivalent ways.<hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
   user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> named <code title="event-open">open</code> at the
@@ -725,33 +702,7 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    <a href="#concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection
    time</a> to that integer. Otherwise, ignore the field.</dd>
 
-   <!-- v2 feature request from Per-Erik Brodin:
-      > > > Finally, it could be useful to be able to reset the reconnection
-      > > > time to the user agent default value by sending the retry field only
-      > > > and leave out the value similar to how you reset the last event id.
-      > >
-      > > What's the use case?
-      >
-      > Take the stock ticker as an example. When the stock market closes the
-      > server logic knows that there won't be any new events for a number of
-      > hours and so it can send the corresponding reconnection time and close
-      > the connection. If the client is still running by the time the market
-      > opens, it will reconnect, and the server can now reset the reconnection
-      > time to a time that is convenient for the user agent (which is the user
-      > agent default value, unknown to the server).
-    -->
-
-<!-- v2 feature request from John Fallows - http://www.w3.org/mid/c5b3a7130810271238h11e40a4fybfcd5983ed5dc08d@mail.gmail.com
-
-   <dt>If the field name is "reconnect"</dt>
-
-   <dd><p>If the field value is the empty string, then: <a
-   href="#dispatchMessage">dispatch the event</a> as defined below,
-   and then drop the connection and immediately reconnect as if the
-   <span title="concept-event-stream-reconnection-time">reconnection
-   time</span> was zero for this one time.</p></dd>
-
-  -->
+   
 
    <dt>Otherwise</dt>
 
@@ -769,14 +720,6 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    U+000A LINE FEED (LF) character, then remove the last character
    from the <var title="">data</var> buffer.</li>
 
-<!--(there's no longer such a think as an invalid event type name it would seem)
-   <li><p>If the <var title="">event name</var> buffer is not the
-   empty string but is also not a valid event type name, as defined by
-   the DOM Events specification, set the <var title="">data</var>
-   buffer and the <var title="">event name</var> buffer to the empty
-   string and abort these steps. <a
-   href="#refsDOMEVENTS">[DOMEVENTS]</a></p></li>
--->
 
    <li><p>Otherwise, create an event that uses the
    <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
@@ -893,7 +836,7 @@ data:&nbsp;test</pre>
   negative effects on the reliability of this protocol. Where
   possible, chunking should be disabled for serving event streams
   unless the rate of messages is high enough for this not to
-  matter.</p><!-- v2 can we get a better solution? --><p>Clients that support HTTP's per-server connection limitation
+  matter.</p><p>Clients that support HTTP's per-server connection limitation
   might run into trouble when opening multiple pages from a site if
   each page has an <code><a href="#eventsource">EventSource</a></code> to the same
   domain. Authors can avoid this using the relatively complex
@@ -956,10 +899,7 @@ data:&nbsp;test</pre>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
   invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
   its connection is still open, the connection must be closed.<h2 id="iana-considerations"><span class="secno">11 </span>IANA considerations</h2><h3 id="text-event-stream"><span class="secno">11.1 </span><dfn><code>text/event-stream</code></dfn></h3><p>This registration is for community review and will be submitted
-  to the IESG for review, approval, and registration with IANA.</p><!--
-   To: ietf-types@iana.org
-   Subject: Registration of media type text/event-stream
-  --><dl><dt>Type name:</dt>
+  to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
    <dd>text</dd>
    <dt>Subtype name:</dt>
    <dd>event-stream</dd>
@@ -974,9 +914,7 @@ data:&nbsp;test</pre>
 
     <p>An event stream from an origin distinct from the origin of the
     content consuming the event stream can result in information
-    leakage. To avoid this, user agents are required to <!--v2: apply
-    CORS semantics or--> block all cross-origin loads. <!--v2: <a
-    href="#refsCORS">[CORS]</a>--></p>
+    leakage. To avoid this, user agents are required to  block all cross-origin loads. </p>
 
     <p>Event streams can overwhelm a user agent; a user agent is
     expected to apply suitable restrictions to avoid depleting local
@@ -1039,30 +977,20 @@ data:&nbsp;test</pre>
    </dd>
    <dt>Related information</dt>
    <dd>None.</dd>
-  </dl><h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web, because the newer ones keep changing. --><dl><dt id="refsABNF">[ABNF]</dt>
+  </dl><h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".</p><dl><dt id="refsABNF">[ABNF]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/std/std68.txt">Augmented
    BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker,
    P. Overell. IETF.</dd>
 
    <dt id="refsCORS">[CORS]</dt>
-   <!--
-   <dd><cite><a href="http://www.w3.org/TR/cors/">Cross-Origin
-   Resource Sharing</a></cite>, A. van Kesteren. W3C.</dd>
-   -->
-   <dd><cite><a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin
+      <dd><cite><a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin
    Resource Sharing</a></cite>, A. van Kesteren.  W3C.</dd>
 
    <dt id="refsDOMCORE">[DOMCORE]</dt>
    <dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">Web DOM Core</a></cite>, A. van Kesteren. W3C.</dd>
 
    <dt id="refsDOMEVENTS">[DOMEVENTS]</dt>
-   <!--
-   <dd><cite><a
-   href="http://www.w3.org/TR/DOM-Level-3-Events/">Document Object
-   Model (DOM) Level 3 Events Specification</a></cite>,
-   B. H&ouml;hrmann, P. Le Hegaret, T. Pixley. W3C.</dd>
-   -->
-   <dd><cite><a href="http://dev.w3.org/2006/webapi/DOM-Level-3-Events/html/DOM3-Events.html">Document
+      <dd><cite><a href="http://dev.w3.org/2006/webapi/DOM-Level-3-Events/html/DOM3-Events.html">Document
    Object Model (DOM) Level 3 Events Specification</a></cite>,
    D. Schepers. W3C.</dd>
 
@@ -1084,20 +1012,11 @@ data:&nbsp;test</pre>
    J. Mogul. IETF.</dd>
 
    <dt id="refsWEBIDL">[WEBIDL]</dt>
-   <!--
-   <dd><cite><a href="http://www.w3.org/TR/WebIDL/">Web
-   IDL</a></cite>, C. McCormack. W3C.</dd>
-   -->
-   <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web
+      <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web
    IDL</a></cite>, C. McCormack. W3C.</dd>
 
    <dt id="refsWEBWORKERS">[WEBWORKERS]</dt>
-   <!--
-   <dd><cite><a
-   href="http://www.w3.org/TR/webworkers/">Workers</a></cite>,
-   I. Hickson. W3C.</dd>
-   -->
-   <dd><cite><a href="http://dev.w3.org/html5/workers/">Web
+      <dd><cite><a href="http://dev.w3.org/html5/workers/">Web
    Workers</a></cite>, I. Hickson. W3C.</dd>
 
   </dl><h2 class="no-num" id="acknowledgements">Acknowledgements</h2><p>For a full list of acknowledgements, please see the HTML
