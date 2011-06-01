@@ -211,7 +211,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-12-may-2011">Editor's Draft 12 May 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-1-june-2011">Editor's Draft 1 June 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -267,22 +267,23 @@
     <p class="note">Please don't use section numbers as these tend to
     change rapidly and make your feedback harder to understand.</p>
     <script type="text/javascript">
-     function checkFeedbackForm(form) {
-       if (form.elements.text.value.match(/^ *</)) {
-         alert('Please don\'t start your feedback with an angle bracket, instead explain what topic your feedback is about first.');
-         return true;
-       } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
-       if (form.elements.text.value.match(/^Please enter your feedback, carefully/)) {
-         alert('Please enter your feedback, explaining what is wrong, and without repeating the instructions. Thanks!');
-         return true;
-       } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
-         form.action = "http://www.whatwg.org/specs/web-apps/current-work/file-bug.cgi";
-         return true;
-       } else {
-         alert('Please include significantly more detail about exactly what problem you are trying to solve.');
-         return false;
-       }
-     }
+    function checkFeedbackForm(form) {
+      if (form.elements.text.value.match(/^ *</)) {
+        alert('Please don\'t start your feedback with an angle bracket, instead explain what topic your feedback is about first.');
+        return true;
+      } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
+        if (form.elements.text.value.match(/^Please enter your feedback, carefully/)) {
+          alert('Please enter your feedback, explaining what is wrong, and without repeating the instructions. Thanks!');
+          return true;
+        } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
+          form.action = "http://www.whatwg.org/specs/web-apps/current-work/file-bug.cgi";
+          return true;
+        } else {
+          alert('Please include significantly more detail about exactly what problem you are trying to solve.');
+          return false;
+        }
+      }
+    }
     </script><p>
      <input onclick="return checkFeedbackForm(form)" type="submit" value="Submit feedback"><small>(Note: Your IP address and user agent will be publicly recorded for spam prevention purposes.)</small>
     </p>
@@ -316,7 +317,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 12 May 2011 Editor's Draft.
+  This specification is the 1 June 2011 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
