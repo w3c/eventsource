@@ -211,7 +211,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-3-june-2011">Editor's Draft 3 June 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-9-june-2011">Editor's Draft 9 June 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -317,7 +317,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 3 June 2011 Editor's Draft.
+  This specification is the 9 June 2011 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -884,7 +884,15 @@ data:&nbsp;test</pre>
   reference from the <code>Window</code> or <code>WorkerUtils</code>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
   invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
-  its connection is still open, the connection must be closed.<h2 id="iana-considerations"><span class="secno">11 </span>IANA considerations</h2><h3 id="text-event-stream"><span class="secno">11.1 </span><dfn><code>text/event-stream</code></dfn></h3><p>This registration is for community review and will be submitted
+  its connection is still open, the user agent must cancel any
+  instance of the <span title="fetch">fetch</span> algorithm opened by
+  this <code><a href="#eventsource">EventSource</a></code>, discarding any <span title="concept-task">tasks</span> <span title="queue a
+  task">queued</span> for them, and discarding any further data
+  received from the network for them.<p class="note">It's possible for one active network connection to
+  be shared by multiple <code><a href="#eventsource">EventSource</a></code> objects and their
+  <span>fetch</span> algorithms, which is why the above is phrased in
+  terms of canceling the <span>fetch</span> algorithm and not the
+  actual underlying download.<h2 id="iana-considerations"><span class="secno">11 </span>IANA considerations</h2><h3 id="text-event-stream"><span class="secno">11.1 </span><dfn><code>text/event-stream</code></dfn></h3><p>This registration is for community review and will be submitted
   to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
    <dd>text</dd>
    <dt>Subtype name:</dt>
