@@ -211,7 +211,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-13-june-2011">Editor's Draft 13 June 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-16-june-2011">Editor's Draft 16 June 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -317,7 +317,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 13 June 2011 Editor's Draft.
+  This specification is the 16 June 2011 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -528,21 +528,25 @@ interface <dfn id="eventsource">EventSource</dfn> {
   response, never caching event sources.<hr><p>As data is received, the <span title="concept-task">tasks</span>
   queued by the <span>networking task source</span> to handle the data
   must act as follows.<p>HTTP 200 OK responses with a <span>Content-Type</span> header
-  specifying the type <code><a href="#text-event-stream">text/event-stream</a></code> must be processed
-  line by line <a href="#event-stream-interpretation">as described
-  below</a>.<p>When a successful response with a supported <span>MIME type</span> is
-  received, such that the user agent begins parsing the contents of
-  the stream, the user agent must <a href="#announce-the-connection">announce the
+  specifying the type <code><a href="#text-event-stream">text/event-stream</a></code>, either with no
+  parameters or with a single parameter whose name is "<code title="">charset</code>" and whose value is an <span>ASCII
+  case-insensitive match</span> for "UTF-8", must be processed line by
+  line <a href="#event-stream-interpretation">as described
+  below</a>.<p>When a successful response with a supported <span>MIME
+  type</span> is received, such that the user agent begins parsing the
+  contents of the stream, the user agent must <a href="#announce-the-connection">announce the
   connection</a>.<p>The <span title="concept-task">task</span> that the
   <span>networking task source</span> places on the <span>task
   queue</span> once the <span title="fetch">fetching algorithm</span>
   for such a resource (with the correct <span>MIME type</span>) has
   completed must <a href="#reestablish-the-connection">reestablish the connection</a>. This applies
   whether the connection is closed gracefully or unexpectedly. It
-  doesn't apply for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span> other
-  than <code><a href="#text-event-stream">text/event-stream</a></code> (or some other supported type),
-  or that have no <span>Content-Type</span> at all, must cause the
-  user agent to <a href="#fail-the-connection">fail the connection</a>.</p><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
+  doesn't apply for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span>
+  specifying an unsupported type (including the
+  <code><a href="#text-event-stream">text/event-stream</a></code> type with unsupported parameters or
+  parameters with unsupported values), or that have no
+  <span>Content-Type</span> at all, must cause the user agent to
+  <a href="#fail-the-connection">fail the connection</a>.</p><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
   other subresource.<p>HTTP 301 Moved Permanently, HTTP 302 Found, 303 See Other, and
   307 Temporary Redirect responses are handled by the <span title="fetch">fetching</span> algorithm. In the case of 301
