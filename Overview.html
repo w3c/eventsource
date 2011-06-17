@@ -707,8 +707,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    from the <var title="">data</var> buffer.</li>
 
 
-   <li><p>Otherwise, create an event that uses the
-   <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
+   <li><p>Create an event that uses the <code>MessageEvent</code>
+   interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
    cancelable, and has no default action. The <code title="dom-MessageEvent-data">data</code> attribute must be set to
    the value of the <var title="">data</var> buffer, the <code title="dom-MessageEvent-origin">origin</code> attribute must be set
    to the <span title="Unicode serialization of an origin">Unicode
