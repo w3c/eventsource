@@ -211,7 +211,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-16-june-2011">Editor's Draft 16 June 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-17-june-2011">Editor's Draft 17 June 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -317,7 +317,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 16 June 2011 Editor's Draft.
+  This specification is the 17 June 2011 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -529,10 +529,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   queued by the <span>networking task source</span> to handle the data
   must act as follows.<p>HTTP 200 OK responses with a <span>Content-Type</span> header
   specifying the type <code><a href="#text-event-stream">text/event-stream</a></code>, either with no
-  parameters or with a single parameter whose name is "<code title="">charset</code>" and whose value is an <span>ASCII
-  case-insensitive match</span> for "UTF-8", must be processed line by
-  line <a href="#event-stream-interpretation">as described
-  below</a>.<p>When a successful response with a supported <span>MIME
+  parameters or with a single parameter with the name "<code title="">charset</code>" whose value is an <span>ASCII
+  case-insensitive</span> match for the string "<code title="">utf-8</code>", must be processed line by line <a href="#event-stream-interpretation">as described below</a>.<p>When a successful response with a supported <span>MIME
   type</span> is received, such that the user agent begins parsing the
   contents of the stream, the user agent must <a href="#announce-the-connection">announce the
   connection</a>.<p>The <span title="concept-task">task</span> that the
