@@ -457,15 +457,19 @@ interface <dfn id="eventsource">EventSource</dfn> {
 
    <li>
 
-    <p><span>Fetch</span> the resource identified by the resulting
-    <span>absolute URL</span>, from the <span>entry script</span>'s
-    <span>origin</span>, with the <i>force same-origin flag</i> set,
-    and process it as described below.</p> 
-    <p class="note">The definition of the <span title="fetch">fetching</span> algorithm is such that if the
-    browser is already fetching the resource identified by the given
-    <span>absolute URL</span>, that connection can be reused, instead
-    of a new connection being established. All messages received up to
-    this point are dispatched immediately, in this case.</p>
+    <p>Do a <span>potentially CORS-enabled fetch</span> of the
+    resulting <span>absolute URL</span>, with the <i>mode</i> being
+    <span title="attr-crossorigin-use-credentials">Use
+    Credentials</span>, and the <i>origin</i> being the <span>entry
+    script</span>'s <span>origin</span>, and process the resource obtained in
+    this fashion, if any, as described below.</p>
+
+    <p class="note">The definition of the <span title="fetch">fetching</span> algorithm (which is used by CORS) is
+    such that if the browser is already fetching the resource
+    identified by the given <span>absolute URL</span>, that connection
+    can be reused, instead of a new connection being established. All
+    messages received up to this point are dispatched immediately, in
+    this case.</p>
 
    </li>
 
@@ -547,8 +551,8 @@ interface <dfn id="eventsource">EventSource</dfn> {
   <a href="#fail-the-connection">fail the connection</a>.</p><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
   other subresource.<p>HTTP 301 Moved Permanently, HTTP 302 Found, 303 See Other, and
-  307 Temporary Redirect responses are handled by the <span title="fetch">fetching</span> algorithm. In the case of 301
-  redirects, the user agent must also remember the new URL so that
+  307 Temporary Redirect responses are handled by the <span title="fetch">fetching</span> and CORS algorithms. In the case of
+  301 redirects, the user agent must also remember the new URL so that
   subsequent requests for this resource for this
   <code><a href="#eventsource">EventSource</a></code> object start with the URL given for the
   last 301 seen for requests for this object.<p>Any other HTTP response code not listed here, and any network
@@ -565,9 +569,15 @@ interface <dfn id="eventsource">EventSource</dfn> {
   <code title="event-error">error</code> at the
   <code><a href="#eventsource">EventSource</a></code> object, and then, after a delay equal to
   the reconnection time of the event source, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
-  still set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>,
-  <span>fetch</span> the event source resource again from the same
-  <span>origin</span> as the original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor.<p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
+  still set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, once again do
+  a <span>potentially CORS-enabled fetch</span> of the <span>absolute
+  URL</span> of the event source resource, with the <i>mode</i> being
+  <span title="attr-crossorigin-use-credentials">Use
+  Credentials</span>, and the <i>origin</i> being the same as the
+  <span>origin</span> used in the original request triggered by the
+  <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor, and process the
+  resource obtained in this fashion, if any, as described in this
+  section.<p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
