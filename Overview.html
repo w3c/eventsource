@@ -496,10 +496,10 @@ interface <dfn id="eventsource">EventSource</dfn> {
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> (0). The
   rules given below for handling the connection define when the value
   changes.<p>The <dfn id="dom-eventsource-close" title="dom-EventSource-close"><code>close()</code></dfn>
-  method must close the connection, if any; must abort any
-  reconnection attempt, if any; and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>. If the
-  connection is already closed, the method must do nothing.<p>The following are the <span>event handlers</span> (and their
+  method must close the connection, if any; must abort any instances
+  of the <span>fetch</span> algorithm started for this
+  <code><a href="#eventsource">EventSource</a></code> object; and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.<p>The following are the <span>event handlers</span> (and their
   corresponding <span title="event handler event type">event handler
   event types</span>) that must be supported, as IDL attributes, by
   all objects implementing the <code><a href="#eventsource">EventSource</a></code> interface:<table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
@@ -558,18 +558,19 @@ interface <dfn id="eventsource">EventSource</dfn> {
   user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> named <code title="event-open">open</code> at the
-  <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>, the user
-  agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>,
+  the user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>,
   <span>queue a task</span> to <span>fire a simple event</span> named
   <code title="event-error">error</code> at the
-  <code><a href="#eventsource">EventSource</a></code> object, and then <span>fetch</span> the
-  event source resource again after a delay equal to the reconnection
-  time of the event source, from the same <span>origin</span> as the
-  original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code>
-  constructor. <strong>Only if the user agent <a href="#reestablish-the-connection" title="reestablish the
-  connection">reestablishes the connection</a> does the connection get
-  opened anew!</strong><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
+  <code><a href="#eventsource">EventSource</a></code> object, and then, after a delay equal to
+  the reconnection time of the event source, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+  still set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>,
+  <span>fetch</span> the event source resource again from the same
+  <span>origin</span> as the original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor.
+  <strong>Only if the user agent <a href="#reestablish-the-connection" title="reestablish the
+  connection">reestablishes the connection</a> does the connection
+  get opened anew!</strong><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
   agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
   <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>queue a
   task</span> to <span>fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
