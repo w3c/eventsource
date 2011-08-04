@@ -592,8 +592,7 @@ interface <dfn id="eventsource">EventSource</dfn> {
 event         = *( comment / field ) end-of-line
 comment       = colon *any-char end-of-line
 field         = 1*name-char [ colon [ space ] *any-char ] end-of-line
-end-of-line   = ( cr lf / cr / lf / eof )
-eof           = &lt; matches repeatedly at the end of the stream &gt;
+end-of-line   = ( cr lf / cr / lf )
 
 ; characters
 lf            = %x000A ; U+000A LINE FEED (LF)
@@ -668,8 +667,9 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    </dd>
 
-  </dl><p>Once the end of the file is reached, the user agent must <a href="#dispatchMessage">dispatch the event</a> one final time, as
-  defined below.<p id="processField">The steps to <dfn title="">process the
+  </dl><p>Once the end of the file is reached, any pending data must be
+  discarded. (If the file ends in the middle of an event, before the
+  final empty line, the incomplete event is not dispatched.)<hr><p id="processField">The steps to <dfn title="">process the
   field</dfn> given a field name and a field value depend on the field
   name, as given in the following list. Field names must be compared
   literally, with no case folding performed.<dl class="switch"><dt>If the field name is "event"</dt>
@@ -779,10 +779,11 @@ stocks.onmessage = function (event) {
    and also has an "id" field, this time with no value, which resets
    the last event ID to the empty string (meaning no <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> header will now be
    sent in the event of a reconnection being attempted). Finally, the
-   last block just fires an event with the data "&nbsp;third&nbsp;event"
-   (with a single leading space character). Note that the last block
-   doesn't have to end with a blank line, the end of the stream is
-   enough to trigger the dispatch of the last event.</p>
+   last block just fires an event with the data
+   "&nbsp;third&nbsp;event" (with a single leading space character).
+   Note that the last still has to end with a blank line, the end of
+   the stream is not enough to trigger the dispatch of the last
+   event.</p>
 
    <pre>: test stream
 
@@ -792,10 +793,11 @@ id: 1
 data:second event
 id
 
-data:&nbsp;&nbsp;third event</pre>
+data:&nbsp;&nbsp;third event
+</pre>
   </div><div class="example">
 
-   <p>The following stream fires three events:</p>
+   <p>The following stream fires two events:</p>
 
    <pre>data
 
@@ -804,9 +806,11 @@ data
 
 data:</pre>
 
-   <p>The first and last blocks fire events with the data set to the
-   empty string. The middle block fires an event with the data set to
-   a single newline character.</p>
+   <p>The first block fires events with the data set to the empty
+   string, as would the last block if it was followed by a blank line.
+   The middle block fires an event with the data set to a single
+   newline character. The last block is discarded because it is not
+   followed by a blank line.</p>
 
   </div><div class="example">
 
@@ -814,7 +818,8 @@ data:</pre>
 
    <pre>data:test
 
-data:&nbsp;test</pre>
+data:&nbsp;test
+</pre>
 
    <p>This is because the space after the colon is ignored if
    present.</p>
@@ -911,15 +916,18 @@ data:&nbsp;test</pre>
    <dt>Required parameters:</dt>
    <dd>No parameters</dd>
    <dt>Optional parameters:</dt>
-   <dt>
-    </dt><dl><dt><code title="">charset</code></dt>
+   <dd>
+    <dl><dt><code title="">charset</code></dt>
      <dd>
+
       <p>The <code title="">charset</code> parameter may be provided.
       The parameter's value must be "<code title="">utf-8</code>".
       This parameter serves no purpose; it is only allowed for
       compatibility with legacy servers.</p>
+
      </dd>
-    </dl><dt>Encoding considerations:</dt>
+    </dl></dd>
+   <dt>Encoding considerations:</dt>
    <dd>Always UTF-8.</dd>
    <dt>Security considerations:</dt>
    <dd>
