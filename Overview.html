@@ -499,10 +499,10 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> (0). The
   rules given below for handling the connection define when the value
   changes.<p>The <dfn id="dom-eventsource-close" title="dom-EventSource-close"><code>close()</code></dfn>
-  method must close the connection, if any; must abort any instances
-  of the <span>fetch</span> algorithm started for this
-  <code><a href="#eventsource">EventSource</a></code> object; and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.<p>The following are the <span>event handlers</span> (and their
+  method must abort any instances of the <span>fetch</span> algorithm
+  started for this <code><a href="#eventsource">EventSource</a></code> object, and must set the
+  <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute
+  to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.<p>The following are the <span>event handlers</span> (and their
   corresponding <span title="event handler event type">event handler
   event types</span>) that must be supported, as IDL attributes, by
   all objects implementing the <code><a href="#eventsource">EventSource</a></code> interface:<table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
@@ -561,16 +561,15 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   error that prevents the HTTP connection from being established in
   the first place (e.g. DNS errors), must cause the user agent to
   <a href="#fail-the-connection">fail the connection</a>.</p><p>For non-HTTP protocols, UAs should act in equivalent ways.<hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
-  user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>queue a
-  task</span> to <span>fire a simple event</span> named <code title="event-open">open</code> at the
-  <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>,
-  the user agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>,
-  <span>queue a task</span> to <span>fire a simple event</span> named
-  <code title="event-error">error</code> at the
-  <code><a href="#eventsource">EventSource</a></code> object, and then, after a delay equal to
-  the reconnection time of the event source, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+  user agent must <span>queue a task</span> to set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>fire a
+  simple event</span> named <code title="event-open">open</code> at
+  the <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>,
+  the user agent must <span>queue a task</span> to set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> and
+  <span>fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
+  object, and then, after a delay equal to the reconnection time of
+  the event source, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
   still set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, once again do
   a <span>potentially CORS-enabled fetch</span> of the <span>absolute
   URL</span> of the event source resource, with the <i>mode</i> being
@@ -580,12 +579,12 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor, and process the
   resource obtained in this fashion, if any, as described in this
   section.<p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
-  agent must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>queue a
-  task</span> to <span>fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
-  object. <strong>Once the user agent has <a href="#fail-the-connection" title="fail the
-  connection">failed the connection</a>, it does <em>not</em>
-  attempt to reconnect!</strong><hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
+  agent must <span>queue a task</span> to set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>fire a
+  simple event</span> named <code title="event-error">error</code> at
+  the <code><a href="#eventsource">EventSource</a></code> object. <strong>Once the user agent has
+  <a href="#fail-the-connection" title="fail the connection">failed the connection</a>, it
+  does <em>not</em> attempt to reconnect!</strong><hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
   task">queued</span> by <code><a href="#eventsource">EventSource</a></code> objects is the
   <dfn id="remote-event-task-source">remote event task source</dfn>.<h2 id="parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</h2><p>This event stream format's <span>MIME type</span> is
   <code><a href="#text-event-stream">text/event-stream</a></code>.<p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
@@ -896,19 +895,31 @@ data:&nbsp;test
   specification and in more distributed ways as described above,
   formats of event framing defined by <span>other applicable
   specifications</span> may be supported. This specification does not
-  define how they are to be parsed or processed.<h2 id="garbage-collection"><span class="secno">10 </span>Garbage collection</h2><p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is not <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, and the object has one
-  or more event listeners registered for <code title="event-message">message</code> events, there must be a strong
+  define how they are to be parsed or processed.<h2 id="garbage-collection"><span class="secno">10 </span>Garbage collection</h2><p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, and the object
+  has one or more event listeners registered for <code title="event-open">open</code>, <code title="event-message">message</code> or <code title="event-error">error</code> events, there must be a strong
   reference from the <code>Window</code> or <code>WorkerUtils</code>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
-  invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
-  its connection is still open, the user agent must cancel any
-  instance of the <span title="fetch">fetch</span> algorithm opened by
-  this <code><a href="#eventsource">EventSource</a></code>, discarding any <span title="concept-task">tasks</span> <span title="queue a
-  task">queued</span> for them, and discarding any further data
-  received from the network for them.<p class="note">It's possible for one active network connection to
+  invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code>, and the object has one or
+  more event listeners registered for <code title="event-message">message</code> or <code title="event-error">error</code> events, there must be a strong
+  reference from the <code>Window</code> or <code>WorkerUtils</code>
+  object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
+  invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.<p>While there is a task queued by an <code><a href="#eventsource">EventSource</a></code>
+  object on the <a href="#remote-event-task-source">remote event task source</a>, there must be a
+  strong reference from the <code>Window</code> or
+  <code>WorkerUtils</code> object that the <code><a href="#eventsource">EventSource</a></code>
+  object's constructor was invoked from to that
+  <code><a href="#eventsource">EventSource</a></code> object.<p>If a user agent is to <dfn id="concept-eventsource-forcibly-close" title="concept-EventSource-forcibly-close">forcibly close</dfn> an
+  <code><a href="#eventsource">EventSource</a></code> object (this happens when a
+  <code>Document</code> object goes away permanently), the user agent
+  must abort any instances of the <span>fetch</span> algorithm started
+  for this <code><a href="#eventsource">EventSource</a></code> object, and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.</p><p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
+  its connection is still open, the user agent must abort any instance
+  of the <span title="fetch">fetch</span> algorithm opened by this
+  <code><a href="#eventsource">EventSource</a></code>.</p><p class="note">It's possible for one active network connection to
   be shared by multiple <code><a href="#eventsource">EventSource</a></code> objects and their
   <span>fetch</span> algorithms, which is why the above is phrased in
-  terms of canceling the <span>fetch</span> algorithm and not the
+  terms of aborting the <span>fetch</span> algorithm and not the
   actual underlying download.<h2 id="iana-considerations"><span class="secno">11 </span>IANA considerations</h2><h3 id="text-event-stream"><span class="secno">11.1 </span><dfn><code>text/event-stream</code></dfn></h3><p>This registration is for community review and will be submitted
   to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
    <dd>text</dd>
