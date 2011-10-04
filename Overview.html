@@ -364,7 +364,10 @@ source.onmessage = function (event) {
 data: This is the second message, it
 data: has two lines.
 
-data: This is the third message.</pre><p>Using this API rather than emulating it using
+data: This is the third message.</pre><p>Event streams requests can be redirected using HTTP 301 and 307
+  redirects as with normal HTTP requests. Clients will reconnect if
+  the connection is closed; a client can be told to stop reconnecting
+  using the HTTP 204 No Content response code.<p>Using this API rather than emulating it using
   <code>XMLHttpRequest</code> or an <code>iframe</code> allows the
   user agent to make better use of network resources in cases where
   the user agent implementor and the network operator are able to
