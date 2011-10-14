@@ -215,7 +215,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-11-october-2011">Editor's Draft 11 October 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-14-october-2011">Editor's Draft 14 October 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -323,7 +323,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 11 October 2011 Editor's Draft.
+  This specification is the 14 October 2011 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -518,7 +518,7 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   method must abort any instances of the <span>fetch</span> algorithm
   started for this <code><a href="#eventsource">EventSource</a></code> object, and must set the
   <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute
-  to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.<p>The following are the <span>event handlers</span> (and their
+  to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.</p><p>The following are the <span>event handlers</span> (and their
   corresponding <span title="event handler event type">event handler
   event types</span>) that must be supported, as IDL attributes, by
   all objects implementing the <code><a href="#eventsource">EventSource</a></code> interface:<table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
@@ -758,9 +758,9 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <li><p>Set the <var title="">data</var> buffer and the <var title="">event name</var> buffer to the empty string.</li>
 
-   <li><p><span>Queue a task</span> to dispatch the newly created
-   event at the <code><a href="#eventsource">EventSource</a></code> object.</li>
-
+   <li><p><span>Queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+   set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, dispatches the newly
+   created event at the <code><a href="#eventsource">EventSource</a></code> object.</li> 
   </ol><p class="note">If an event doesn't have an "id" field, but an
   earlier event did set the event source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
   string</a>, then the event's <code title="dom-MessageEvent-lastEventId">lastEventId</code> field will
