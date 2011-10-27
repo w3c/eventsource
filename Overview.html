@@ -215,7 +215,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-21-october-2011">Editor's Draft 21 October 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-27-october-2011">Editor's Draft 27 October 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -323,7 +323,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 21 October 2011 Editor's Draft.
+  This specification is the 27 October 2011 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -563,9 +563,10 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   <span>networking task source</span> places on the <span>task
   queue</span> once the <span title="fetch">fetching algorithm</span>
   for such a resource (with the correct <span>MIME type</span>) has
-  completed must <a href="#reestablish-the-connection">reestablish the connection</a>. This applies
-  whether the connection is closed gracefully or unexpectedly. It
-  doesn't apply for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span>
+  completed must cause the user agent to asynchronously
+  <a href="#reestablish-the-connection">reestablish the connection</a>. This applies whether the
+  connection is closed gracefully or unexpectedly. It doesn't apply
+  for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span>
   specifying an unsupported type (including the
   <code><a href="#text-event-stream">text/event-stream</a></code> type with unsupported parameters or
   parameters with unsupported values), or that have no
@@ -581,30 +582,61 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   error that prevents the HTTP connection from being established in
   the first place (e.g. DNS errors), must cause the user agent to
   <a href="#fail-the-connection">fail the connection</a>.</p><p>For non-HTTP protocols, UAs should act in equivalent ways.<hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
-  user agent must <span>queue a task</span> to set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span>fire a
-  simple event</span> named <code title="event-open">open</code> at
-  the <code><a href="#eventsource">EventSource</a></code> object.<p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>,
-  the user agent must <span>queue a task</span> to set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> and
-  <span>fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
-  object, and then, after a delay equal to the reconnection time of
-  the event source, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
-  still set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, once again do
-  a <span>potentially CORS-enabled fetch</span> of the <span>absolute
-  URL</span> of the event source resource, with the <i>mode</i> being
-  <span title="attr-crossorigin-use-credentials">Use
-  Credentials</span>, and the <i title="">origin</i> being the same as the
-  <span>origin</span> used in the original request triggered by the
-  <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor, and process the
-  resource obtained in this fashion, if any, as described in this
-  section.<p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
-  agent must <span>queue a task</span> to set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span>fire a
-  simple event</span> named <code title="event-error">error</code> at
-  the <code><a href="#eventsource">EventSource</a></code> object. <strong>Once the user agent has
-  <a href="#fail-the-connection" title="fail the connection">failed the connection</a>, it
-  does <em>not</em> attempt to reconnect!</strong><hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
+  user agent must <span>queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+  set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, sets the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span title="fire
+  a simple event">fires a simple event</span> named <code title="event-open">open</code> at the <code><a href="#eventsource">EventSource</a></code>
+  object.<p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>,
+  the user agent must run the following steps. These steps are run
+  asynchronously, not as part of a <span title="concept-task">task</span>. (The tasks that it queues, of
+  course, are run like normal tasks and not asynchronously.)<ol><li>
+
+    <p><span>Queue a task</span> to run the following steps:</p>
+
+    <ol><li><p>If the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+     set to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, abort
+     the task.</li>
+
+     <li><p>Set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+     <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>.</li>
+
+     <li><p><span>Fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
+     object.</li>
+
+    </ol></li>
+
+   <li><p>Wait a delay equal to the reconnection time of the event
+   source.</li>
+
+   <li><p>Wait until the aforementioned task has run, if it has not
+   yet run.</li>
+
+   <li>
+
+    <p><span>Queue a task</span> to run the following steps:</p>
+
+    <ol><li><p>If the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+     not set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, abort these
+     steps.</li>
+
+     <li><p>Perform a <span>potentially CORS-enabled fetch</span> of
+     the <span>absolute URL</span> of the event source resource, with
+     the <i>mode</i> being <span title="attr-crossorigin-use-credentials">Use Credentials</span>,
+     and the <i title="">origin</i> being the same as the
+     <span>origin</span> used in the original request triggered by the
+     <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code>
+     constructor, and process the resource obtained in this fashion, if
+     any, as described earlier in this section.</li>
+
+    </ol></li>
+
+  </ol><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
+  agent must <span>queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+  set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, sets the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
+  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span title="fire a simple event">fires a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
+  object. <strong>Once the user agent has <a href="#fail-the-connection" title="fail the
+  connection">failed the connection</a>, it does <em>not</em>
+  attempt to reconnect!</strong><hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
   task">queued</span> by <code><a href="#eventsource">EventSource</a></code> objects is the
   <dfn id="remote-event-task-source">remote event task source</dfn>.<h2 id="parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</h2><p>This event stream format's <span>MIME type</span> is
   <code><a href="#text-event-stream">text/event-stream</a></code>.<p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
