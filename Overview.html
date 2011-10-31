@@ -215,7 +215,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-27-october-2011">Editor's Draft 27 October 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-31-october-2011">Editor's Draft 31 October 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -323,7 +323,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 27 October 2011 Editor's Draft.
+  This specification is the 31 October 2011 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -441,9 +441,10 @@ source.addEventListener('remove', removeHandler, false);</pre><p>The default eve
   <code>Node</code> objects as defined in the DOM Core
   specifications. <a href="#refsDOMCORE">[DOMCORE]</a><p>An IDL attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
-  <em>setting</em> when a new value is assigned to it.<h2 id="the-eventsource-interface"><span class="secno">4 </span>The <code><a href="#eventsource">EventSource</a></code> interface</h2><pre class="idl">[<a href="#dom-eventsource" title="dom-EventSource">Constructor</a>(DOMString url)]
+  <em>setting</em> when a new value is assigned to it.<h2 id="the-eventsource-interface"><span class="secno">4 </span>The <code><a href="#eventsource">EventSource</a></code> interface</h2><pre class="idl">[<a href="#dom-eventsource" title="dom-EventSource">Constructor</a>(DOMString url, optional <a href="#eventsourceinit">EventSourceInit</a> eventSourceInitDict)]
 interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   readonly attribute DOMString <a href="#dom-eventsource-url" title="dom-EventSource-url">url</a>;
+  readonly attribute boolean <a href="#dom-eventsource-withcredentials" title="dom-EventSource-withCredentials">withCredentials</a>;
 
   // ready state
   const unsigned short <a href="#dom-eventsource-connecting" title="dom-EventSource-CONNECTING">CONNECTING</a> = 0;
@@ -456,13 +457,19 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   [TreatNonCallableAsNull] attribute <span>Function</span>? <a href="#handler-eventsource-onmessage" title="handler-EventSource-onmessage">onmessage</a>;
   [TreatNonCallableAsNull] attribute <span>Function</span>? <a href="#handler-eventsource-onerror" title="handler-EventSource-onerror">onerror</a>;
   void <a href="#dom-eventsource-close" title="dom-EventSource-close">close</a>();
-};</pre><p>The <dfn id="dom-eventsource" title="dom-EventSource"><code>EventSource(<var title="">url</var>)</code></dfn> constructor takes one argument,
-  <var title="">url</var>, which specifies the <span>URL</span> to
-  which to connect. When the <code>EventSource()</code> constructor is
+};
+
+dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
+  boolean <dfn id="dom-eventsourceinit-withcredentials" title="dom-EventSourceInit-withCredentials">withCredentials</dfn> = false;
+};</pre><p>The <dfn id="dom-eventsource" title="dom-EventSource"><code>EventSource()</code></dfn>
+  constructor takes one or two arguments. The first specifies the
+  <span>URL</span> to which to connect. The second specifies the
+  settings, if any, in the form of an <code><a href="#eventsourceinit">EventSourceInit</a></code>
+  dictionary. When the <code>EventSource()</code> constructor is
   invoked, the UA must run these steps:<ol><li><p><span title="resolve a url">Resolve</span> the
-   <span>URL</span> specified in <var title="">url</var>, relative to
-   the <span>entry script</span>'s <span title="script's base
-   URL">base URL</span>.
+   <span>URL</span> specified in the first argument, relative to the
+   <span>entry script</span>'s <span title="script's base URL">base
+   URL</span>.
    
    <a href="#refsHTML">[HTML]</a>
    
@@ -471,17 +478,27 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
    <li><p>If the previous step failed, then throw a
    <code>SyntaxError</code> exception.</li>
 
-   <li><p>Return a new <code><a href="#eventsource">EventSource</a></code> object, and continue
+   <li><p>Create a new <code><a href="#eventsource">EventSource</a></code> object.</li>
+
+   <li><p>Let <var title="">CORS mode</var> be <span title="attr-crossorigin-anonymous">Anonymous</span>.</li>
+
+   <li><p>If the second argument is present, and the <code title="dom-EventSourceInit-withCredentials"><a href="#dom-eventsourceinit-withcredentials">withCredentials</a></code>
+   dictionary member has the value true, then set <var title="">CORS
+   mode</var> to <span title="attr-crossorigin-use-credentials">Use
+   Credentials</span> and initialize the new <code><a href="#eventsource">EventSource</a></code>
+   object's <code title="dom-EventSource-withCredentials"><a href="#dom-eventsource-withcredentials">withCredentials</a></code>
+   attribute to true.</li>
+
+   <li><p>Return the new <code><a href="#eventsource">EventSource</a></code> object, and continue
    these steps in the background (without blocking scripts).</li>
 
    <li>
 
     <p>Do a <span>potentially CORS-enabled fetch</span> of the
     resulting <span>absolute URL</span>, with the <i>mode</i> being
-    <span title="attr-crossorigin-use-credentials">Use
-    Credentials</span>, and the <i title="">origin</i> being the <span>entry
-    script</span>'s <span>origin</span>, and process the resource obtained in
-    this fashion, if any, as described below.</p>
+    <var title="">CORS mode</var>, and the <i title="">origin</i>
+    being the <span>entry script</span>'s <span>origin</span>, and process the
+    resource obtained in this fashion, if any, as described below.</p>
 
     <p class="note">The definition of the <span title="fetch">fetching</span> algorithm (which is used by CORS) is
     such that if the browser is already fetching the resource
@@ -497,7 +514,9 @@ interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-url"><code>url</code></dfn>
   attribute must return the <span>absolute URL</span> that resulted
   from <span title="resolve a url">resolving</span> the value that was
-  passed to the constructor.</p><p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
+  passed to the constructor.</p><p>The <dfn id="dom-eventsource-withcredentials" title="dom-EventSource-withCredentials"><code>withCredentials</code></dfn>
+  attribute must return the value to which it was last initialized.
+  When the object is created, it must be initialized to false.<p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
   attribute represents the state of the connection. It can have the
   following values:<dl><dt><dfn id="dom-eventsource-connecting" title="dom-EventSource-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
