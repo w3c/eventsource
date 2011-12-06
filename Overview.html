@@ -573,9 +573,8 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
   caching event sources.<hr><p>As data is received, the <span title="concept-task">tasks</span>
   queued by the <span>networking task source</span> to handle the data
   must act as follows.<p>HTTP 200 OK responses with a <span>Content-Type</span> header
-  specifying the type <code><a href="#text-event-stream">text/event-stream</a></code>, either with no
-  parameters or with a single parameter with the name "<code title="">charset</code>" whose value is an <span>ASCII
-  case-insensitive</span> match for the string "<code title="">utf-8</code>", must be processed line by line <a href="#event-stream-interpretation">as described below</a>.<p>When a successful response with a supported <span>MIME
+  specifying the type <code><a href="#text-event-stream">text/event-stream</a></code>, ignoring any
+  <span>MIME type</span> parameters, must be processed line by line <a href="#event-stream-interpretation">as described below</a>.<p>When a successful response with a supported <span>MIME
   type</span> is received, such that the user agent begins parsing the
   contents of the stream, the user agent must <a href="#announce-the-connection">announce the
   connection</a>.<p>The <span title="concept-task">task</span> that the
@@ -586,9 +585,7 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
   <a href="#reestablish-the-connection">reestablish the connection</a>. This applies whether the
   connection is closed gracefully or unexpectedly. It doesn't apply
   for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span>
-  specifying an unsupported type (including the
-  <code><a href="#text-event-stream">text/event-stream</a></code> type with unsupported parameters or
-  parameters with unsupported values), or that have no
+  specifying an unsupported type, or that have no
   <span>Content-Type</span> at all, must cause the user agent to
   <a href="#fail-the-connection">fail the connection</a>.</p><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
