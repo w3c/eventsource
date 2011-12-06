@@ -215,7 +215,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-2-december-2011">Editor's Draft 2 December 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-6-december-2011">Editor's Draft 6 December 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -323,7 +323,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 2 December 2011 Editor's Draft.
+  This specification is the 6 December 2011 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -801,8 +801,9 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    the <code title="dom-MessageEvent-origin">origin</code> attribute
    must be initialized to the <span title="Unicode serialization of an
    origin">Unicode serialization</span> of the <span>origin</span> of
-   the event stream's URL, and the <code title="dom-MessageEvent-lastEventId">lastEventId</code> attribute
-   must be initialized to the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
+   the event stream's final URL (i.e. the URL after redirects), and
+   the <code title="dom-MessageEvent-lastEventId">lastEventId</code>
+   attribute must be initialized to the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
    string</a> of the event source.</li>
 
    <li><p>If the <var title="">event name</var> buffer has a value
