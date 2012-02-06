@@ -215,11 +215,12 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-6-december-2011">Editor's Draft 6 December 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-6-february-2012">Editor's Draft 6 February 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
     <dd><a class="latest-link" href="http://dev.w3.org/html5/eventsource/">http://dev.w3.org/html5/eventsource/</a></dd>
+
 
     <dt>Previous Versions:</dt>
     <dd><a href="http://www.w3.org/TR/2011/WD-eventsource-20110310/">http://www.w3.org/TR/2011/WD-eventsource-20110310/</a></dd>
@@ -323,7 +324,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 6 December 2011 Editor's Draft.
+  This specification is the 6 February 2012 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -332,6 +333,7 @@
   individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
   6 of the W3C Patent Policy</a>.<h2 class="no-num no-toc" id="contents">Table of Contents</h2>
+
 <ol class="toc">
  <li><a href="#server-sent-events-intro"><span class="secno">1 </span>Introduction</a></li>
  <li><a href="#conformance-requirements"><span class="secno">2 </span>Conformance requirements</a>
@@ -493,6 +495,7 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
    these steps in the background (without blocking scripts).</li>
 
    <li>
+
     <p>Do a <span>potentially CORS-enabled fetch</span> of the
     resulting <span>absolute URL</span>, with the <i>mode</i> being
     <var title="">CORS mode</var>, and the <i title="">origin</i>
@@ -769,6 +772,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    
 
+
+
    <dt>Otherwise</dt>
 
    <dd><p>The field is ignored.</dd>
@@ -813,6 +818,7 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    <li><p><span>Queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
    set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, dispatches the newly
    created event at the <code><a href="#eventsource">EventSource</a></code> object.</li> 
+
   </ol><p class="note">If an event doesn't have an "id" field, but an
   earlier event did set the event source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
   string</a>, then the event's <code title="dom-MessageEvent-lastEventId">lastEventId</code> field will
@@ -1016,6 +1022,7 @@ data:&nbsp;test
     </dl></dd>
    <dt>Encoding considerations:</dt>
    <dd>8bit (always UTF-8)</dd>
+
    <dt>Security considerations:</dt>
    <dd>
 
@@ -1035,6 +1042,7 @@ data:&nbsp;test
     prevent conforming clients from reconnecting automatically.</p>
 
    </dd>
+
    <dt>Interoperability considerations:</dt>
    <dd>
     Rules for processing both conforming and non-conforming content
@@ -1071,19 +1079,19 @@ data:&nbsp;test
    <dd>W3C</dd>
   </dl><p>Fragment identifiers have no meaning with
   <code><a href="#text-event-stream">text/event-stream</a></code> resources.<h3 id="last-event-id"><span class="secno">11.2 </span><dfn title="http-last-event-id"><code>Last-Event-ID</code></dfn></h3><p>This section describes a header field for registration in the
-  Permanent Message Header Field Registry.  <a href="#refsRFC3864">[RFC3864]</a><dl><dt>Header field name</dt>
+  Permanent Message Header Field Registry.  <a href="#refsRFC3864">[RFC3864]</a><dl><dt>Header field name:</dt>
    <dd>Last-Event-ID</dd>
-   <dt>Applicable protocol</dt>
+   <dt>Applicable protocol:</dt>
    <dd>http</dd>
-   <dt>Status</dt>
+   <dt>Status:</dt>
    <dd>standard</dd>
-   <dt>Author/Change controller</dt>
+   <dt>Author/Change controller:</dt>
    <dd>W3C</dd>
-   <dt>Specification document(s)</dt>
+   <dt>Specification document(s):</dt>
    <dd>
     This document is the relevant specification.
    </dd>
-   <dt>Related information</dt>
+   <dt>Related information:</dt>
    <dd>None.</dd>
   </dl><h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".</p><dl><dt id="refsABNF">[ABNF]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/std/std68.txt">Augmented
@@ -1091,7 +1099,8 @@ data:&nbsp;test
    P. Overell. IETF.</dd>
 
    <dt id="refsCORS">[CORS]</dt>
-      <dd><cite><a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin
+   
+   <dd><cite><a href="http://dev.w3.org/2006/waf/access-control/">Cross-Origin
    Resource Sharing</a></cite>, A. van Kesteren. W3C.</dd>
 
    <dt id="refsDOMCORE">[DOMCORE]</dt>
@@ -1116,7 +1125,8 @@ data:&nbsp;test
    J. Mogul. IETF.</dd>
 
    <dt id="refsWEBIDL">[WEBIDL]</dt>
-      <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web
+   
+   <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web
    IDL</a></cite>, C. McCormack. W3C.</dd>
 
    <dt id="refsWEBWORKERS">[WEBWORKERS]</dt>
