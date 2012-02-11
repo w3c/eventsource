@@ -215,7 +215,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-6-february-2012">Editor's Draft 6 February 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -324,7 +324,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 6 February 2012 Editor's Draft.
+  This specification is the 11 February 2012 Editor's Draft.
   </p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -590,9 +590,9 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
   for the error conditions listed below.<p>HTTP 200 OK responses that have a <span>Content-Type</span>
   specifying an unsupported type, or that have no
   <span>Content-Type</span> at all, must cause the user agent to
-  <a href="#fail-the-connection">fail the connection</a>.</p><p>HTTP 305 Use Proxy, HTTP 401 Unauthorized, and 407 Proxy
+  <a href="#fail-the-connection">fail the connection</a>.</p><p>HTTP 305 Use Proxy, 401 Unauthorized, and 407 Proxy
   Authentication Required should be treated transparently as for any
-  other subresource.<p>HTTP 301 Moved Permanently, HTTP 302 Found, 303 See Other, and
+  other subresource.<p>HTTP 301 Moved Permanently, 302 Found, 303 See Other, and
   307 Temporary Redirect responses are handled by the <span title="fetch">fetching</span> and CORS algorithms. In the case of
   301 redirects, the user agent must also remember the new URL so that
   subsequent requests for this resource for this
