@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-24-april-2012">Editor's Draft 24 April 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-8-may-2012">Editor's Draft 8 May 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -356,7 +356,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 24 April 2012 Editor's Draft.
+  This specification is the 8 May 2012 Editor's Draft.
   </p>
 
   
@@ -431,7 +431,6 @@ event: remove
 data: 2153
 
 event: add
-
 data: 113411</pre>
 
   <p>The script to handle such a stream would look like this (where
@@ -885,7 +884,7 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
   a line can end.</p>
 
   <p>When a stream is parsed, a <var title="">data</var> buffer, an
-  <var title="">event name</var> buffer, and a <var title="">last
+  <var title="">event type</var> buffer, and a <var title="">last
   event ID</var> buffer must be associated with it. They must be
   initialized to the empty string</p>
 
@@ -944,7 +943,7 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
   <dl class="switch"><dt>If the field name is "event"</dt>
 
-   <dd><p>Set the <var title="">event name</var> buffer to field
+   <dd><p>Set the <var title="">event type</var> buffer to field
    value.</dd>
 
 
@@ -996,7 +995,7 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    from the <var title="">data</var> buffer.</li>
 
    <li><p>Create an event that uses the <code>MessageEvent</code>
-   interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
+   interface, with the event type <code title="event-message">message</code>, which does not bubble, is not
    cancelable, and has no default action. The <code title="dom-MessageEvent-data">data</code> attribute must be
    initialized to the value of the <var title="">data</var> buffer,
    the <code title="dom-MessageEvent-origin">origin</code> attribute
@@ -1007,12 +1006,12 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    attribute must be initialized to the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
    string</a> of the event source.</li>
 
-   <li><p>If the <var title="">event name</var> buffer has a value
+   <li><p>If the <var title="">event type</var> buffer has a value
    other than the empty string, change the <span title="concept-event-type">type</span> of the newly created event
-   to equal the value of the <var title="">event name</var>
+   to equal the value of the <var title="">event type</var>
    buffer.</li>
 
-   <li><p>Set the <var title="">data</var> buffer and the <var title="">event name</var> buffer to the empty string.</li>
+   <li><p>Set the <var title="">data</var> buffer and the <var title="">event type</var> buffer to the empty string.</li>
 
    <li><p><span>Queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
    set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, dispatches the newly
