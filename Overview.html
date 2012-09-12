@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-26-august-2012">Editor's Draft 26 August 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-12-september-2012">Editor's Draft 12 September 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -356,7 +356,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 26 August 2012 Editor's Draft.
+  This specification is the 12 September 2012 Editor's Draft.
   </p>
 
   
@@ -606,12 +606,13 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
 
    <li>
 
-    <p>Do a <span>potentially CORS-enabled fetch</span> of the
-    resulting <span>absolute URL</span>, with the <i>mode</i> being
-    <var title="">CORS mode</var>, and the <i title="">origin</i>
-    being the <span>entry script</span>'s <span>origin</span>,
-    and process the resource obtained in this fashion, if any, as
-    described below.</p>
+    <p>Do a <span>potentially CORS-enabled fetch</span> of
+    the resulting <span>absolute URL</span> using the <span>entry
+    script</span>'s <span title="script's referrer source">referrer
+    source</span>, with the <i>mode</i> being <var title="">CORS
+    mode</var>, and the <i title="">origin</i> being the <span>entry
+    script</span>'s <span>origin</span>, and process the
+    resource obtained in this fashion, if any, as described below.</p>
 
     <p class="note">The definition of the <span title="fetch">fetching</span> algorithm (which is used by CORS) is
     such that if the browser is already fetching the resource
@@ -800,11 +801,11 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
      not set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, abort these
      steps.</li>
 
-     <li><p>Perform a <span>potentially CORS-enabled fetch</span> of
-     the <span>absolute URL</span> of the event source resource, with
-     the <i>mode</i> and
-     the <i title="">origin</i> being the same as those used in the
-     original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor, and
+     <li><p>Perform a <span>potentially CORS-enabled
+     fetch</span> of the <span>absolute URL</span> of the
+     event source resource, using the same <i>referrer source</i>, and
+     with the same <i>mode</i> and <i title="">origin</i>, as those used in
+     the original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor, and
      process the resource obtained in this fashion, if any, as
      described earlier in this section.</li>
 
