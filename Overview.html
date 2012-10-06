@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-27-september-2012">Editor's Draft 27 September 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-6-october-2012">Editor's Draft 6 October 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -356,7 +356,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 27 September 2012 Editor's Draft.
+  This specification is the 6 October 2012 Editor's Draft.
   </p>
 
   
@@ -994,17 +994,13 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    U+000A LINE FEED (LF) character, then remove the last character
    from the <var title="">data</var> buffer.</li>
 
-   <li><p>Create an event that uses the <code>MessageEvent</code>
-   interface, with the event type <code title="event-message">message</code>, which does not bubble, is not
-   cancelable, and has no default action. The <code title="dom-MessageEvent-data">data</code> attribute must be
-   initialized to the value of the <var title="">data</var> buffer,
-   the <code title="dom-MessageEvent-origin">origin</code> attribute
-   must be initialized to the <span title="Unicode serialization of an
-   origin">Unicode serialization</span> of the <span>origin</span> of
-   the event stream's final URL (i.e. the URL after redirects), and
-   the <code title="dom-MessageEvent-lastEventId">lastEventId</code>
-   attribute must be initialized to the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
-   string</a> of the event source.</li>
+   <li><p>Create an event that uses the <code>MessageEvent</code> interface, with the event type
+   <code title="event-message">message</code>, which does not bubble, is not cancelable, and has no
+   default action. The <code title="dom-MessageEvent-data">data</code> attribute must be initialized
+   to the value of the <var title="">data</var> buffer, the <code title="dom-MessageEvent-origin">origin</code> attribute must be initialized to the <span title="Unicode serialization of an origin">Unicode serialization</span> of the
+   <span>origin</span> of the event stream's final URL (i.e. the URL after redirects), and the <code title="dom-MessageEvent-lastEventId">lastEventId</code> attribute must be initialized to the
+   <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID string</a> of the event source.
+   This event is not <span title="concept-events-trusted">trusted</span>.</li>
 
    <li><p>If the <var title="">event type</var> buffer has a value
    other than the empty string, change the <span title="concept-event-type">type</span> of the newly created event
