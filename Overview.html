@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-6-october-2012">Editor's Draft 6 October 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-10-october-2012">Editor's Draft 10 October 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -356,7 +356,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 6 October 2012 Editor's Draft.
+  This specification is the 10 October 2012 Editor's Draft.
   </p>
 
   
@@ -443,18 +443,16 @@ source.addEventListener('remove', removeHandler, false);</pre>
 
   <p>The default event type is "message".</p>
 
-  <hr><p>Event streams requests can be redirected using HTTP 301 and 307
-  redirects as with normal HTTP requests. Clients will reconnect if
-  the connection is closed; a client can be told to stop reconnecting
-  using the HTTP 204 No Content response code.</p>
+  <hr><p>Event stream requests can be redirected using HTTP 301 and 307 redirects as with normal HTTP
+  requests. Clients will reconnect if the connection is closed; a client can be told to stop
+  reconnecting using the HTTP 204 No Content response code.</p>
 
-  <p>Using this API rather than emulating it using
-  <code>XMLHttpRequest</code> or an <code>iframe</code> allows the
-  user agent to make better use of network resources in cases where
-  the user agent implementor and the network operator are able to
-  coordinate in advance. Amongst other benefits, this can result in
-  significant savings in battery life on portable devices. This is
-  discussed further in the section below on <a href="#eventsource-push">connectionless push</a>.</p>
+  <p>Using this API rather than emulating it using <code>XMLHttpRequest</code> or an
+  <code>iframe</code> allows the user agent to make better use of network resources in cases where
+  the user agent implementor and the network operator are able to coordinate in advance. Amongst
+  other benefits, this can result in significant savings in battery life on portable devices. This
+  is discussed further in the section below on <a href="#eventsource-push">connectionless
+  push</a>.</p>
 
 
   
