@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-25-october-2012">Editor's Draft 25 October 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-30-october-2012">Editor's Draft 30 October 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 25 October 2012 Editor's Draft.
+  This specification is the 30 October 2012 Editor's Draft.
   </p>
 
   
@@ -961,8 +961,7 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <dt>If the field name is "retry"</dt>
 
-   <dd><p>If the field value consists of only characters in the range
-   U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), then interpret the
+   <dd><p>If the field value consists of only <span>ASCII digits</span>, then interpret the
    field value as an integer in base ten, and set the event stream's
    <a href="#concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection
    time</a> to that integer. Otherwise, ignore the field.</dd>
