@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-30-october-2012">Editor's Draft 30 October 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-5-november-2012">Editor's Draft 5 November 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 30 October 2012 Editor's Draft.
+  This specification is the 5 November 2012 Editor's Draft.
   </p>
 
   
@@ -1007,9 +1007,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <li><p>Set the <var title="">data</var> buffer and the <var title="">event type</var> buffer to the empty string.</li>
 
-   <li><p><span>Queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
-   set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, dispatches the newly
-   created event at the <code><a href="#eventsource">EventSource</a></code> object.</li> 
+   <li><p><span>Queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, <span title="concept-event-dispatch">dispatches</span> the newly created event at the
+   <code><a href="#eventsource">EventSource</a></code> object.</li> 
 
   </ol><p class="note">If an event doesn't have an "id" field, but an
   earlier event did set the event source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
