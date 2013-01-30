@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-24-january-2013">Editor's Draft 24 January 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-30-january-2013">Editor's Draft 30 January 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 24 January 2013 Editor's Draft.
+  This specification is the 30 January 2013 Editor's Draft.
   </p>
 
   
@@ -620,7 +620,7 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
 
   </ol><p>This constructor must be visible when the <span>script's global
   object</span> is either a <code>Window</code> object or an object
-  implementing the <code>WorkerUtils</code> interface.</p>
+  implementing the <code>WorkerGlobalScope</code> interface.</p>
 
   <hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-url"><code>url</code></dfn>
   attribute must return the <span>absolute URL</span> that resulted
@@ -1203,20 +1203,20 @@ data:&nbsp;test
 
   <p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, and the object
   has one or more event listeners registered for <code title="event-open">open</code>, <code title="event-message">message</code> or <code title="event-error">error</code> events, there must be a strong
-  reference from the <code>Window</code> or <code>WorkerUtils</code>
+  reference from the <code>Window</code> or <code>WorkerGlobalScope</code>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
   invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.</p>
 
   <p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code>, and the object has one or
   more event listeners registered for <code title="event-message">message</code> or <code title="event-error">error</code> events, there must be a strong
-  reference from the <code>Window</code> or <code>WorkerUtils</code>
+  reference from the <code>Window</code> or <code>WorkerGlobalScope</code>
   object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
   invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.</p>
 
   <p>While there is a task queued by an <code><a href="#eventsource">EventSource</a></code>
   object on the <a href="#remote-event-task-source">remote event task source</a>, there must be a
   strong reference from the <code>Window</code> or
-  <code>WorkerUtils</code> object that the <code><a href="#eventsource">EventSource</a></code>
+  <code>WorkerGlobalScope</code> object that the <code><a href="#eventsource">EventSource</a></code>
   object's constructor was invoked from to that
   <code><a href="#eventsource">EventSource</a></code> object.</p>
 
