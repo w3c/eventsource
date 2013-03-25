@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-30-january-2013">Editor's Draft 30 January 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-25-march-2013">Editor's Draft 25 March 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 30 January 2013 Editor's Draft.
+  This specification is the 25 March 2013 Editor's Draft.
   </p>
 
   
@@ -808,26 +808,23 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
 
     </ol></li>
 
-  </ol><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user
-  agent must <span>queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
-  set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, sets the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span title="fire a simple event">fires a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
-  object. <strong>Once the user agent has <a href="#fail-the-connection" title="fail the
-  connection">failed the connection</a>, it does <em>not</em>
-  attempt to reconnect!</strong></p>
+  </ol><p>When a user agent is to <dfn id="fail-the-connection">fail the connection</dfn>, the user agent must <span>queue a
+  task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+  set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, sets the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code> and <span title="fire a simple event">fires a simple
+  event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code> object.
+  <strong>Once the user agent has <a href="#fail-the-connection" title="fail the connection">failed the connection</a>, it
+  does <em>not</em> attempt to reconnect!</strong></p>
 
-  <hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a
-  task">queued</span> by <code><a href="#eventsource">EventSource</a></code> objects is the
-  <dfn id="remote-event-task-source">remote event task source</dfn>.</p>
+  <hr><p>The <span>task source</span> for any <span title="concept-task">tasks</span> that are <span title="queue a task">queued</span> by <code><a href="#eventsource">EventSource</a></code> objects is the <dfn id="remote-event-task-source">remote event
+  task source</dfn>.</p>
 
 
   <h2 id="parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</h2>
 
-  <p>This event stream format's <span>MIME type</span> is
-  <code><a href="#text-event-stream">text/event-stream</a></code>.</p>
+  <p>This event stream format's <span>MIME type</span> is <code><a href="#text-event-stream">text/event-stream</a></code>.</p>
 
-  <p>The event stream format is as described by the <code title="">stream</code> production of the following ABNF, the
-  character set for which is Unicode. <a href="#refsABNF">[ABNF]</a></p>
+  <p>The event stream format is as described by the <code title="">stream</code> production of the
+  following ABNF, the character set for which is Unicode. <a href="#refsABNF">[ABNF]</a></p>
 
   <pre>stream        = [ bom ] *event
 event         = *( comment / field ) end-of-line
@@ -846,19 +843,17 @@ name-char     = %x0000-0009 / %x000B-000C / %x000E-0039 / %x003B-10FFFF
 any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
                 ; a <span>Unicode character</span> other than U+000A LINE FEED (LF) or U+000D CARRIAGE RETURN (CR)</pre>
 
-  <p>Event streams in this format must always be encoded as
-  UTF-8. <a href="#refsRFC3629">[RFC3629]</a></p>
+  <p>Event streams in this format must always be encoded as UTF-8. <a href="#refsRFC3629">[RFC3629]</a></p>
 
-  <p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A
-  LINE FEED (CRLF) character pair, a single U+000A LINE FEED (LF)
-  character, or a single U+000D CARRIAGE RETURN (CR) character.</p>
+  <p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A LINE FEED (CRLF) character
+  pair, a single U+000A LINE FEED (LF) character, or a single U+000D CARRIAGE RETURN (CR)
+  character.</p>
 
-  <p>Since connections established to remote servers for such
-  resources are expected to be long-lived, UAs should ensure that
-  appropriate buffering is used. In particular, while line buffering
-  with lines are defined to end with a single U+000A LINE FEED (LF)
-  character is safe, block buffering or line buffering with different
-  expected line endings can cause delays in event dispatch.</p>
+  <p>Since connections established to remote servers for such resources are expected to be
+  long-lived, UAs should ensure that appropriate buffering is used. In particular, while line
+  buffering with lines are defined to end with a single U+000A LINE FEED (LF) character is safe,
+  block buffering or line buffering with different expected line endings can cause delays in event
+  dispatch.</p>
 
 
   <h2 id="event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</h2>
@@ -870,28 +865,23 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
   
   </p>
 
-  <p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
-  any are present.</p>
+  <p>One leading U+FEFF BYTE ORDER MARK character must be ignored if any are present.</p>
 
-  <p>The stream must then be parsed by reading everything line by
-  line, with a U+000D CARRIAGE RETURN U+000A LINE FEED (CRLF)
-  character pair, a single U+000A LINE FEED (LF) character not
-  preceded by a U+000D CARRIAGE RETURN (CR) character, and a single
-  U+000D CARRIAGE RETURN (CR) character not followed by a U+000A LINE
-  FEED (LF) character being the ways in which a line can end.</p>
+  <p>The stream must then be parsed by reading everything line by line, with a U+000D CARRIAGE
+  RETURN U+000A LINE FEED (CRLF) character pair, a single U+000A LINE FEED (LF) character not
+  preceded by a U+000D CARRIAGE RETURN (CR) character, and a single U+000D CARRIAGE RETURN (CR)
+  character not followed by a U+000A LINE FEED (LF) character being the ways in which a line can
+  end.</p>
 
-  <p>When a stream is parsed, a <var title="">data</var> buffer, an
-  <var title="">event type</var> buffer, and a <var title="">last
-  event ID</var> buffer must be associated with it. They must be
+  <p>When a stream is parsed, a <var title="">data</var> buffer, an <var title="">event type</var>
+  buffer, and a <var title="">last event ID</var> buffer must be associated with it. They must be
   initialized to the empty string</p>
 
-  <p>Lines must be processed, in the order they are received, as
-  follows:</p>
+  <p>Lines must be processed, in the order they are received, as follows:</p>
 
   <dl class="switch"><dt>If the line is empty (a blank line)</dt>
 
-   <dd><p><a href="#dispatchMessage">Dispatch the event</a>, as
-   defined below.</dd>
+   <dd><p><a href="#dispatchMessage">Dispatch the event</a>, as defined below.</dd>
 
 
    <dt>If the line starts with a U+003A COLON character (:)</dt>
@@ -903,18 +893,12 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <dd>
 
-    <p>Collect the characters on the line before the first U+003A
-    COLON character (:), and let <var title="">field</var> be that
-    string.</p>
+    <p>Collect the characters on the line before the first U+003A COLON character (:), and let <var title="">field</var> be that string.</p>
 
-    <p>Collect the characters on the line after the first U+003A COLON
-    character (:), and let <var title="">value</var> be that
-    string. If <var title="">value</var> starts with a U+0020
-    SPACE character, remove it from <var title="">value</var>.</p>
+    <p>Collect the characters on the line after the first U+003A COLON character (:), and let <var title="">value</var> be that string. If <var title="">value</var> starts with a U+0020 SPACE
+    character, remove it from <var title="">value</var>.</p>
 
-    <p><a href="#processField">Process the field</a> using the steps
-    described below, using <var title="">field</var> as the field name
-    and <var title="">value</var> as the field value.</p>
+    <p><a href="#processField">Process the field</a> using the steps described below, using <var title="">field</var> as the field name and <var title="">value</var> as the field value.</p>
 
    </dd>
 
