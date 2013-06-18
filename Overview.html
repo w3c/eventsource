@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-23-april-2013">Editor's Draft 23 April 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-18-june-2013">Editor's Draft 18 June 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 23 April 2013 Editor's Draft.
+  This specification is the 18 June 2013 Editor's Draft.
   </p>
 
   
@@ -381,10 +381,14 @@
  <li><a href="#the-eventsource-interface"><span class="secno">4 </span>The <code>EventSource</code> interface</a></li>
  <li><a href="#processing-model"><span class="secno">5 </span>Processing model</a></li>
  <li><a href="#parsing-an-event-stream"><span class="secno">6 </span>Parsing an event stream</a></li>
- <li><a href="#event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</a></li>
- <li><a href="#notes"><span class="secno">8 </span>Notes</a></li>
- <li><a href="#eventsource-push"><span class="secno">9 </span>Connectionless push and other features</a></li>
- <li><a href="#garbage-collection"><span class="secno">10 </span>Garbage collection</a></li>
+ <li><a href="#event-stream-interpretation"><span class="secno">7 </span>Interpreting an event stream</a>
+  <ol>
+   <li><a href="#authoring-notes"><span class="secno">7.1 </span>Authoring notes
+
+  </a></ol></li>
+ <li><a href="#eventsource-push"><span class="secno">8 </span>Connectionless push and other features</a></li>
+ <li><a href="#garbage-collection"><span class="secno">9 </span>Garbage collection</a></li>
+ <li><a href="#implementation-advice"><span class="secno">10 </span>Implementation advice</a></li>
  <li><a href="#iana-considerations"><span class="secno">11 </span>IANA considerations</a>
   <ol>
    <li><a href="#text-event-stream"><span class="secno">11.1 </span><code>text/event-stream</code></a></li>
@@ -1083,9 +1087,9 @@ data:&nbsp;test
   </div>
 
 
-  <h2 id="notes"><span class="secno">8 </span>Notes</h2>
+  <h4 id="authoring-notes"><span class="secno">7.1 </span>Authoring notes
 
-  <p>Legacy proxy servers are known to, in certain cases, drop HTTP
+  </h4><p>Legacy proxy servers are known to, in certain cases, drop HTTP
   connections after a short timeout. To protect against such proxy
   servers, authors can include a comment line (one starting with a ':'
   character) every 15 seconds or so.</p>
@@ -1119,7 +1123,7 @@ data:&nbsp;test
   </p>
 
 
-  <h2 id="eventsource-push"><span class="secno">9 </span>Connectionless push and other features</h2>
+  <h2 id="eventsource-push"><span class="secno">8 </span>Connectionless push and other features</h2>
 
   <p>User agents running in controlled environments, e.g. browsers on
   mobile handsets tied to specific carriers, may offload the
@@ -1176,7 +1180,7 @@ data:&nbsp;test
   define how they are to be parsed or processed.</p>
 
 
-  <h2 id="garbage-collection"><span class="secno">10 </span>Garbage collection</h2>
+  <h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2>
 
   <p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, and the object
   has one or more event listeners registered for <code title="event-open">open</code>, <code title="event-message">message</code> or <code title="event-error">error</code> events, there must be a strong
@@ -1214,6 +1218,25 @@ data:&nbsp;test
   <span>fetch</span> algorithms, which is why the above is phrased in
   terms of aborting the <span>fetch</span> algorithm and not the
   actual underlying download.</p>
+
+
+  <h2 id="implementation-advice"><span class="secno">10 </span>Implementation advice</h2>
+
+  <p><i>This section is non-normative.</i></p>
+
+  <p>User agents are strongly urged to provide detailed diagnostic information about
+  <code><a href="#eventsource">EventSource</a></code> objects and their related network connections in their development
+  consoles, to aid authors in debugging code using this API.</p>
+
+  <p>For example, a user agent could have a panel displaying all the <code><a href="#eventsource">EventSource</a></code>
+  objects a page has created, each listing the constructor's arguments, whether there was a network
+  error, what the CORS status of the connection is and what headers were sent by the client and
+  received from the server to lead to that status, the messages that were received and how they were
+  parsed, and so forth.</p>
+
+  <p>Implementations are especially encouraged to report detailed information to their development
+  consoles whenever an <code title="event-error">error</code> event is fired, since little to no
+  information can be made available in the events themselves.</p>
 
 
   <h2 id="iana-considerations"><span class="secno">11 </span>IANA considerations</h2>
