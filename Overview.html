@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-26-july-2013">Editor's Draft 26 July 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-31-july-2013">Editor's Draft 31 July 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 26 July 2013 Editor's Draft.
+  This specification is the 31 July 2013 Editor's Draft.
   </p>
 
   
@@ -571,16 +571,13 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
   boolean <dfn id="dom-eventsourceinit-withcredentials" title="dom-EventSourceInit-withCredentials">withCredentials</dfn> = false;
 };</pre>
 
-  <p>The <dfn id="dom-eventsource" title="dom-EventSource"><code>EventSource()</code></dfn>
-  constructor takes one or two arguments. The first specifies the
-  <span>URL</span> to which to connect. The second specifies the
-  settings, if any, in the form of an <code><a href="#eventsourceinit">EventSourceInit</a></code>
-  dictionary. When the <code>EventSource()</code> constructor is
-  invoked, the UA must run these steps:</p>
+  <p>The <dfn id="dom-eventsource" title="dom-EventSource"><code>EventSource()</code></dfn> constructor takes one or two
+  arguments. The first specifies the <span>URL</span> to which to connect. The second specifies the
+  settings, if any, in the form of an <code><a href="#eventsourceinit">EventSourceInit</a></code> dictionary. When the
+  <code>EventSource()</code> constructor is invoked, the UA must run these steps:</p>
 
-  <ol><li><p><span title="resolve a url">Resolve</span> the
-   <span>URL</span> specified in the first argument, relative to the
-   <span>entry script</span>'s <span title="script's base URL">base
+  <ol><li><p><span title="resolve a url">Resolve</span> the <span>URL</span> specified in the first
+   argument, relative to the <span>entry script</span>'s <span title="script's base URL">base
    URL</span>.
    
    <a href="#refsHTML">[HTML]</a>
@@ -594,132 +591,111 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
 
    <li><p>Let <var title="">CORS mode</var> be <span title="attr-crossorigin-anonymous">Anonymous</span>.</li>
 
-   <li><p>If the second argument is present, and the <code title="dom-EventSourceInit-withCredentials"><a href="#dom-eventsourceinit-withcredentials">withCredentials</a></code>
-   dictionary member has the value true, then set <var title="">CORS
-   mode</var> to <span title="attr-crossorigin-use-credentials">Use
-   Credentials</span> and initialize the new <code><a href="#eventsource">EventSource</a></code>
-   object's <code title="dom-EventSource-withCredentials"><a href="#dom-eventsource-withcredentials">withCredentials</a></code>
-   attribute to true.</li>
+   <li><p>If the second argument is present, and the <code title="dom-EventSourceInit-withCredentials"><a href="#dom-eventsourceinit-withcredentials">withCredentials</a></code> dictionary member has the
+   value true, then set <var title="">CORS mode</var> to <span title="attr-crossorigin-use-credentials">Use Credentials</span> and initialize the new
+   <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-withCredentials"><a href="#dom-eventsource-withcredentials">withCredentials</a></code> attribute to true.</li>
 
-   <li><p>Return the new <code><a href="#eventsource">EventSource</a></code> object, but continue
-   these steps asynchronously.</li>
+   <li><p>Return the new <code><a href="#eventsource">EventSource</a></code> object, but continue these steps
+   asynchronously.</li>
 
    <li>
 
-    <p>Do a <span>potentially CORS-enabled fetch</span> of
-    the resulting <span>absolute URL</span> using the <span>entry
-    script</span>'s <span title="script's referrer source">referrer
-    source</span>, with the <i>mode</i> being <var title="">CORS
-    mode</var>, and the <i title="">origin</i> being the <span>entry
-    script</span>'s <span>origin</span>, and process the
-    resource obtained in this fashion, if any, as described below.</p>
+    <p>Do a <span>potentially CORS-enabled fetch</span> of the resulting <span>absolute
+    URL</span> using the <span>entry script</span>'s <span title="script's referrer source">referrer
+    source</span>, with the <i>mode</i> being <var title="">CORS mode</var>, and the <i title="">origin</i> being the <span>entry script</span>'s <span>origin</span>, and process the resource obtained in this fashion, if any, as
+    described below.</p>
 
-    <p class="note">The definition of the <span title="fetch">fetching</span> algorithm (which is used by CORS) is
-    such that if the browser is already fetching the resource
-    identified by the given <span>absolute URL</span>, that connection
-    can be reused, instead of a new connection being established. All
-    messages received up to this point are dispatched immediately, in
-    this case.</p>
+    <p class="note">The definition of the <span title="fetch">fetching</span> algorithm (which is
+    used by CORS) is such that if the browser is already fetching the resource identified by the
+    given <span>absolute URL</span>, that connection can be reused, instead of a new connection
+    being established. All messages received up to this point are dispatched immediately, in this
+    case.</p>
 
    </li>
 
-  </ol><hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-url"><code>url</code></dfn>
-  attribute must return the <span>absolute URL</span> that resulted
-  from <span title="resolve a url">resolving</span> the value that was
-  passed to the constructor.</p> 
+  </ol><hr><p>The <dfn id="dom-eventsource-url" title="dom-EventSource-url"><code>url</code></dfn> attribute must return the
+  <span>absolute URL</span> that resulted from <span title="resolve a url">resolving</span> the
+  value that was passed to the constructor.</p> 
 
-  <p>The <dfn id="dom-eventsource-withcredentials" title="dom-EventSource-withCredentials"><code>withCredentials</code></dfn>
-  attribute must return the value to which it was last initialized.
-  When the object is created, it must be initialized to false.</p>
+  <p>The <dfn id="dom-eventsource-withcredentials" title="dom-EventSource-withCredentials"><code>withCredentials</code></dfn> attribute
+  must return the value to which it was last initialized. When the object is created, it must be
+  initialized to false.</p>
 
-  <p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn>
-  attribute represents the state of the connection. It can have the
-  following values:</p>
+  <p>The <dfn id="dom-eventsource-readystate" title="dom-EventSource-readyState"><code>readyState</code></dfn> attribute represents
+  the state of the connection. It can have the following values:</p>
 
   <dl><dt><dfn id="dom-eventsource-connecting" title="dom-EventSource-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
-   <dd>The connection has not yet been established, or it was closed
-   and the user agent is reconnecting.</dd>
+   <dd>The connection has not yet been established, or it was closed and the user agent is
+   reconnecting.</dd>
 
    <dt><dfn id="dom-eventsource-open" title="dom-EventSource-OPEN"><code>OPEN</code></dfn> (numeric value 1)</dt>
 
-   <dd>The user agent has an open connection and is dispatching events
-   as it receives them.</dd>
+   <dd>The user agent has an open connection and is dispatching events as it receives them.</dd>
 
    <dt><dfn id="dom-eventsource-closed" title="dom-EventSource-CLOSED"><code>CLOSED</code></dfn> (numeric value 2)</dt>
 
-   <dd>The connection is not open, and the user agent is not trying to
-   reconnect. Either there was a fatal error or the <code title="dom-EventSource-close"><a href="#dom-eventsource-close">close()</a></code> method was
-   invoked.</dd>
+   <dd>The connection is not open, and the user agent is not trying to reconnect. Either there was a
+   fatal error or the <code title="dom-EventSource-close"><a href="#dom-eventsource-close">close()</a></code> method was invoked.</dd>
 
-  </dl><p>When the object is created its <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> must be set to
-  <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> (0). The
-  rules given below for handling the connection define when the value
-  changes.</p>
+  </dl><p>When the object is created its <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> must
+  be set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code> (0). The rules given below
+  for handling the connection define when the value changes.</p>
 
-  <p>The <dfn id="dom-eventsource-close" title="dom-EventSource-close"><code>close()</code></dfn>
-  method must abort any instances of the <span>fetch</span> algorithm
-  started for this <code><a href="#eventsource">EventSource</a></code> object, and must set the
-  <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute
-  to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.</p> 
+  <p>The <dfn id="dom-eventsource-close" title="dom-EventSource-close"><code>close()</code></dfn> method must abort any
+  instances of the <span>fetch</span> algorithm started for this <code><a href="#eventsource">EventSource</a></code> object,
+  and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.</p> 
 
-  <p>The following are the <span>event handlers</span> (and their
-  corresponding <span title="event handler event type">event handler
-  event types</span>) that must be supported, as <span>event handler IDL attributes</span>, by
-  all objects implementing the <code><a href="#eventsource">EventSource</a></code> interface:</p>
+  <p>The following are the <span>event handlers</span> (and their corresponding <span title="event
+  handler event type">event handler event types</span>) that must be supported, as <span>event
+  handler IDL attributes</span>, by all objects implementing the <code><a href="#eventsource">EventSource</a></code>
+  interface:</p>
 
   <table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
    <tbody><tr><td><dfn id="handler-eventsource-onopen" title="handler-EventSource-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
     <tr><td><dfn id="handler-eventsource-onmessage" title="handler-EventSource-onmessage"><code>onmessage</code></dfn> <td> <code title="event-message">message</code>
     <tr><td><dfn id="handler-eventsource-onerror" title="handler-EventSource-onerror"><code>onerror</code></dfn> <td> <code title="event-error">error</code>
-  </table><hr><p>In addition to the above, each <code><a href="#eventsource">EventSource</a></code> object
-  has the following associated with it:</p>
+  </table><hr><p>In addition to the above, each <code><a href="#eventsource">EventSource</a></code> object has the following associated
+  with it:</p>
 
-  <ul><li>A <dfn id="concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection
-   time</dfn>, in milliseconds. This must initially be a
-   user-agent-defined value, probably in the region of a few
+  <ul><li>A <dfn id="concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection time</dfn>, in
+   milliseconds. This must initially be a user-agent-defined value, probably in the region of a few
    seconds.</li>
 
-   <li>A <dfn id="concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event
-   ID string</dfn>. This must initially be the empty string.</li>
+   <li>A <dfn id="concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID string</dfn>. This must
+   initially be the empty string.</li>
 
   </ul><p>These values are not currently exposed on the interface.</p>
 
 
   <h2 id="processing-model"><span class="secno">5 </span>Processing model</h2>
 
-  <p>The resource indicated in the argument to the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor is <span title="fetch">fetched</span> when the constructor is run.</p>
+  <p>The resource indicated in the argument to the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code>
+  constructor is <span title="fetch">fetched</span> when the constructor is run.</p>
 
-  <p>For HTTP connections, the <code title="">Accept</code> header may
-  be included; if included, it must contain only formats of event
-  framing that are supported by the user agent (one of which must be
-  <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).</p>
+  <p>For HTTP connections, the <code title="">Accept</code> header may be included; if included, it
+  must contain only formats of event framing that are supported by the user agent (one of which must
+  be <code><a href="#text-event-stream">text/event-stream</a></code>, as described below).</p>
 
   <p>If the event source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
-  string</a> is not the empty string, then a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> HTTP header must be
-  included with the request, whose value is the value of the event
-  source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event
-  ID string</a>, encoded as UTF-8.</p>
+  string</a> is not the empty string, then a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> HTTP header must be included with the request,
+  whose value is the value of the event source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID string</a>, encoded as UTF-8.</p>
 
-  <p>User agents should use the <code>Cache-Control: no-cache</code>
-  header in requests to bypass any caches for requests of event
-  sources. (This header is not a <span title="custom request
-  headers">custom request header</span>, so the user agent will still
-  use the CORS <span>simple cross-origin request</span> mechanism.)
-  User agents should ignore HTTP cache headers in the response, never
-  caching event sources.</p>
+  <p>User agents should use the <code>Cache-Control: no-cache</code> header in requests to bypass
+  any caches for requests of event sources. (This header is not a <span title="custom request
+  headers">custom request header</span>, so the user agent will still use the CORS <span>simple
+  cross-origin request</span> mechanism.) User agents should ignore HTTP cache headers in the
+  response, never caching event sources.</p>
 
-  <hr><p>As data is received, the <span title="concept-task">tasks</span>
-  queued by the <span>networking task source</span> to handle the data
-  must act as follows.</p>
+  <hr><p>As data is received, the <span title="concept-task">tasks</span> queued by the <span>networking
+  task source</span> to handle the data must act as follows.</p>
 
-  <p>HTTP 200 OK responses with a <span>Content-Type</span> header
-  specifying the type <code><a href="#text-event-stream">text/event-stream</a></code>, ignoring any
-  <span>MIME type</span> parameters, must be processed line by line <a href="#event-stream-interpretation">as described below</a>.</p>
+  <p>HTTP 200 OK responses with a <span>Content-Type</span> header specifying the type
+  <code><a href="#text-event-stream">text/event-stream</a></code>, ignoring any <span>MIME type</span> parameters, must be processed
+  line by line <a href="#event-stream-interpretation">as described below</a>.</p>
 
-  <p>When a successful response with a supported <span>MIME
-  type</span> is received, such that the user agent begins parsing the
-  contents of the stream, the user agent must <a href="#announce-the-connection">announce the
+  <p>When a successful response with a supported <span>MIME type</span> is received, such that the
+  user agent begins parsing the contents of the stream, the user agent must <a href="#announce-the-connection">announce the
   connection</a>.</p>
 
   <p>The <span title="concept-task">task</span> that the <span>networking task source</span> places
@@ -751,36 +727,31 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
 
   <p>For non-HTTP protocols, UAs should act in equivalent ways.</p>
 
-  <hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the
-  user agent must <span>queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
-  set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, sets the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span title="fire
-  a simple event">fires a simple event</span> named <code title="event-open">open</code> at the <code><a href="#eventsource">EventSource</a></code>
+  <hr><p>When a user agent is to <dfn id="announce-the-connection">announce the connection</dfn>, the user agent must <span>queue a
+  task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
+  set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, sets the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code> and <span title="fire a simple event">fires a simple
+  event</span> named <code title="event-open">open</code> at the <code><a href="#eventsource">EventSource</a></code>
   object.</p>
 
-  <p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>,
-  the user agent must run the following steps. These steps are run
-  asynchronously, not as part of a <span title="concept-task">task</span>. (The tasks that it queues, of
-  course, are run like normal tasks and not asynchronously.)</p>
+  <p>When a user agent is to <dfn id="reestablish-the-connection">reestablish the connection</dfn>, the user agent must run the
+  following steps. These steps are run asynchronously, not as part of a <span title="concept-task">task</span>. (The tasks that it queues, of course, are run like normal tasks
+  and not asynchronously.)</p>
 
   <ol><li>
 
     <p><span>Queue a task</span> to run the following steps:</p>
 
-    <ol><li><p>If the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
-     set to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, abort
-     the task.</li>
+    <ol><li><p>If the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is set to
+     <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, abort the task.</li>
 
-     <li><p>Set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-     <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>.</li>
+     <li><p>Set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>.</li>
 
-     <li><p><span>Fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#eventsource">EventSource</a></code>
-     object.</li>
+     <li><p><span>Fire a simple event</span> named <code title="event-error">error</code> at the
+     <code><a href="#eventsource">EventSource</a></code> object.</li>
 
     </ol></li>
 
-   <li><p>Wait a delay equal to the reconnection time of the event
-   source.</li>
+   <li><p>Wait a delay equal to the reconnection time of the event source.</li>
 
    <li><p>Optionally, wait some more. In particular, if the previous attempt failed, then user
    agents might introduce an exponential backoff delay to avoid overloading a potentially already
@@ -788,24 +759,20 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
    connectivity, user agents might wait for the operating system to announce that the network
    connection has returned before retrying.</li>
 
-   <li><p>Wait until the aforementioned task has run, if it has not
-   yet run.</li>
+   <li><p>Wait until the aforementioned task has run, if it has not yet run.</li>
 
    <li>
 
     <p><span>Queue a task</span> to run the following steps:</p>
 
-    <ol><li><p>If the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is
-     not set to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, abort these
-     steps.</li>
+    <ol><li><p>If the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is not set
+     to <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, abort these steps.</li>
 
-     <li><p>Perform a <span>potentially CORS-enabled
-     fetch</span> of the <span>absolute URL</span> of the
-     event source resource, using the same <i>referrer source</i>, and
-     with the same <i>mode</i> and <i title="">origin</i>, as those used in
-     the original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor, and
-     process the resource obtained in this fashion, if any, as
-     described earlier in this section.</li>
+     <li><p>Perform a <span>potentially CORS-enabled fetch</span> of the <span>absolute
+     URL</span> of the event source resource, using the same <i>referrer source</i>, and with the
+     same <i>mode</i> and <i title="">origin</i>, as those
+     used in the original request triggered by the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource()</a></code> constructor, and process the resource obtained in
+     this fashion, if any, as described earlier in this section.</li>
 
     </ol></li>
 
@@ -904,46 +871,39 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <dd>
 
-    <p><a href="#processField">Process the field</a> using the steps
-    described below, using the whole line as the field name, and
-    the empty string as the field value.</p>
+    <p><a href="#processField">Process the field</a> using the steps described below, using the
+    whole line as the field name, and the empty string as the field value.</p>
 
    </dd>
 
-  </dl><p>Once the end of the file is reached, any pending data must be
-  discarded. (If the file ends in the middle of an event, before the
-  final empty line, the incomplete event is not dispatched.)</p>
+  </dl><p>Once the end of the file is reached, any pending data must be discarded. (If the file ends in
+  the middle of an event, before the final empty line, the incomplete event is not dispatched.)</p>
 
-  <hr><p id="processField">The steps to <dfn title="">process the
-  field</dfn> given a field name and a field value depend on the field
-  name, as given in the following list. Field names must be compared
+  <hr><p id="processField">The steps to <dfn title="">process the field</dfn> given a field name and a
+  field value depend on the field name, as given in the following list. Field names must be compared
   literally, with no case folding performed.</p>
 
   <dl class="switch"><dt>If the field name is "event"</dt>
 
-   <dd><p>Set the <var title="">event type</var> buffer to field
-   value.</dd>
+   <dd><p>Set the <var title="">event type</var> buffer to field value.</dd>
 
 
    <dt>If the field name is "data"</dt>
 
-   <dd><p>Append the field value to the <var title="">data</var>
-   buffer, then append a single U+000A LINE FEED (LF) character to the
-   <var title="">data</var> buffer.</dd>
+   <dd><p>Append the field value to the <var title="">data</var> buffer, then append a single U+000A
+   LINE FEED (LF) character to the <var title="">data</var> buffer.</dd>
 
 
    <dt>If the field name is "id"</dt>
 
-   <dd><p>Set the <var title="">last event ID</var> buffer to the
-   field value.</dd>
+   <dd><p>Set the <var title="">last event ID</var> buffer to the field value.</dd>
 
 
    <dt>If the field name is "retry"</dt>
 
-   <dd><p>If the field value consists of only <span>ASCII digits</span>, then interpret the
-   field value as an integer in base ten, and set the event stream's
-   <a href="#concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection
-   time</a> to that integer. Otherwise, ignore the field.</dd>
+   <dd><p>If the field value consists of only <span>ASCII digits</span>, then interpret the field
+   value as an integer in base ten, and set the event stream's <a href="#concept-event-stream-reconnection-time" title="concept-event-stream-reconnection-time">reconnection time</a> to that integer.
+   Otherwise, ignore the field.</dd>
 
    
 
@@ -953,23 +913,20 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <dd><p>The field is ignored.</dd>
 
-  </dl><p id="dispatchMessage">When the user agent is required to <dfn title="">dispatch the event</dfn>, then the user agent must act as
-  follows:
+  </dl><p id="dispatchMessage">When the user agent is required to <dfn title="">dispatch the event</dfn>,
+  then the user agent must act as follows:
 
-  <ol><li><p>Set the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
-   string</a> of the event source to the value of the <var title="">last event ID</var> buffer. The buffer does not get reset,
-   so the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event
-   ID string</a> of the event source remains set to this value
-   until the next time it is set by the server.</li>
+  <ol><li><p>Set the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID string</a> of
+   the event source to the value of the <var title="">last event ID</var> buffer. The buffer does
+   not get reset, so the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
+   string</a> of the event source remains set to this value until the next time it is set by the
+   server.</li>
 
-   <li><p>If the <var title="">data</var> buffer is an empty string,
-   set the <var title="">data</var> buffer and the <var title="">event
-   type</var> buffer to the empty string and abort these
-   steps.</li>
+   <li><p>If the <var title="">data</var> buffer is an empty string, set the <var title="">data</var> buffer and the <var title="">event type</var> buffer to the empty string and
+   abort these steps.</li>
 
-   <li><p>If the <var title="">data</var> buffer's last character is a
-   U+000A LINE FEED (LF) character, then remove the last character
-   from the <var title="">data</var> buffer.</li>
+   <li><p>If the <var title="">data</var> buffer's last character is a U+000A LINE FEED (LF)
+   character, then remove the last character from the <var title="">data</var> buffer.</li>
 
    <li><p>Create an event that uses the <code>MessageEvent</code> interface, with the event type
    <code title="event-message">message</code>, which does not bubble, is not cancelable, and has no
@@ -979,20 +936,20 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
    <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID string</a> of the event source.
    This event is not <span title="concept-events-trusted">trusted</span>.</li>
 
-   <li><p>If the <var title="">event type</var> buffer has a value
-   other than the empty string, change the <span title="concept-event-type">type</span> of the newly created event
-   to equal the value of the <var title="">event type</var>
-   buffer.</li>
+   <li><p>If the <var title="">event type</var> buffer has a value other than the empty string,
+   change the <span title="concept-event-type">type</span> of the newly created event to equal the
+   value of the <var title="">event type</var> buffer.</li>
 
-   <li><p>Set the <var title="">data</var> buffer and the <var title="">event type</var> buffer to the empty string.</li>
+   <li><p>Set the <var title="">data</var> buffer and the <var title="">event type</var> buffer to
+   the empty string.</li>
 
    <li><p><span>Queue a task</span> which, if the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute is set to a value other than <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>, <span title="concept-event-dispatch">dispatches</span> the newly created event at the
    <code><a href="#eventsource">EventSource</a></code> object.</li> 
 
-  </ol><p class="note">If an event doesn't have an "id" field, but an
-  earlier event did set the event source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID
-  string</a>, then the event's <code title="dom-MessageEvent-lastEventId">lastEventId</code> field will
-  be set to the value of whatever the last seen "id" field was.</p>
+  </ol><p class="note">If an event doesn't have an "id" field, but an earlier event did set the event
+  source's <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID string</a>, then the
+  event's <code title="dom-MessageEvent-lastEventId">lastEventId</code> field will be set to the
+  value of whatever the last seen "id" field was.</p>
 
 
   <div class="example">
@@ -1003,10 +960,9 @@ data: +2
 data: 10</pre>
 
    <p>...would cause an event <code title="event-message">message</code> with the interface
-   <code>MessageEvent</code> to be dispatched on the
-   <code><a href="#eventsource">EventSource</a></code> object. The event's <code title="dom-MessageEvent-data">data</code> attribute would contain
-   the string <code>YHOO\n+2\n10</code> (where <code>\n</code>
-   represents a newline).</p>
+   <code>MessageEvent</code> to be dispatched on the <code><a href="#eventsource">EventSource</a></code> object. The event's
+   <code title="dom-MessageEvent-data">data</code> attribute would contain the string
+   <code>YHOO\n+2\n10</code> (where <code>\n</code> represents a newline).</p>
 
    <p>This could be used as follows:
    <pre>var stocks = new EventSource("http://stocks.example.com/ticker.php");
@@ -1025,20 +981,15 @@ stocks.onmessage = function (event) {
 
   <div class="example">
 
-   <p>The following stream contains four blocks. The first block has
-   just a comment, and will fire nothing. The second block has two
-   fields with names "data" and "id" respectively; an event will be
-   fired for this block, with the data "first event", and will then
-   set the last event ID to "1" so that if the connection died between
-   this block and the next, the server would be sent a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> header with the
-   value "1". The third block fires an event with data "second event",
-   and also has an "id" field, this time with no value, which resets
-   the last event ID to the empty string (meaning no <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> header will now be
-   sent in the event of a reconnection being attempted). Finally, the
-   last block just fires an event with the data
-   "&nbsp;third&nbsp;event" (with a single leading space character).
-   Note that the last still has to end with a blank line, the end of
-   the stream is not enough to trigger the dispatch of the last
+   <p>The following stream contains four blocks. The first block has just a comment, and will fire
+   nothing. The second block has two fields with names "data" and "id" respectively; an event will
+   be fired for this block, with the data "first event", and will then set the last event ID to "1"
+   so that if the connection died between this block and the next, the server would be sent a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> header with the value "1". The third block fires
+   an event with data "second event", and also has an "id" field, this time with no value, which
+   resets the last event ID to the empty string (meaning no <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> header will now be sent in the event of a
+   reconnection being attempted). Finally, the last block just fires an event with the data
+   "&nbsp;third&nbsp;event" (with a single leading space character). Note that the last still has to
+   end with a blank line, the end of the stream is not enough to trigger the dispatch of the last
    event.</p>
 
    <pre>: test stream
@@ -1064,11 +1015,9 @@ data
 
 data:</pre>
 
-   <p>The first block fires events with the data set to the empty
-   string, as would the last block if it was followed by a blank line.
-   The middle block fires an event with the data set to a single
-   newline character. The last block is discarded because it is not
-   followed by a blank line.</p>
+   <p>The first block fires events with the data set to the empty string, as would the last block if
+   it was followed by a blank line. The middle block fires an event with the data set to a single
+   newline character. The last block is discarded because it is not followed by a blank line.</p>
 
   </div>
 
@@ -1081,143 +1030,116 @@ data:</pre>
 data:&nbsp;test
 </pre>
 
-   <p>This is because the space after the colon is ignored if
-   present.</p>
+   <p>This is because the space after the colon is ignored if present.</p>
 
   </div>
 
 
   <h4 id="authoring-notes"><span class="secno">7.1 </span>Authoring notes
 
-  </h4><p>Legacy proxy servers are known to, in certain cases, drop HTTP
-  connections after a short timeout. To protect against such proxy
-  servers, authors can include a comment line (one starting with a ':'
-  character) every 15 seconds or so.</p>
+  </h4><p>Legacy proxy servers are known to, in certain cases, drop HTTP connections after a short
+  timeout. To protect against such proxy servers, authors can include a comment line (one starting
+  with a ':' character) every 15 seconds or so.</p>
 
-  <p>Authors wishing to relate event source connections to each other
-  or to specific documents previously served might find that relying
-  on IP addresses doesn't work, as individual clients can have
-  multiple IP addresses (due to having multiple proxy servers) and
-  individual IP addresses can have multiple clients (due to sharing a
-  proxy server). It is better to include a unique identifier in the
-  document when it is served and then pass that identifier as part of
-  the URL when the connection is established.</p>
+  <p>Authors wishing to relate event source connections to each other or to specific documents
+  previously served might find that relying on IP addresses doesn't work, as individual clients can
+  have multiple IP addresses (due to having multiple proxy servers) and individual IP addresses can
+  have multiple clients (due to sharing a proxy server). It is better to include a unique identifier
+  in the document when it is served and then pass that identifier as part of the URL when the
+  connection is established.</p>
 
-  <p>Authors are also cautioned that HTTP chunking can have unexpected
-  negative effects on the reliability of this protocol. Where
-  possible, chunking should be disabled for serving event streams
-  unless the rate of messages is high enough for this not to
-  matter.</p> 
+  <p>Authors are also cautioned that HTTP chunking can have unexpected negative effects on the
+  reliability of this protocol. Where possible, chunking should be disabled for serving event
+  streams unless the rate of messages is high enough for this not to matter.</p> 
 
-  <p>Clients that support HTTP's per-server connection limitation
-  might run into trouble when opening multiple pages from a site if
-  each page has an <code><a href="#eventsource">EventSource</a></code> to the same
-  domain. Authors can avoid this using the relatively complex
-  mechanism of using unique domain names per connection, or by
-  allowing the user to enable or disable the <code><a href="#eventsource">EventSource</a></code>
-  functionality on a per-page basis, or by sharing a single
-  <code><a href="#eventsource">EventSource</a></code> object using a <span title="SharedWorkerGlobalScope">shared worker</span>.
-  
-  <a href="#refsWEBWORKERS">[WEBWORKERS]</a>
-  
-  </p>
+  <p>Clients that support HTTP's per-server connection limitation might run into trouble when
+  opening multiple pages from a site if each page has an <code><a href="#eventsource">EventSource</a></code> to the same
+  domain. Authors can avoid this using the relatively complex mechanism of using unique domain names
+  per connection, or by allowing the user to enable or disable the <code><a href="#eventsource">EventSource</a></code>
+  functionality on a per-page basis, or by sharing a single <code><a href="#eventsource">EventSource</a></code> object using a
+  <span title="SharedWorkerGlobalScope">shared worker</span>.  <a href="#refsWEBWORKERS">[WEBWORKERS]</a>  </p>
 
 
   <h2 id="eventsource-push"><span class="secno">8 </span>Connectionless push and other features</h2>
 
-  <p>User agents running in controlled environments, e.g. browsers on
-  mobile handsets tied to specific carriers, may offload the
-  management of the connection to a proxy on the network. In such a
-  situation, the user agent for the purposes of conformance is
-  considered to include both the handset software and the network
-  proxy.</p>
+  <p>User agents running in controlled environments, e.g. browsers on mobile handsets tied to
+  specific carriers, may offload the management of the connection to a proxy on the network. In such
+  a situation, the user agent for the purposes of conformance is considered to include both the
+  handset software and the network proxy.</p>
 
   <div class="example">
 
-   <p>For example, a browser on a mobile device, after having
-   established a connection, might detect that it is on a supporting
-   network and request that a proxy server on the network take over
-   the management of the connection. The timeline for such a situation
-   might be as follows:</p>
+   <p>For example, a browser on a mobile device, after having established a connection, might detect
+   that it is on a supporting network and request that a proxy server on the network take over the
+   management of the connection. The timeline for such a situation might be as follows:</p>
 
-   <ol><li>Browser connects to a remote HTTP server and requests the
-    resource specified by the author in the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor.</li>
+   <ol><li>Browser connects to a remote HTTP server and requests the resource specified by the author
+    in the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor.</li>
 
     <li>The server sends occasional messages.</li>
 
-    <li>In between two messages, the browser detects that it is idle
-    except for the network activity involved in keeping the TCP
-    connection alive, and decides to switch to sleep mode to save power.</li>
+    <li>In between two messages, the browser detects that it is idle except for the network activity
+    involved in keeping the TCP connection alive, and decides to switch to sleep mode to save
+    power.</li>
 
     <li>The browser disconnects from the server.</li>
 
-    <li>The browser contacts a service on the network, and requests
-    that that service, a "push proxy", maintain the connection instead.</li>
+    <li>The browser contacts a service on the network, and requests that that service, a "push
+    proxy", maintain the connection instead.</li>
 
-    <li>The "push proxy" service contacts the remote HTTP server and
-    requests the resource specified by the author in the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor (possibly
-    including a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code>
-    HTTP header, etc).</li>
+    <li>The "push proxy" service contacts the remote HTTP server and requests the resource specified
+    by the author in the <code title="dom-EventSource"><a href="#dom-eventsource">EventSource</a></code> constructor (possibly
+    including a <code title="http-last-event-id"><a href="#last-event-id">Last-Event-ID</a></code> HTTP header, etc).</li>
 
     <li>The browser allows the mobile device to go to sleep.</li>
 
     <li>The server sends another message.</li>
 
-    <li>The "push proxy" service uses a technology such as OMA push to
-    convey the event to the mobile device, which wakes only
-    enough to process the event and then returns to sleep.</li>
+    <li>The "push proxy" service uses a technology such as OMA push to convey the event to the
+    mobile device, which wakes only enough to process the event and then returns to sleep.</li>
 
    </ol></div>
 
-  <p>This can reduce the total data usage, and can therefore result in
-  considerable power savings.</p>
+  <p>This can reduce the total data usage, and can therefore result in considerable power
+  savings.</p>
 
-  <p>As well as implementing the existing API and
-  <code><a href="#text-event-stream">text/event-stream</a></code> wire format as defined by this
-  specification and in more distributed ways as described above,
-  formats of event framing defined by <span>other applicable
-  specifications</span> may be supported. This specification does not
-  define how they are to be parsed or processed.</p>
+  <p>As well as implementing the existing API and <code><a href="#text-event-stream">text/event-stream</a></code> wire format as
+  defined by this specification and in more distributed ways as described above, formats of event
+  framing defined by <span>other applicable specifications</span> may be supported. This
+  specification does not define how they are to be parsed or processed.</p>
 
 
   <h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2>
 
-  <p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, and the object
-  has one or more event listeners registered for <code title="event-open">open</code>, <code title="event-message">message</code> or <code title="event-error">error</code> events, there must be a strong
-  reference from the <code>Window</code> or <code>WorkerGlobalScope</code>
-  object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
-  invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.</p>
+  <p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-CONNECTING"><a href="#dom-eventsource-connecting">CONNECTING</a></code>, and the object has one or more event
+  listeners registered for <code title="event-open">open</code>, <code title="event-message">message</code> or <code title="event-error">error</code> events, there must
+  be a strong reference from the <code>Window</code> or <code>WorkerGlobalScope</code> object that
+  the <code><a href="#eventsource">EventSource</a></code> object's constructor was invoked from to the <code><a href="#eventsource">EventSource</a></code>
+  object itself.</p>
 
-  <p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code>, and the object has one or
-  more event listeners registered for <code title="event-message">message</code> or <code title="event-error">error</code> events, there must be a strong
-  reference from the <code>Window</code> or <code>WorkerGlobalScope</code>
-  object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
-  invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.</p>
+  <p>While an <code><a href="#eventsource">EventSource</a></code> object's <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> is <code title="dom-EventSource-OPEN"><a href="#dom-eventsource-open">OPEN</a></code>, and the object has one or more event listeners
+  registered for <code title="event-message">message</code> or <code title="event-error">error</code> events, there must be a strong reference from the
+  <code>Window</code> or <code>WorkerGlobalScope</code> object that the <code><a href="#eventsource">EventSource</a></code>
+  object's constructor was invoked from to the <code><a href="#eventsource">EventSource</a></code> object itself.</p>
 
-  <p>While there is a task queued by an <code><a href="#eventsource">EventSource</a></code>
-  object on the <a href="#remote-event-task-source">remote event task source</a>, there must be a
-  strong reference from the <code>Window</code> or
-  <code>WorkerGlobalScope</code> object that the <code><a href="#eventsource">EventSource</a></code>
-  object's constructor was invoked from to that
-  <code><a href="#eventsource">EventSource</a></code> object.</p>
+  <p>While there is a task queued by an <code><a href="#eventsource">EventSource</a></code> object on the <a href="#remote-event-task-source">remote event
+  task source</a>, there must be a strong reference from the <code>Window</code> or
+  <code>WorkerGlobalScope</code> object that the <code><a href="#eventsource">EventSource</a></code> object's constructor was
+  invoked from to that <code><a href="#eventsource">EventSource</a></code> object.</p>
 
   <p>If a user agent is to <dfn id="concept-eventsource-forcibly-close" title="concept-EventSource-forcibly-close">forcibly close</dfn> an
-  <code><a href="#eventsource">EventSource</a></code> object (this happens when a
-  <code>Document</code> object goes away permanently), the user agent
-  must abort any instances of the <span>fetch</span> algorithm started
-  for this <code><a href="#eventsource">EventSource</a></code> object, and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to
-  <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.</p> 
+  <code><a href="#eventsource">EventSource</a></code> object (this happens when a <code>Document</code> object goes away
+  permanently), the user agent must abort any instances of the <span>fetch</span> algorithm started
+  for this <code><a href="#eventsource">EventSource</a></code> object, and must set the <code title="dom-EventSource-readyState"><a href="#dom-eventsource-readystate">readyState</a></code> attribute to <code title="dom-EventSource-CLOSED"><a href="#dom-eventsource-closed">CLOSED</a></code>.</p> 
 
-  <p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while
-  its connection is still open, the user agent must abort any instance
-  of the <span title="fetch">fetch</span> algorithm opened by this
-  <code><a href="#eventsource">EventSource</a></code>.</p> 
+  <p>If an <code><a href="#eventsource">EventSource</a></code> object is garbage collected while its connection is still open,
+  the user agent must abort any instance of the <span title="fetch">fetch</span> algorithm opened by
+  this <code><a href="#eventsource">EventSource</a></code>.</p> 
 
-  <p class="note">It's possible for one active network connection to
-  be shared by multiple <code><a href="#eventsource">EventSource</a></code> objects and their
-  <span>fetch</span> algorithms, which is why the above is phrased in
-  terms of aborting the <span>fetch</span> algorithm and not the
-  actual underlying download.</p>
+  <p class="note">It's possible for one active network connection to be shared by multiple
+  <code><a href="#eventsource">EventSource</a></code> objects and their <span>fetch</span> algorithms, which is why the above
+  is phrased in terms of aborting the <span>fetch</span> algorithm and not the actual underlying
+  download.</p>
 
 
   <h2 id="implementation-advice"><span class="secno">10 </span>Implementation advice</h2>
@@ -1243,8 +1165,8 @@ data:&nbsp;test
 
   <h3 id="text-event-stream"><span class="secno">11.1 </span><dfn><code>text/event-stream</code></dfn></h3>
 
-  <p>This registration is for community review and will be submitted
-  to the IESG for review, approval, and registration with IANA.</p>
+  <p>This registration is for community review and will be submitted to the IESG for review,
+  approval, and registration with IANA.</p>
 
   
 
@@ -1259,9 +1181,8 @@ data:&nbsp;test
     <dl><dt><code title="">charset</code></dt>
      <dd>
 
-      <p>The <code title="">charset</code> parameter may be provided.
-      The parameter's value must be "<code title="">utf-8</code>".
-      This parameter serves no purpose; it is only allowed for
+      <p>The <code title="">charset</code> parameter may be provided. The parameter's value must be
+      "<code title="">utf-8</code>". This parameter serves no purpose; it is only allowed for
       compatibility with legacy servers.</p>
 
      </dd>
@@ -1272,20 +1193,17 @@ data:&nbsp;test
    <dt>Security considerations:</dt>
    <dd>
 
-    <p>An event stream from an origin distinct from the origin of the
-    content consuming the event stream can result in information
-    leakage. To avoid this, user agents are required to apply CORS
+    <p>An event stream from an origin distinct from the origin of the content consuming the event
+    stream can result in information leakage. To avoid this, user agents are required to apply CORS
     semantics. <a href="#refsCORS">[CORS]</a></p>
 
-    <p>Event streams can overwhelm a user agent; a user agent is
-    expected to apply suitable restrictions to avoid depleting local
-    resources because of an overabundance of information from an event
-    stream.</p>
+    <p>Event streams can overwhelm a user agent; a user agent is expected to apply suitable
+    restrictions to avoid depleting local resources because of an overabundance of information from
+    an event stream.</p>
 
-    <p>Servers can be overwhelmed if a situation develops in which the
-    server is causing clients to reconnect rapidly. Servers should use
-    a 5xx status code to indicate capacity problems, as this will
-    prevent conforming clients from reconnecting automatically.</p>
+    <p>Servers can be overwhelmed if a situation develops in which the server is causing clients to
+    reconnect rapidly. Servers should use a 5xx status code to indicate capacity problems, as this
+    will prevent conforming clients from reconnecting automatically.</p>
 
    </dd>
 
