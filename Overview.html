@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-12-september-2013">Editor's Draft 12 September 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-18-october-2013">Editor's Draft 18 October 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 12 September 2013 Editor's Draft.
+  This specification is the 18 October 2013 Editor's Draft.
   </p>
 
   
@@ -400,21 +400,19 @@
 
   <p><i>This section is non-normative.</i></p>
 
-  <p>To enable servers to push data to Web pages over HTTP or using
-  dedicated server-push protocols, this specification introduces the
-  <code><a href="#eventsource">EventSource</a></code> interface.</p>
+  <p>To enable servers to push data to Web pages over HTTP or using dedicated server-push protocols,
+  this specification introduces the <code><a href="#eventsource">EventSource</a></code> interface.</p>
 
-  <p>Using this API consists of creating an <code><a href="#eventsource">EventSource</a></code>
-  object and registering an event listener.</p>
+  <p>Using this API consists of creating an <code><a href="#eventsource">EventSource</a></code> object and registering an event
+  listener.</p>
 
   <pre>var source = new EventSource('updates.cgi');
 source.onmessage = function (event) {
   alert(event.data);
 };</pre>
 
-  <p>On the server-side, the script ("<code title="">updates.cgi</code>" in this case) sends messages in the
-  following form, with the <code><a href="#text-event-stream">text/event-stream</a></code> MIME
-  type:</p>
+  <p>On the server-side, the script ("<code title="">updates.cgi</code>" in this case) sends
+  messages in the following form, with the <code><a href="#text-event-stream">text/event-stream</a></code> MIME type:</p>
 
   <pre>data: This is the first message.
 
@@ -423,8 +421,8 @@ data: has two lines.
 
 data: This is the third message.</pre>
 
-  <hr><p>Authors can separate events by using different event types. Here
-  is a stream that has two event types, "add" and "remove":</p>
+  <hr><p>Authors can separate events by using different event types. Here is a stream that has two event
+  types, "add" and "remove":</p>
 
   <pre>event: add
 data: 73857293
@@ -435,9 +433,8 @@ data: 2153
 event: add
 data: 113411</pre>
 
-  <p>The script to handle such a stream would look like this (where
-  <code title="">addHandler</code> and <code title="">removeHandler</code> are functions that take one argument,
-  the event):</p>
+  <p>The script to handle such a stream would look like this (where <code title="">addHandler</code>
+  and <code title="">removeHandler</code> are functions that take one argument, the event):</p>
 
   <pre>var source = new EventSource('updates.cgi');
 source.addEventListener('add', addHandler, false);
@@ -729,9 +726,8 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
   asynchronously <a href="#reestablish-the-connection">reestablish the connection</a>.</p>
 
   <p id="event-source-fail-reasons">Any other HTTP response code not listed here, as well as the
-  cancelation of the <span>fetch</span> algorithm by the user agent (e.g. in response to
-  <code title="dom-window-stop">window.stop()</code> or the user canceling the network connection manually) must cause the user
-  agent to <a href="#fail-the-connection">fail the connection</a>.</p>  
+  cancelation of the <span>fetch</span> algorithm by the user agent (e.g. in response to <code title="dom-window-stop">window.stop()</code> or the user canceling the network connection
+  manually) must cause the user agent to <a href="#fail-the-connection">fail the connection</a>.</p>  
 
   <p>For non-HTTP protocols, UAs should act in equivalent ways.</p>
 
@@ -1065,11 +1061,7 @@ data:&nbsp;test
   domain. Authors can avoid this using the relatively complex mechanism of using unique domain names
   per connection, or by allowing the user to enable or disable the <code><a href="#eventsource">EventSource</a></code>
   functionality on a per-page basis, or by sharing a single <code><a href="#eventsource">EventSource</a></code> object using a
-  <span title="SharedWorkerGlobalScope">shared worker</span>.
-  
-  <a href="#refsWEBWORKERS">[WEBWORKERS]</a>
-  
-  </p>
+  <span title="SharedWorkerGlobalScope">shared worker</span>.</p>
 
 
   <h2 id="eventsource-push"><span class="secno">8 </span>Connectionless push and other features</h2>
@@ -1221,8 +1213,8 @@ data:&nbsp;test
 
    <dt>Interoperability considerations:</dt>
    <dd>
-    Rules for processing both conforming and non-conforming content
-    are defined in this specification.
+    Rules for processing both conforming and non-conforming content are defined in this
+    specification.
    </dd>
    <dt>Published specification:</dt>
    <dd>
@@ -1246,9 +1238,8 @@ data:&nbsp;test
    <dt>Intended usage:</dt>
    <dd>Common</dd>
    <dt>Restrictions on usage:</dt>
-   <dd>This format is only expected to be used by dynamic open-ended
-   streams served using HTTP or a similar protocol. Finite resources
-   are not expected to be labeled with this type.</dd>
+   <dd>This format is only expected to be used by dynamic open-ended streams served using HTTP or a
+   similar protocol. Finite resources are not expected to be labeled with this type.</dd>
    <dt>Author:</dt>
    <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
    <dt>Change controller:</dt>
@@ -1259,8 +1250,8 @@ data:&nbsp;test
 
   <h3 id="last-event-id"><span class="secno">11.2 </span><dfn title="http-last-event-id"><code>Last-Event-ID</code></dfn></h3>
 
-  <p>This section describes a header field for registration in the
-  Permanent Message Header Field Registry.  <a href="#refsRFC3864">[RFC3864]</a></p>
+  <p>This section describes a header for registration in the Permanent Message Header Field
+  Registry. <a href="#refsRFC3864">[RFC3864]</a></p>
 
   <dl><dt>Header field name:</dt>
    <dd>Last-Event-ID</dd>
@@ -1305,9 +1296,6 @@ data:&nbsp;test
 
    <dt id="refsWEBIDL">[WEBIDL]</dt>
    <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web IDL</a></cite>, C. McCormack. W3C.</dd>
-
-   <dt id="refsWEBWORKERS">[WEBWORKERS]</dt>
-   <dd><cite><a href="http://dev.w3.org/html5/workers/">Web Workers</a></cite>, I. Hickson. W3C.</dd>
 
   </dl><h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
