@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-18-october-2013">Editor's Draft 18 October 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-30-october-2013">Editor's Draft 30 October 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 18 October 2013 Editor's Draft.
+  This specification is the 30 October 2013 Editor's Draft.
   </p>
 
   
@@ -577,8 +577,8 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
   <code>EventSource()</code> constructor is invoked, the UA must run these steps:</p>
 
   <ol><li><p><span title="resolve a url">Resolve</span> the <span>URL</span> specified in the first
-   argument, relative to the <span>entry script</span>'s <span title="script's base URL">base
-   URL</span>.
+   argument, relative to the <span>API base URL</span> specified by the <span>entry script</span>'s <span>settings
+   object</span>.
    
    <a href="#refsHTML">[HTML]</a>
    
@@ -600,9 +600,10 @@ dictionary <dfn id="eventsourceinit">EventSourceInit</dfn> {
 
    <li>
 
+
     <p>Do a <span>potentially CORS-enabled fetch</span> of the resulting <span>absolute
-    URL</span> using the <span>entry script</span>'s <span title="script's referrer source">referrer
-    source</span>, with the <i>mode</i> being <var title="">CORS mode</var>, and the <i title="">origin</i> being the <span>entry script</span>'s <span>origin</span>, and process the resource obtained in this fashion, if any, as
+    URL</span> using the <span>API referrer source</span> specified by the <span>entry script</span>'s <span>settings
+    object</span>, with the <i>mode</i> being <var title="">CORS mode</var>, and the <i title="">origin</i> being the <span>entry script</span>'s <span>origin</span>, and process the resource obtained in this fashion, if any, as
     described below.</p>
 
     <p class="note">The definition of the <span title="fetch">fetching</span> algorithm (which is
