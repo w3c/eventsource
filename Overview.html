@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-17-january-2014">Editor's Draft 17 January 2014</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-27-january-2014">Editor's Draft 27 January 2014</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 17 January 2014 Editor's Draft.
+  This specification is the 27 January 2014 Editor's Draft.
   </p>
 
   
@@ -549,7 +549,7 @@ source.addEventListener('remove', removeHandler, false);</pre>
 
   <h2 id="the-eventsource-interface"><span class="secno">4 </span>The <code><a href="#eventsource">EventSource</a></code> interface</h2>
 
-  <pre class="idl">[<a href="#dom-eventsource" title="dom-EventSource">Constructor</a>(DOMString url, optional <a href="#eventsourceinit">EventSourceInit</a> eventSourceInitDict)]
+  <pre class="idl">[<a href="#dom-eventsource" title="dom-EventSource">Constructor</a>(DOMString url, optional <a href="#eventsourceinit">EventSourceInit</a> eventSourceInitDict), Exposed=Window,Worker]
 interface <dfn id="eventsource">EventSource</dfn> : <span>EventTarget</span> {
   readonly attribute DOMString <a href="#dom-eventsource-url" title="dom-EventSource-url">url</a>;
   readonly attribute boolean <a href="#dom-eventsource-withcredentials" title="dom-EventSource-withCredentials">withCredentials</a>;
