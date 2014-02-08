@@ -216,7 +216,7 @@
 
    <h1>Server-Sent Events</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-27-january-2014">Editor's Draft 27 January 2014</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-8-february-2014">Editor's Draft 8 February 2014</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -354,7 +354,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 27 January 2014 Editor's Draft.
+  This specification is the 8 February 2014 Editor's Draft.
   </p>
 
   
@@ -914,8 +914,11 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
    <dd><p>The field is ignored.</dd>
 
-  </dl><p id="dispatchMessage">When the user agent is required to <dfn title="">dispatch the event</dfn>,
-  then the user agent must act as follows:
+  </dl><p>When the user agent is required to <dfn id="dispatchMessage">dispatch the
+  event</dfn>, the user agent must process the <var title="">data</var> buffer, the <var title="">event type</var> buffer, and the <var title="">last event ID</var> buffer using steps
+  appropriate for the user agent.</p>
+
+  <p>For Web browsers, the appropriate steps to <a href="#dispatchMessage">dispatch the event</a> are as follows:</p>
 
   <ol><li><p>Set the <a href="#concept-event-stream-last-event-id" title="concept-event-stream-last-event-id">last event ID string</a> of
    the event source to the value of the <var title="">last event ID</var> buffer. The buffer does
@@ -952,6 +955,8 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
   event's <code title="dom-MessageEvent-lastEventId">lastEventId</code> field will be set to the
   value of whatever the last seen "id" field was.</p>
 
+  <p>For other user agents, the appropriate steps to <a href="#dispatchMessage">dispatch the event</a> are
+  implementation dependent, but at a minimum they must set the <var title="">data</var> and <var title="">event type</var> buffers to the empty string before returning.</p>
 
   <div class="example">
 
