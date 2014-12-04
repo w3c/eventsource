@@ -447,6 +447,9 @@ source.addEventListener('remove', removeHandler, false);</pre>
 
   <p>The default event type is "message".</p>
 
+  <p>Event streams are always decoded as UTF-8. There is no way to specify another character
+  encoding.</p>
+
   <hr><p>Event stream requests can be redirected using HTTP 301 and 307 redirects as with normal HTTP
   requests. Clients will reconnect if the connection is closed; a client can be told to stop
   reconnecting using the HTTP 204 No Content response code.</p>
@@ -865,9 +868,6 @@ any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 
   <p>Event streams in this format must always be encoded as
   UTF-8. <a href="#refsRFC3629">[RFC3629]</a></p>
-
-  <p>Event streams are always decoded as UTF-8. There is no way to specify another character
-  encoding.</p>
 
   <p>Lines must be separated by either a U+000D CARRIAGE RETURN U+000A
   LINE FEED (CRLF) character pair, a single U+000A LINE FEED (LF)
