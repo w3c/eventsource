@@ -216,14 +216,16 @@
 
    <h1>Server-Sent Events (Second Edition)</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-14-may-2014">Editor's Draft 14 May 2014</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-06-october-2015">W3C Editor's Draft 06 October 2015</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/eventsource/">http://www.w3.org/TR/eventsource/</a></dd>
     <dt>Latest Editor's Draft:</dt>
     <dd><a href="https://w3c.github.io/eventsource/" class="latest-link">https://w3c.github.io/eventsource/</a></dd>
-
+    <dt>WHATWG Living Standard:</dt>
+    <dd><a href="https://html.spec.whatwg.org/multipage/comms.html#server-sent-events" class="latest-link">https://html.spec.whatwg.org/multipage/comms.html#server-sent-events</a></dd>
 
     <dt>Previous Versions:</dt>
+    <dd><a href="http://www.w3.org/TR/2015/REC-eventsource-20150203/">http://www.w3.org/TR/2015/REC-eventsource-20150203/</dd>
     <dd><a href="http://www.w3.org/TR/2011/WD-eventsource-20110310/">http://www.w3.org/TR/2011/WD-eventsource-20110310/</a></dd>
     <dd><a href="http://www.w3.org/TR/2011/WD-eventsource-20110208/">http://www.w3.org/TR/2011/WD-eventsource-20110208/</a></dd>
     <dd><a href="http://www.w3.org/TR/2009/WD-eventsource-20091222/">http://www.w3.org/TR/2009/WD-eventsource-20091222/</a></dd>
@@ -236,14 +238,15 @@
     <dt>Participate:</dt>
      <dd><a href="https://github.com/w3c/eventsource">Github repository</a></dd>
      <dd><a href="https://github.com/w3c/eventsource/issues">Github issues</a></dd>
-     <dd><a href="https://www.w3.org/Bugs/Public/buglist.cgi?component=Server-Sent%20Events%20%28editor%3A%20Ian%20Hickson%29&list_id=57611&product=WebAppsWG&resolution=---">Bugzilla bugs</a></dd>
+     <dd><a href="https://www.w3.org/Bugs/Public/buglist.cgi?component=Server-Sent%20Events%20%28editor%3A%20Ian%20Hickson%29&list_id=57611&product=WebAppsWG&resolution=---">Bugzilla bugs (Historical)</a></dd>
      <dd><a href="https://github.com/w3c/web-platform-tests/tree/master/eventsource">Test suite</a></dd>
 
    </dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-   &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide
+   &copy; 2015 <a href="http://www.w3.org/"><abbr title="World Wide
    Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts
    Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research
-   Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C
+   Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>,
+   <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C
    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>
    and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document
@@ -252,7 +255,7 @@
 
    <!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
    <p class="alt">The bulk of the text of this specification is also
-   available in the WHATWG <a href="http://www.whatwg.org/specs/web-apps/current-work/complete.html#eventsource">Web Applications 1.0</a> specification, under a license that permits
+   available in the WHATWG <a href="https://html.spec.whatwg.org/#server-sent-events">HTML Living Standard</a> specification, under a license that permits
    reuse of the specification text.</p>
    <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
 
@@ -268,9 +271,6 @@
 
   <h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2>
 
-  
-  
-
   <p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
   document. A list of current W3C publications and the
@@ -280,53 +280,13 @@
   revision of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
   http://www.w3.org/TR/.</em></p>
 
-
-  
-
-  <p>If you wish to make comments regarding this document, you can
-  enter feedback using this form:</p>
-
-  <form action="http://www.whatwg.org/specs/web-apps/current-work/file-spam.cgi" method="post">
-   <fieldset><legend>Feedback Comments</legend>
-    <input value="top" name="id" type="hidden"><input value="Server-Sent Events (editor: Ian Hickson)" name="component" type="hidden"><input value="html" name="response" type="hidden"><p><label for="feedbackBox">Please enter your feedback, carefully
-    indicating the title of the section for which you are submitting
-    feedback, quoting the text that's wrong today if appropriate. If
-    you're suggesting a new feature, it's really important to say
-    <em>what</em> the problem you're trying to solve is. That's more
-    important than the solution, in fact.</label></p>
-    <p><textarea name="text" rows="10" id="feedbackBox" cols="79"></textarea></p>
-    <p class="note">Please don't use section numbers as these tend to
-    change rapidly and make your feedback harder to understand.</p>
-    <script type="text/javascript">
-    function checkFeedbackForm(form) {
-      if (form.elements.text.value.match(/^ *</)) {
-        alert('Please don\'t start your feedback with an angle bracket, instead explain what topic your feedback is about first.');
-        return true;
-      } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
-        if (form.elements.text.value.match(/^Please enter your feedback, carefully/)) {
-          alert('Please enter your feedback, explaining what is wrong, and without repeating the instructions. Thanks!');
-          return true;
-        } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
-          form.action = "http://www.whatwg.org/specs/web-apps/current-work/file-bug.cgi";
-          return true;
-        } else {
-          alert('Please include significantly more detail about exactly what problem you are trying to solve.');
-          return false;
-        }
-      }
-    }
-    </script><p>
-     <input value="Submit feedback" onclick="return checkFeedbackForm(form)" type="submit"><small>(Note: Your IP address and user agent will be publicly recorded for spam prevention purposes.)</small>
-    </p>
-   </fieldset></form>
-
-  
-  <p>You can also e-mail feedback to <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="mailto:public-webapps-request@w3.org?subject=subscribe">subscribe</a>,
+  <p>If you wish to make comments regarding this document, please create a
+  <a href="https://github.com/w3c/eventsource/issues/new">new Github issue</a>. 
+  You can also e-mail feedback to <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="mailto:public-webapps-request@w3.org?subject=subscribe">subscribe</a>,
   <a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>),
-  or <a href="mailto:whatwg@whatwg.org">whatwg@whatwg.org</a> (<a href="http://lists.whatwg.org/listinfo.cgi/whatwg-whatwg.org">subscribe</a>,
-  <a href="http://lists.whatwg.org/pipermail/whatwg-whatwg.org/">archives</a>).
+  or <a href="mailto:whatwg@whatwg.org">whatwg@whatwg.org</a> (<a href="https://whatwg.org/mailing-list">subscribe information</a>,
+  <a href="http://lists.w3.org/Archives/Public/public-whatwg-archive/">archives</a>).
   All feedback is welcome.</p>
-
   
   <p>Implementors should be aware that this specification is not
   stable. <strong>Implementors who are not taking part in the
@@ -339,33 +299,6 @@
   <div id="multipage-common">
   </div>
 
-   <p>The latest
-  stable version of the editor's draft of this specification is always
-  available on <a href="http://dev.w3.org/html5/eventsource/">the W3C CVS server</a>
-  and in the <a href="http://svn.whatwg.org/webapps/">WHATWG
-  Subversion repository</a>. The <a href="http://www.whatwg.org/specs/web-apps/current-work/complete.html">latest
-  editor's working copy</a> (which may contain unfinished text in the
-  process of being prepared) contains the latest draft text of this
-  specification (amongst others). For more details, please see the <a href="http://wiki.whatwg.org/wiki/FAQ#What_are_the_various_versions_of_the_spec.3F">WHATWG
-  FAQ</a>.</p>
-
-  <p>Notifications of changes to this specification are sent along
-  with notifications of changes to related specifications using the
-  following mechanisms:</p>
-  <dl><dt>E-mail notifications of changes</dt>
-   <dd>Commit-Watchers mailing list (complete source diffs): <a href="http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org">http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org</a></dd>
-   <dt>Browsable version-control record of all changes:</dt>
-   <dd>CVSWeb interface with side-by-side diffs: <a href="http://dev.w3.org/cvsweb/html5/">http://dev.w3.org/cvsweb/html5/</a></dd>
-   <dd>Annotated summary with unified diffs: <a href="http://html5.org/tools/web-apps-tracker">http://html5.org/tools/web-apps-tracker</a></dd>
-   <dd>Raw Subversion interface: <code>svn checkout http://svn.whatwg.org/webapps/</code></dd>
-  </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
-  Working Group</a> is the W3C working group responsible for this
-  specification's progress along the W3C Recommendation track.
-  This specification is the 14 May 2014 Editor's Draft.
-  </p>
-
-  
-  
   <p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a rel="disclosure" href="http://www.w3.org/2004/01/pp-impl/42538/status">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -375,6 +308,7 @@
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
   6 of the W3C Patent Policy</a>.</p>
 
+  <p>This document is governed by the <a id="w3c_process_revision" href="http://www.w3.org/2015/Process-20150901/">1 September 2015 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.</p>
 
   <h2 class="no-num no-toc" id="contents">Table of Contents</h2>
   
